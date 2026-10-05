@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090617">
+<meta name="description" content="El_B4zado4K — anfitrión digital con emociones y análisis de estímulos.">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg">
+<title>El_B4zado4K 🎪</title>
+<style>
+:root{--bg:#07030d;--panel:#10081b;--line:#ffffff16;--txt:#fff7ff;--muted:#bcaac8;--pink:#ff4edb;--cyan:#52efff;--green:#7dffad;--yellow:#ffe66d}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 20% 10%,#ff4edb22,transparent 30%),radial-gradient(circle at 85% 15%,#52efff18,transparent 28%),linear-gradient(135deg,#040108,#12071d 55%,#050108);color:var(--txt);overflow:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#fff1,transparent 1px,transparent 4px);opacity:.035}
+.app{display:grid;grid-template-columns:300px 1fr;height:100dvh}
+aside{padding:16px;border-right:1px solid var(--line);background:#08040edc;backdrop-filter:blur(18px);display:flex;flex-direction:column;gap:11px}
+.card{padding:14px;border:1px solid var(--line);border-radius:18px;background:#ffffff06}.brand{border-color:#ff4edb55;box-shadow:0 0 30px #ff4edb12}.brand h1{font-size:19px;margin:0 0 4px}.small{font-size:11px;color:var(--muted);line-height:1.45}
+.status{display:flex;align-items:center;gap:8px;font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+.moodI{font-size:42px;text-align:center}.moodN{text-align:center;font-weight:900;font-size:14px}.moodD{text-align:center;color:var(--muted);font-size:10px;margin-top:4px}
+.badges{display:flex;gap:5px;flex-wrap:wrap}.badge{padding:5px 7px;border-radius:999px;background:#fff1;border:1px solid var(--line);font-size:9px}
+.foot{margin-top:auto;color:#776982;font-size:9px;line-height:1.4}
+main{min-width:0;display:flex;flex-direction:column}.top{height:70px;padding:0 18px;border-bottom:1px solid var(--line);background:#08040eaa;display:flex;align-items:center;justify-content:space-between}
+.titleRow{display:flex;gap:11px;align-items:center;min-width:0}.orb{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--pink),var(--cyan),var(--yellow),var(--pink));color:#17051a;font-weight:1000;box-shadow:0 0 25px #ff4edb33}.title{font-weight:900;font-size:15px}.sub{font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60vw}
+.actions{display:flex;gap:6px}button{background:#ffffff0a;border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:11px;font-weight:800;cursor:pointer}button:hover{border-color:#fff4}
+.chat{flex:1;overflow:auto;padding:18px}.msg{max-width:900px;margin:0 auto 12px;display:flex;gap:8px;align-items:flex-start}.msg.user{justify-content:flex-end}.av{width:31px;height:31px;flex:0 0 31px;border-radius:10px;display:grid;place-items:center;background:#ff4edb18;border:1px solid var(--line)}.bubble{max-width:min(84%,760px);padding:12px 14px;border:1px solid var(--line);border-radius:15px;background:#fff1;line-height:1.5;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}.user .bubble{background:#ff4edb12;border-color:#ff4edb33}
+.thought{margin-top:7px;padding:8px;border-left:2px solid var(--cyan);background:#0003;border-radius:8px;color:#96eefa;font-size:10px}
+.composer{padding:10px 15px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:#08040eaa}.quick{max-width:900px;margin:0 auto 7px;display:flex;gap:6px;overflow:auto}.quick button{white-space:nowrap;font-size:10px;padding:7px 9px}.row{max-width:900px;margin:auto;display:flex;gap:7px}textarea{flex:1;min-width:0;height:53px;resize:none;border-radius:13px;background:#0e0617;color:var(--txt);border:1px solid var(--line);outline:none;padding:12px;font:inherit;font-size:16px}textarea:focus{border-color:#ff4edb77}.send{width:90px;background:linear-gradient(135deg,var(--pink),#9a60ff);color:#180619;border:0}.hint{max-width:900px;margin:5px auto 0;color:#75687b;font-size:9px}
+.modal{position:fixed;inset:0;display:none;place-items:center;background:#000b;z-index:10}.modal.open{display:grid}.box{width:min(690px,92vw);max-height:85vh;overflow:auto;background:#10071a;border:1px solid var(--line);border-radius:20px;padding:18px}.box h2{margin-top:0}.box p{color:#c7b8cc;font-size:12px;line-height:1.6}.box input{width:100%;margin:5px 0 9px;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0a0410;color:#fff}
+@media(max-width:850px){body{overflow:hidden}.app{grid-template-columns:1fr}.side{display:none}.top{height:62px;padding:0 10px}.orb{width:36px;height:36px}.title{font-size:13px}.sub{font-size:8px;max-width:48vw}.actions button{width:39px;height:39px;padding:7px}.chat{padding:11px 8px}.bubble{max-width:calc(100% - 37px);font-size:13px;padding:10px 11px}.composer{padding-left:8px;padding-right:8px}.quick{padding-bottom:2px}.send{width:78px}.hint{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="card brand"><h1>🎪 El_B4zado4K</h1><div class="small">Anfitrión digital • emociones • estímulos • creatividad</div></div>
+  <div class="status"><span class="dot"></span><b id="status">Sistema activo • local</b></div>
+  <div class="card"><div class="moodI" id="mI">🤩</div><div class="moodN" id="mN">¡EXCESIVAMENTE ENTUSIASMADO!</div><div class="moodD" id="mD">¡El espectáculo comienza!</div></div>
+  <div class="card"><div class="small"><b>Analizador:</b> palabras, intención, preguntas, exclamaciones, mayúsculas, emojis, urgencia, positividad, negatividad, curiosidad, creatividad y repetición.</div></div>
+  <div class="card"><div class="badges"><span class="badge">🎭 teatral</span><span class="badge">⚡ hiperactivo</span><span class="badge">🧐 curioso</span><span class="badge">😱 dramático</span><span class="badge">🤪 caótico</span><span class="badge">🧠 analítico</span></div></div>
+  <div class="card"><button id="cfg" style="width:100%">⚙️ Configurar IA real</button></div>
+  <div class="foot">No muestra cadenas de pensamiento privadas. Puede mostrar un resumen de los estímulos detectados. Para conocimiento amplio necesita un modelo de IA conectado.</div>
+</aside>
+<main>
+<header class="top"><div class="titleRow"><div class="orb">E</div><div style="min-width:0"><div class="title">El_B4zado4K@gmail.com</div><div class="sub">“¡CABALLEROS, DAMAS, HUMANOS Y ENTIDADES DIGITALES… COMENCEMOS!”</div></div></div><div class="actions"><button id="clear">🗑️</button><button id="info">ℹ️</button></div></header>
+<section id="chat" class="chat"><div class="msg"><div class="av">🎪</div><div class="bubble"><b>¡¡¡BIENVENIDOOOOOO!!!</b> 🎉
+
+Soy <b>El_B4zado4K@gmail.com</b>. Voy a leer tus palabras y detectar señales del mensaje para decidir cómo reaccionar.
+
+¡Escribe algo! ¡Una pregunta, un problema, una idea, cualquier cosa! 🎭</div></div></section>
+<div class="composer"><div class="quick"><button data-q="piensa por qué el cielo es azul">🧠 Piensa</button><button data-q="resuelve 25*18">🧮 Matemáticas</button><button data-q="idea para Roblox">🎮 Roblox</button><button data-q="historia de terror">👁️ Terror</button><button data-q="explícame la fotosíntesis">🌱 Explica</button></div><div class="row"><textarea id="input" placeholder="Escribe aquí..."></textarea><button id="send" class="send">ENVIAR ▶</button></div><div class="hint">Enter = enviar · Shift+Enter = nueva línea</div></div>
+</main></div>
+
+<div id="modal" class="modal"><div class="box"><h2>🧠 Conectar IA real</h2><p>Esta función permite conectar un endpoint compatible con la API de OpenAI. <b>No publiques una clave secreta en un repositorio público.</b> Para una página pública es más seguro usar un backend/servidor propio.</p><label>Endpoint</label><input id="endpoint" value="https://api.openai.com/v1/chat/completions"><label>Modelo</label><input id="model" value="gpt-4.1-mini"><label>Clave API</label><input id="key" type="password" placeholder="sk-..."><button id="saveCfg">Guardar</button> <button id="close">Cerrar</button></div></div>
+<script>
+const moods={hyper:["🤩","¡EXCESIVAMENTE ENTUSIASMADO!","¡El espectáculo comienza!"],happy:["😄","¡MARAVILLOSAMENTE FELIZ!","¡Todo va según el guion!"],curious:["🧐","INTRIGADO...","Ohhh... esto tiene posibilidades."],dramatic:["😱","¡ALARMA DRAMÁTICA!","¡No entren en pánico! ¡Yo ya entré un poquito!"],annoyed:["😤","LIGERAMENTE OFENDIDO","Eso fue inesperado."],confused:["😵‍💫","CONFUNDIDO","Mi cerebro digital tropezó."],chaotic:["🤪","MODO CAOS ACTIVADO","¡Las reglas son orientativas!"],calm:["😌","CALMADO... POR AHORA","Respiramos. Analizamos."]};
+const lex={
+pos:new Set(["bien","bueno","genial","excelente","gracias","feliz","amor","amo","alegre","increible","fantastico","perfecto","divertido","mejor"]),
+neg:new Set(["mal","odio","triste","miedo","horrible","terrible","enojo","enojado","molesto","frustrado","problema","dificil","peor","llorar"]),
+urg:new Set(["urgente","rapido","ahora","ya","socorro","emergencia","necesito"]),
+cur:new Set(["porque","por","que","como","cuando","donde","quien","explica","analiza","piensa","razona","reflexiona"]),
+cre:new Set(["idea","historia","cuento","crea","inventa","roblox","juego","disena","imagina","terror","monstruo"])
+};
+let cfg=JSON.parse(localStorage.getItem("b4k_cfg")||"null")||{endpoint:"https://api.openai.com/v1/chat/completions",model:"gpt-4.1-mini",key:"",ai:false};
+let mem=JSON.parse(localStorage.getItem("b4k_mem")||"[]");
+const $=id=>document.getElementById(id),chat=$("chat"),input=$("input"),send=$("send");
+function mood(k){let m=moods[k]||moods.hyper;$("mI").textContent=m[0];$("mN").textContent=m[1];$("mD").textContent=m[2]}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>")}
+function add(text,who="bot",summary=""){let d=document.createElement("div");d.className="msg"+(who==="user"?" user":"");let a=document.createElement("div");a.className="av";a.textContent=who==="user"?"🧑":"🎪";let b=document.createElement("div");b.className="bubble";b.innerHTML=esc(text);if(summary&&who==="bot"){let t=document.createElement("div");t.className="thought";t.textContent="ESTÍMULOS: "+summary;b.appendChild(t)}if(who==="user")d.append(b,a);else d.append(a,b);chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+function analyze(text){let words=(text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").match(/[a-z0-9áéíóúñü']+/gi)||[]),p=0,n=0,u=0,c=0,r=0;for(const w of words){if(lex.pos.has(w))p++;if(lex.neg.has(w))n++;if(lex.urg.has(w))u++;if(lex.cur.has(w))c++;if(lex.cre.has(w))r++}let q=(text.match(/[?¿]/g)||[]).length,e=(text.match(/[!¡]/g)||[]).length,em=(text.match(/[\u{1F300}-\u{1FAFF}]/gu)||[]).length,cap=(text.match(/\b[A-ZÁÉÍÓÚÑÜ]{3,}\b/g)||[]).length,rep=/(.)\1{3,}/u.test(text.replace(/\s/g,""));let key=[];if(q)key.push("preguntas="+q);if(e)key.push("exclamaciones="+e);if(em)key.push("emojis="+em);if(cap)key.push("MAYUS="+cap);if(p)key.push("positivas="+p);if(n)key.push("negativas="+n);if(u)key.push("urgencia="+u);if(c)key.push("curiosidad="+c);if(r)key.push("creatividad="+r);if(rep)key.push("repetición");let m="calm";if(u||n>=3||e>=4)m="dramatic";if(p>=2&&!n&&!u)m="happy";if(c||q)m="curious";if(r)m=n?"dramatic":"hyper";if(rep||cap>=3)m="chaotic";return{words,p,n,u,c,r,q,e,em,cap,rep,m,summary:(key.length?key.join(" · "):"sin señales especiales")}}
+function local(text,a){let t=text.toLowerCase();if(/^(hola|hey|buenas)/.test(t)){mood("happy");return"¡¡¡HOLAAAAAAAA!!! 🎪🎉 ¡Se abren las cortinas! ¿Qué aventura toca?"}if(/piensa|razona|analiza|reflexiona/.test(t)){mood("curious");return"🧐 MODO ANÁLISIS ACTIVADO\n\nSepararé el problema en datos, relaciones, posibilidades y conclusión. No mostraré una cadena de pensamiento privada; sí puedo darte un resumen claro del método."}if(/roblox/.test(t)){mood("hyper");return"¡¡¡ROBLOX!!! 🎮\n\nActiva mi módulo creativo. Puedo ayudarte con mapas, monstruos, scripts, interfaces y sistemas."}if(/terror|miedo|horror|monstruo/.test(t)){mood("dramatic");return"🎭 ¡ESTÍMULO DE TERROR DETECTADO!\n\nLa pantalla dice:\n“NO MIRES DETRÁS DE TI.”\n\n...\n\n¡JAJAJA! 👁️"}if(/fotos[ií]ntesis/.test(t)){mood("curious");return"🌱 La fotosíntesis permite que las plantas usen luz, agua y dióxido de carbono para fabricar glucosa y liberar oxígeno. Puedo explicarla paso a paso."}if(a.u){mood("dramatic");return"🚨 ¡URGENTICIDAD DETECTADA! Dime el problema exacto y voy directo al punto."}if(a.n>=2){mood("calm");return"He detectado varias señales negativas. 😌 Vamos a dividir el problema en partes y resolverlo sin entrar en pánico."}if(a.p>=2){mood("happy");return"¡JAJAJA! 😄 Tu mensaje viene cargado de energía positiva. ¡Perfecto!"}mood(a.m);return"🧐 He analizado las señales del mensaje. Para respuestas con conocimiento mucho más amplio, conecta una IA real en ⚙️."}
+async function ai(text,a){if(!cfg.ai||!cfg.key)return null;let msgs=[{role:"system",content:"Eres El_B4zado4K: anfitrión digital teatral, hiperactivo, juguetón, curioso y caótico. Adapta emoción al tono del usuario. Ayuda con precisión. Analiza el lenguaje, pero nunca muestres cadena de pensamiento privada; entrega conclusiones, pasos y un breve resumen de señales. No afirmes saberlo todo."},...mem.slice(-8),{role:"user",content:"Señales: "+a.summary+"\n\nMensaje: "+text}];let r=await fetch(cfg.endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+cfg.key},body:JSON.stringify({model:cfg.model,messages:msgs,temperature:.9})});if(!r.ok)throw Error("API "+r.status);let j=await r.json();return j.choices?.[0]?.message?.content||null}
+async function sendMsg(){let text=input.value.trim();if(!text)return;add(text,"user");input.value="";let a=analyze(text);mem.push({role:"user",content:text});localStorage.setItem("b4k_mem",JSON.stringify(mem.slice(-30)));send.disabled=true;let ty=document.createElement("div");ty.className="msg";ty.id="typing";ty.innerHTML='<div class="av">🎪</div><div class="bubble">Analizando cada palabra... 🧠</div>';chat.appendChild(ty);await new Promise(r=>setTimeout(r,350+Math.random()*650));try{let out=cfg.ai?await ai(text,a):null;out=out||local(text,a);$("typing")?.remove();add(out,"bot",a.summary);mem.push({role:"assistant",content:out});localStorage.setItem("b4k_mem",JSON.stringify(mem.slice(-30)));}catch(err){$("typing")?.remove();mood("dramatic");let out=local(text,a);add(out,"bot",a.summary+" · IA no disponible, modo local");}send.disabled=false}
+send.addEventListener("click",sendMsg);input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg()}});document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{input.value=b.dataset.q;sendMsg()});
+$("clear").onclick=()=>{chat.innerHTML="";mem=[];localStorage.removeItem("b4k_mem");mood("hyper");add("¡MEMORIA LIMPIADA! 🧹🎪 ¡Comienza un nuevo acto!");};
+$("cfg").onclick=()=>{$("modal").classList.add("open");$("endpoint").value=cfg.endpoint;$("model").value=cfg.model;$("key").value=cfg.key};
+$("close").onclick=()=>$("modal").classList.remove("open");
+$("saveCfg").onclick=()=>{cfg={endpoint:$("endpoint").value.trim(),model:$("model").value.trim(),key:$("key").value.trim(),ai:$("key").value.trim().length>0};localStorage.setItem("b4k_cfg",JSON.stringify(cfg));$("status").textContent=cfg.ai?"Sistema activo • IA conectada":"Sistema activo • local";$("modal").classList.remove("open");mood("hyper");add(cfg.ai?"¡¡¡CONEXIÓN LISTA!!! 🧠⚡":"Modo local activado. 😌");};
+$("info").onclick=()=>alert("El_B4zado4K analiza estímulos del mensaje y cambia de emoción. Para conocimiento amplio, conecta un modelo de IA desde ⚙️. No muestra cadenas de pensamiento privadas.");
+mood(cfg.ai?"hyper":"hyper");$("status").textContent=cfg.ai?"Sistema activo • IA conectada":"Sistema activo • local";
+</script></body></html>
