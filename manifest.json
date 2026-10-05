@@ -1,0 +1,12 @@
+{
+  "name":"El_B4zado4K",
+  "short_name":"El_B4zado4K",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#07030d",
+  "theme_color":"#090617",
+  "lang":"es",
+  "orientation":"portrait-primary",
+  "icons":[{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
