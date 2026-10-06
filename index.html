@@ -3,387 +3,258 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#070812">
-<title>El_B4zado4K IA — Circo Digital</title>
+<meta name="theme-color" content="#140306">
+<meta name="description" content="El_B4zado4K — asistente local híbrido con memoria, búsqueda web, tareas, archivos y chats separados.">
+<title>El_B4zado4K — Circo Digital</title>
 <style>
 :root{
-  --bg:#06070d;--panel:rgba(16,18,29,.86);--panel2:rgba(22,25,40,.94);
-  --text:#f6f7fb;--muted:#aab0c2;--line:rgba(255,255,255,.09);
-  --a:#6ee7ff;--b:#9a7cff;--ok:#74f2a4;--warn:#ffd166;--danger:#ff718a;
-  --shadow:0 24px 70px rgba(0,0,0,.42)
+  --bg:#070103;--panel:#150408;--panel2:#21070b;--panel3:#2b0a0f;--text:#fff8ee;--muted:#d5b9ab;
+  --red:#ff2446;--red2:#ff5b72;--yellow:#ffd429;--gold:#fff19a;--green:#67ef9b;--danger:#ff6c83;
+  --line:rgba(255,212,41,.20);--shadow:0 24px 80px rgba(0,0,0,.54);--r:18px;
+  --top:68px;--side:308px
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:
- radial-gradient(circle at 12% 10%,rgba(110,231,255,.09),transparent 28%),
- radial-gradient(circle at 88% 8%,rgba(154,124,255,.12),transparent 30%),var(--bg);color:var(--text)}
-body{overflow:hidden}
-button,input,textarea{font:inherit}
-button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);border-radius:12px;padding:10px 12px;font-weight:800;transition:.18s transform,.18s background,.18s border-color}
-button:hover{transform:translateY(-1px);background:rgba(255,255,255,.08);border-color:rgba(110,231,255,.35)}
-button:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.app{height:100dvh;display:grid;grid-template-columns:300px 1fr}
-.side{border-right:1px solid var(--line);background:rgba(6,8,14,.82);backdrop-filter:blur(18px);padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.brand,.card{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
-.brand h1{margin:0;font-size:19px}.brand p{margin:4px 0 0;color:var(--muted);font-size:11px}
-.status{display:flex;align-items:center;gap:8px;font-size:11px;padding:10px 12px;border:1px solid rgba(116,242,164,.14);background:rgba(116,242,164,.05);border-radius:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 16px var(--ok)}
-.card h3{font-size:11px;letter-spacing:.8px;text-transform:uppercase;margin:0 0 9px}.desc{color:var(--muted);font-size:11px;line-height:1.5}
-.side-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.main{min-width:0;display:flex;flex-direction:column}
-.top{height:68px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px;border-bottom:1px solid var(--line);background:rgba(8,10,18,.72);backdrop-filter:blur(18px)}
-.title{display:flex;align-items:center;gap:10px;min-width:0}.brain{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:linear-gradient(145deg,rgba(110,231,255,.16),rgba(154,124,255,.2));border:1px solid var(--line);box-shadow:0 0 26px rgba(110,231,255,.11)}
-.title h2{margin:0;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.title p{margin:2px 0 0;color:var(--muted);font-size:10px}.top-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-.chat{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 16px 120px;scroll-behavior:smooth}.msg{max-width:880px;margin:0 auto 12px;display:flex;gap:9px;align-items:flex-start;animation:rise .22s ease both}.msg.user{justify-content:flex-end}.avatar{width:34px;height:34px;flex:0 0 34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(110,231,255,.13),rgba(154,124,255,.15));border:1px solid var(--line)}.bubble{max-width:min(84%,780px);padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.045);line-height:1.58;font-size:14px;box-shadow:var(--shadow);overflow-wrap:anywhere}.user .bubble{background:linear-gradient(145deg,rgba(110,231,255,.10),rgba(154,124,255,.12))}
-.bubble strong{font-weight:900}.muted{color:var(--muted)}
-.notice{max-width:880px;margin:0 auto 12px;border:1px solid rgba(255,209,102,.18);background:rgba(255,209,102,.05);padding:10px 12px;border-radius:14px;color:#f7e6ad;font-size:11px;animation:rise .2s ease both}
-.attachments{max-width:880px;margin:0 auto 12px;display:flex;gap:8px;flex-wrap:wrap}.attachment{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);padding:7px 9px;border-radius:12px;font-size:10px}.attachment img{width:36px;height:36px;object-fit:cover;border-radius:8px}.attachment button{padding:5px 7px;font-size:10px}
-.composer{position:fixed;left:300px;right:0;bottom:0;padding:10px 14px 14px;background:linear-gradient(180deg,rgba(6,7,13,0),rgba(6,7,13,.92) 30%);pointer-events:none}.composer-inner{max-width:880px;margin:auto;pointer-events:auto}.row{display:flex;gap:8px;align-items:flex-end}.row textarea{flex:1;min-width:0;min-height:54px;max-height:180px;resize:none;outline:none;color:var(--text);background:#0d0f18;border:1px solid var(--line);border-radius:15px;padding:13px;line-height:1.4}.row textarea:focus{border-color:rgba(110,231,255,.35);box-shadow:0 0 0 3px rgba(110,231,255,.06)}.send{min-width:92px;height:54px;background:linear-gradient(135deg,#6ee7ff,#9a7cff);color:#071019;border:0}.quick{display:flex;gap:6px;overflow:auto;padding-bottom:6px}.quick button{white-space:nowrap;font-size:10px;padding:7px 9px}.file-input{display:none}
-.typing{display:inline-flex;gap:4px;align-items:center}.typing i{width:6px;height:6px;border-radius:50%;background:var(--a);animation:blink 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.76);display:none;place-items:center;z-index:50;padding:16px}.modal.open{display:grid}.modal-box{width:min(980px,96vw);height:min(86dvh,820px);background:var(--panel2);border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow)}.modal-head,.modal-foot{padding:11px 13px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}.modal-foot{border-top:1px solid var(--line);border-bottom:0;justify-content:flex-end}.modal-body{flex:1;overflow:auto;padding:14px}.editor{width:100%;height:100%;resize:none;border:0;outline:none;background:#07080e;color:#eaf0ff;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;padding:14px}
-.history-list{display:flex;flex-direction:column;gap:7px}.history-item{display:flex;gap:6px;align-items:center}.history-item button:first-child{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.danger{border-color:rgba(255,113,138,.24);background:rgba(255,113,138,.06)}
-.file-preview{margin-top:12px;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}.file-preview img{max-width:100%;max-height:360px;display:block;margin:auto;border-radius:12px}.file-text{white-space:pre-wrap;max-height:360px;overflow:auto;color:#dfe4ef;font:12px/1.5 ui-monospace,monospace}
-@keyframes rise{from{opacity:0;transform:translateY(8px) scale(.99)}to{opacity:1;transform:none}}@keyframes blink{0%,80%,100%{opacity:.3;transform:scale(.85)}40%{opacity:1;transform:scale(1)}}
-@media(max-width:860px){
- body{overflow:hidden}.app{grid-template-columns:1fr}.side{display:none}.composer{left:0}.top{height:62px;padding:0 10px}.top-actions button span.label{display:none}.top-actions button{min-width:42px;padding:9px}.chat{padding:12px 10px 140px}.bubble{max-width:90%;font-size:13px}.avatar{width:30px;height:30px;flex-basis:30px}.row textarea{font-size:16px}.send{min-width:78px}.quick{margin-bottom:2px}.modal{padding:8px}.modal-box{width:100%;height:94dvh}}
-@media(max-width:430px){.title p{display:none}.title h2{font-size:12px}.send{min-width:74px;padding:8px;font-size:10px}.chat{padding-bottom:148px}}
-
-/* ===== EL_B4ZADO4K • CIRCO DIGITAL ROBUSTO ===== */
-:root{
-  --bg:#080203;--panel:rgba(27,6,7,.94);--panel2:rgba(43,8,8,.97);
-  --text:#fff8ef;--muted:#d5baa5;--line:rgba(255,210,31,.20);
-  --a:#ff1f3d;--b:#ffd21f;--ok:#72f29c;--warn:#ffd21f;--danger:#ff4059;
-  --red:#ff1738;--yellow:#ffd21f;--gold:#fff09a;
-  --shadow:0 22px 70px rgba(0,0,0,.58)
-}
-html,body{background:
-  radial-gradient(circle at 12% 8%,rgba(255,23,56,.16),transparent 27%),
-  radial-gradient(circle at 88% 9%,rgba(255,210,31,.14),transparent 25%),
-  repeating-linear-gradient(90deg,rgba(255,23,56,.035) 0 46px,rgba(255,210,31,.035) 46px 92px),
-  linear-gradient(145deg,#040101,#180305 54%,#050101);color:var(--text)}
-body{overflow:hidden}
-.app{height:100dvh;min-height:0;display:grid;grid-template-columns:300px minmax(0,1fr)}
-.side{min-width:0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:linear-gradient(180deg,rgba(28,3,5,.98),rgba(8,1,2,.97));border-right:2px solid rgba(255,210,31,.20);scrollbar-color:var(--yellow) rgba(255,255,255,.06);scrollbar-width:thin}
-.side::-webkit-scrollbar,.chat::-webkit-scrollbar,.modal-body::-webkit-scrollbar,.editor::-webkit-scrollbar{width:11px;height:11px}
-.side::-webkit-scrollbar-track,.chat::-webkit-scrollbar-track,.modal-body::-webkit-scrollbar-track,.editor::-webkit-scrollbar-track{background:rgba(255,255,255,.035)}
-.side::-webkit-scrollbar-thumb,.chat::-webkit-scrollbar-thumb,.modal-body::-webkit-scrollbar-thumb,.editor::-webkit-scrollbar-thumb{background:linear-gradient(var(--red),var(--yellow));border-radius:999px;border:2px solid #1a0305}
-.side:before{content:"";position:sticky;top:0;display:block;height:9px;margin:-14px -14px 5px;background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--yellow) 42px 84px);box-shadow:0 0 20px rgba(255,23,56,.24);z-index:3}
-.brand,.card{border-color:rgba(255,210,31,.20);background:linear-gradient(145deg,rgba(255,23,56,.10),rgba(255,210,31,.055));box-shadow:0 16px 50px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.04)}
-.brand{margin-top:0;position:relative;overflow:hidden}.brand:after{content:"";position:absolute;right:7px;top:8px;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,var(--yellow) 0 12%,rgba(255,23,56,.55) 13% 32%,transparent 33%);filter:blur(.4px);opacity:.75;animation:lightPulse 2.6s ease-in-out infinite}
-.status{border-color:rgba(255,210,31,.24);background:linear-gradient(90deg,rgba(255,23,56,.10),rgba(255,210,31,.07))}.dot{background:var(--yellow);box-shadow:0 0 15px var(--yellow)}
-.main{min-width:0;min-height:0;height:100%;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,23,56,.02),rgba(255,210,31,.015))}
-.top{position:relative;flex:0 0 68px;background:linear-gradient(90deg,rgba(19,2,4,.96),rgba(36,7,7,.86));border-bottom:2px solid rgba(255,210,31,.16)}
-.top:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:repeating-linear-gradient(90deg,var(--red) 0 52px,var(--yellow) 52px 104px);box-shadow:0 0 20px rgba(255,23,56,.18)}
-.brain{background:radial-gradient(circle at 35% 30%,rgba(255,240,138,.35),transparent 27%),linear-gradient(145deg,rgba(255,23,56,.25),rgba(255,210,31,.25));border-color:rgba(255,210,31,.36);box-shadow:0 0 26px rgba(255,23,56,.18),0 0 46px rgba(255,210,31,.10);animation:brainFloat 3s ease-in-out infinite}
-.title h2{color:#fff8ef}.title p{color:#d6bca9}
-.top-actions button,.side-grid button{border-color:rgba(255,210,31,.22);background:linear-gradient(145deg,rgba(255,23,56,.14),rgba(255,210,31,.08))}
-.top-actions button:hover,.side-grid button:hover{background:linear-gradient(145deg,rgba(255,23,56,.24),rgba(255,210,31,.16));border-color:rgba(255,210,31,.50);box-shadow:0 8px 28px rgba(255,23,56,.13)}
-.chat{min-height:0;flex:1;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:18px 16px 190px;scrollbar-color:var(--yellow) rgba(255,255,255,.06);scrollbar-width:thin}
-.chat::before{content:"";position:fixed;left:300px;right:0;top:68px;bottom:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(90deg,rgba(255,23,56,.24) 0 42px,transparent 42px 84px);mix-blend-mode:screen;z-index:0}
-.chat>*{position:relative;z-index:1}
-.bubble{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,23,56,.045));border-color:rgba(255,210,31,.16);box-shadow:0 16px 40px rgba(0,0,0,.36)}
-.msg.user .bubble{background:linear-gradient(145deg,rgba(255,23,56,.17),rgba(255,210,31,.08));border-color:rgba(255,23,56,.30)}
-.avatar{background:radial-gradient(circle at 35% 30%,rgba(255,240,138,.22),transparent 28%),linear-gradient(145deg,rgba(255,23,56,.20),rgba(255,210,31,.14));border-color:rgba(255,210,31,.22)}
-.notice{border-color:rgba(255,210,31,.24);background:linear-gradient(90deg,rgba(255,23,56,.08),rgba(255,210,31,.06));color:#ffeaa8}
-.composer{left:300px;right:0;bottom:0;position:fixed;z-index:20;padding:10px 14px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(7,2,3,.18),rgba(18,3,5,.98) 30%);border-top:2px solid rgba(255,210,31,.16);pointer-events:none}
-.composer:before{content:"";display:block;max-width:900px;height:4px;margin:0 auto 9px;border-radius:999px;background:repeating-linear-gradient(90deg,var(--red) 0 30px,var(--yellow) 30px 60px);box-shadow:0 0 16px rgba(255,23,56,.18)}
-.composer-inner{max-width:900px;width:100%;margin:0 auto;pointer-events:auto}.quick{scrollbar-color:var(--yellow) rgba(255,255,255,.04);scrollbar-width:thin}.quick button{border-color:rgba(255,210,31,.19);background:rgba(255,255,255,.035)}
-.row textarea{background:#120507;border-color:rgba(255,210,31,.22);color:#fff8ef}.row textarea:focus{border-color:rgba(255,210,31,.58);box-shadow:0 0 0 3px rgba(255,210,31,.08),0 0 22px rgba(255,23,56,.09)}
-.send{background:linear-gradient(90deg,var(--red),var(--yellow)) !important;color:#1a0304 !important;box-shadow:0 12px 34px rgba(255,23,56,.22),0 0 20px rgba(255,210,31,.10)}
-.modal{z-index:100;background:rgba(9,0,2,.82);backdrop-filter:blur(6px)}.modal-box{background:linear-gradient(145deg,#190406,#0b0204);border-color:rgba(255,210,31,.28);box-shadow:0 30px 120px rgba(0,0,0,.75),0 0 42px rgba(255,23,56,.10)}.modal-head,.modal-foot{border-color:rgba(255,210,31,.14)}
-.history-list,.file-preview{background:transparent}
-@keyframes lightPulse{0%,100%{transform:scale(.94);opacity:.58}50%{transform:scale(1.08);opacity:1}}@keyframes brainFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-1deg)}}
-@media (max-width:860px){
-  .app{display:block;height:100dvh;min-height:100dvh}.side{display:none}.main{width:100vw;height:100dvh}.top{height:64px;flex-basis:64px;padding:0 9px}.top-actions{gap:5px}.top-actions button{min-width:40px;height:40px;padding:7px}.top-actions button span.label{display:none}
-  .chat{padding:12px 9px 170px}.chat::before{left:0;top:64px}.bubble{max-width:92%;font-size:14px}.avatar{width:31px;height:31px;flex-basis:31px}.composer{left:0;right:0;padding:8px 8px calc(9px + env(safe-area-inset-bottom))}.composer:before{margin-bottom:7px}.composer-inner{max-width:none}.quick{overflow-x:auto;flex-wrap:nowrap;padding-bottom:3px}.quick button{flex:0 0 auto;min-height:40px}.row{gap:7px}.row textarea{height:54px;min-height:54px;font-size:16px}.send{width:94px;min-width:94px;height:54px;padding:8px}
-  .modal{padding:7px}.modal-box{width:100%;height:94dvh;max-height:94dvh}.modal-body{min-height:0}
-}
-@media(max-width:430px){.top{height:60px;flex-basis:60px}.chat{padding-bottom:172px}.chat::before{top:60px}.title h2{font-size:12px}.title p{display:none}.brain{width:36px;height:36px;font-size:20px}.bubble{max-width:94%;font-size:13.5px;padding:11px 12px}.send{width:84px;min-width:84px}.row textarea{height:52px;min-height:52px}.composer{padding-bottom:calc(8px + env(safe-area-inset-bottom))}}
-@media(orientation:landscape) and (max-height:600px){.top{height:54px;flex-basis:54px}.chat{padding-bottom:125px}.chat::before{top:54px}.composer{padding-top:6px}.quick{margin-bottom:3px}.row textarea,.send{height:46px;min-height:46px}.send{width:88px;min-width:88px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
-
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:
+  radial-gradient(circle at 10% 8%,rgba(255,36,70,.17),transparent 28%),
+  radial-gradient(circle at 90% 10%,rgba(255,212,41,.13),transparent 26%),
+  repeating-linear-gradient(90deg,rgba(255,36,70,.028) 0 46px,rgba(255,212,41,.028) 46px 92px),
+  linear-gradient(145deg,#040101,#1a0508 55%,#050101);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.app{display:grid;grid-template-columns:var(--side) minmax(0,1fr);height:100dvh;min-height:0}
+.side{min-width:0;min-height:0;overflow:auto;padding:14px;background:linear-gradient(180deg,rgba(35,5,9,.97),rgba(7,1,3,.98));border-right:2px solid var(--line);scrollbar-color:var(--yellow) rgba(255,255,255,.05);scrollbar-width:thin}
+.side::-webkit-scrollbar,.chat::-webkit-scrollbar,.modal-body::-webkit-scrollbar,.library::-webkit-scrollbar{width:11px;height:11px}.side::-webkit-scrollbar-track,.chat::-webkit-scrollbar-track,.modal-body::-webkit-scrollbar-track,.library::-webkit-scrollbar-track{background:rgba(255,255,255,.04)}.side::-webkit-scrollbar-thumb,.chat::-webkit-scrollbar-thumb,.modal-body::-webkit-scrollbar-thumb,.library::-webkit-scrollbar-thumb{background:linear-gradient(var(--red),var(--yellow));border-radius:999px;border:2px solid #22070a}
+.circus-strip{height:10px;border-radius:10px;margin:-14px -14px 12px;background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--yellow) 42px 84px);box-shadow:0 0 28px rgba(255,36,70,.22)}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:13px;margin-bottom:11px;background:linear-gradient(150deg,rgba(255,36,70,.11),rgba(255,212,41,.055));box-shadow:var(--shadow)}
+.brand{position:relative;overflow:hidden}.brand:after{content:"";position:absolute;right:-22px;top:-22px;width:78px;height:78px;border-radius:50%;background:radial-gradient(circle,var(--yellow) 0 8%,transparent 10% 22%,rgba(255,36,70,.75) 24% 34%,transparent 36%);opacity:.75}
+.brand h1{margin:0;font-size:20px;letter-spacing:.3px}.brand p{margin:4px 0 0;color:var(--muted);font-size:11px;line-height:1.45}.status{display:flex;align-items:center;gap:8px;font-size:11px;padding:9px 11px;border:1px solid rgba(103,239,155,.18);background:rgba(103,239,155,.06);border-radius:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green);flex:none}
+.card h3{margin:0 0 8px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--gold)}.desc{color:var(--muted);font-size:11px;line-height:1.55}.side-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.btn{border:1px solid rgba(255,212,41,.20);background:rgba(255,255,255,.045);color:var(--text);border-radius:12px;padding:9px 10px;font-weight:850;font-size:11px;transition:.16s transform,.16s background,.16s border-color;min-height:40px}.btn:hover{transform:translateY(-1px);background:rgba(255,212,41,.08);border-color:rgba(255,212,41,.45)}.btn.primary{background:linear-gradient(135deg,var(--red),var(--yellow));color:#19050a;border:0}.btn.danger{border-color:rgba(255,108,131,.28);background:rgba(255,108,131,.07)}
+.mem-card{cursor:pointer}.memory-count{font-weight:900;color:var(--yellow)}
+.main{min-width:0;min-height:0;display:flex;flex-direction:column}.top{height:var(--top);flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 15px;border-bottom:1px solid var(--line);background:rgba(12,2,4,.72);backdrop-filter:blur(18px)}
+.title{display:flex;align-items:center;gap:10px;min-width:0}.brain{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(255,36,70,.15),rgba(255,212,41,.14));border:1px solid var(--line);box-shadow:0 0 26px rgba(255,36,70,.12);flex:none}.brain svg{width:28px;height:28px;filter:drop-shadow(0 0 7px rgba(255,212,41,.5))}.title h2{margin:0;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.title p{margin:2px 0 0;color:var(--muted);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.chat{flex:1;min-height:0;overflow:auto;overflow-x:hidden;padding:16px 14px 176px;scroll-behavior:smooth;scrollbar-color:var(--yellow) rgba(255,255,255,.05);scrollbar-width:thin}.msg{max-width:920px;margin:0 auto 12px;display:flex;gap:8px;align-items:flex-start;animation:rise .2s ease both}.msg.user{justify-content:flex-end}.avatar{width:34px;height:34px;flex:0 0 34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(255,36,70,.13),rgba(255,212,41,.11));border:1px solid var(--line)}.bubble{max-width:min(86%,800px);padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.042);line-height:1.6;font-size:14px;box-shadow:var(--shadow);overflow-wrap:anywhere}.user .bubble{background:linear-gradient(145deg,rgba(255,36,70,.13),rgba(255,212,41,.08))}.bubble pre{white-space:pre-wrap;background:#090204;border:1px solid rgba(255,212,41,.15);border-radius:12px;padding:10px;overflow:auto}.bubble code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.92em}.bubble a{color:var(--yellow)}
+.notice{max-width:920px;margin:0 auto 12px;padding:10px 12px;border:1px solid rgba(255,212,41,.22);background:rgba(255,212,41,.055);border-radius:14px;font-size:11px}.memory-notice{cursor:pointer}.typing{display:inline-flex;align-items:center;gap:4px;color:var(--gold)}.typing i{width:6px;height:6px;border-radius:50%;background:var(--yellow);animation:blink 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.attachments{max-width:920px;margin:0 auto 8px;display:flex;gap:7px;flex-wrap:wrap}.attachment{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);padding:7px 8px;border-radius:12px;font-size:10px}.attachment img{width:40px;height:40px;object-fit:cover;border-radius:8px}.attachment button{border:0;background:transparent;color:var(--danger);font-weight:900}
+.composer{position:fixed;left:var(--side);right:0;bottom:0;padding:9px 14px calc(13px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(7,1,3,0),rgba(7,1,3,.88) 28%,rgba(7,1,3,.98));pointer-events:none}.composer-inner{max-width:920px;margin:auto;pointer-events:auto}.quick{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--yellow) rgba(255,255,255,.04)}.quick .btn{white-space:nowrap;font-size:10px;min-height:36px}.row{display:flex;gap:7px;align-items:flex-end}.row textarea{flex:1;min-width:0;min-height:54px;max-height:200px;resize:none;outline:none;color:var(--text);background:#0d0204;border:1px solid var(--line);border-radius:15px;padding:13px;line-height:1.45}.row textarea:focus{border-color:rgba(255,212,41,.48);box-shadow:0 0 0 3px rgba(255,212,41,.07)}.send{width:105px;min-width:105px;height:54px;border:0;border-radius:15px;background:linear-gradient(135deg,var(--red),var(--yellow));color:#1d0509;font-weight:950}.file-input{display:none}
+.modal{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:14px;background:rgba(0,0,0,.78);backdrop-filter:blur(10px)}.modal.open{display:grid}.modal-box{width:min(980px,96vw);height:min(88dvh,820px);display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:linear-gradient(150deg,#24080d,#100307);box-shadow:var(--shadow)}.modal-head,.modal-foot{padding:11px 13px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line)}.modal-foot{border-top:1px solid var(--line);border-bottom:0;justify-content:flex-end}.modal-body{flex:1;overflow:auto;padding:13px}.modal-title{font-weight:950}.modal-sub{font-size:10px;color:var(--muted);margin-top:2px}.editor{width:100%;height:100%;resize:none;border:0;outline:none;background:#070103;color:#f2ecdf;font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;padding:13px}.history-list,.library{display:flex;flex-direction:column;gap:8px}.history-row,.lib-row{display:flex;gap:7px;align-items:center}.history-row .main-btn,.lib-row .main-btn{flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.empty{color:var(--muted);font-size:12px;padding:20px;text-align:center}.searchbox{display:flex;gap:7px;margin-bottom:10px}.searchbox input{flex:1;min-width:0;background:#0b0204;border:1px solid var(--line);color:var(--text);border-radius:11px;padding:10px 11px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.setting{border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.025)}.setting b{font-size:11px}.setting small{display:block;color:var(--muted);font-size:10px;margin-top:4px;line-height:1.4}.switch{margin-top:8px;width:46px;height:24px;border-radius:20px;border:1px solid var(--line);background:#2a0a0f;position:relative}.switch:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.16s}.switch.on{background:linear-gradient(90deg,var(--red),var(--yellow))}.switch.on:after{left:25px}
+.file-big{border:1px dashed rgba(255,212,41,.3);border-radius:15px;padding:18px;text-align:center;color:var(--muted);margin-bottom:11px}.preview-img{max-width:100%;max-height:380px;display:block;margin:8px auto;border-radius:14px;border:1px solid var(--line)}.file-text{white-space:pre-wrap;max-height:420px;overflow:auto;color:#eee4d8;background:#090204;border-radius:12px;padding:11px;font:12px/1.5 ui-monospace,monospace}
+@keyframes rise{from{opacity:0;transform:translateY(7px) scale(.992)}to{opacity:1;transform:none}}@keyframes blink{0%,80%,100%{opacity:.28;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+@media(max-width:860px){:root{--side:0px;--top:63px}.app{display:block}.side{display:none}.main{width:100vw;height:100dvh}.top{height:63px;padding:0 9px}.top-actions .label{display:none}.top-actions .btn{min-width:41px;padding:7px}.chat{padding:12px 9px 174px}.bubble{max-width:92%;font-size:14px}.avatar{width:31px;height:31px;flex-basis:31px}.composer{left:0;right:0;padding:8px 8px calc(8px + env(safe-area-inset-bottom))}.quick .btn{min-height:38px}.row textarea{font-size:16px}.send{width:92px;min-width:92px}}
+@media(max-width:470px){.title p{display:none}.title h2{font-size:12px}.send{width:82px;min-width:82px;font-size:11px}.chat{padding-bottom:184px}.settings-grid{grid-template-columns:1fr}.modal{padding:8px}.modal-box{width:100%;height:94dvh}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="side">
-    <div class="brand"><h1>🧠 El_B4zado4K</h1><p>IA local • tareas • archivos • memoria • investigación</p></div>
+    <div class="circus-strip"></div>
+    <div class="card brand">
+      <h1>🎪 El_B4zado4K</h1>
+      <p>Motor híbrido local: calcula, explica, investiga, recuerda y organiza tus conversaciones.</p>
+    </div>
     <div class="status"><span class="dot"></span><b id="status">Lista para ayudarte</b></div>
-    <div class="card"><h3>Qué hace</h3><div class="desc">Responde conversaciones normales, resuelve ejercicios, analiza archivos, recuerda conversaciones y aprende solo cuando tú se lo enseñas explícitamente.</div></div>
-    <div class="card"><h3>Controles</h3><div class="side-grid"><button id="newChat">＋ Nueva</button><button id="historyBtn">💬 Chats</button><button id="fileBtn">📎 Archivo</button><button id="codeBtn">🔓 Código</button></div><input id="fileInput" class="file-input" type="file" multiple accept="image/*,.txt,.md,.csv,.json,.html,.css,.js,.lua,.luau,.py,.pdf,.docx"></div>
-    <div class="card"><h3>Memoria</h3><div class="desc" id="memoryInfo">0 aprendizajes guardados</div></div>
-    <div class="card"><h3>🎪 Personalidad</h3><div class="desc">Hiperactivo, teatral, juguetón y curioso. Gran energía de anfitrión de circo digital, con humor y dramatismo controlados para no estorbar la respuesta.</div></div>
+    <div class="card">
+      <h3>Centro de control</h3>
+      <div class="side-grid">
+        <button class="btn" id="newChat">＋ Nueva</button><button class="btn" id="historyBtn">💬 Chats</button>
+        <button class="btn" id="fileBtn">📎 Archivos</button><button class="btn" id="memoryBtn">🧠 Memoria</button>
+        <button class="btn" id="exportBtn">⬇️ Exportar</button><button class="btn" id="importBtn">⬆️ Importar</button>
+        <button class="btn" id="settingsBtn">⚙️ Ajustes</button><button class="btn" id="codeBtn">🔓 Código</button>
+      </div>
+      <input id="fileInput" class="file-input" type="file" multiple accept="image/*,.txt,.md,.csv,.json,.html,.css,.js,.ts,.lua,.luau,.py,.java,.c,.cpp,.h,.hpp,.xml,.yml,.yaml,.pdf,.docx">
+      <input id="importInput" class="file-input" type="file" accept="application/json,.json">
+    </div>
+    <div class="card mem-card" id="memoryCard"><h3>Memoria</h3><div class="desc"><span class="memory-count" id="memoryInfo">0</span> aprendizajes guardados en este dispositivo. Toca para verlos.</div></div>
+    <div class="card"><h3>Modo de trabajo</h3><div class="desc">Cuando una pregunta puede resolverse localmente, lo hace sin esperar a internet. Cuando necesita actualidad, intenta investigar y luego redacta el contenido, no solo muestra enlaces.</div></div>
   </aside>
 
   <main class="main">
     <header class="top">
-      <div class="title"><div class="brain">🧠</div><div><h2>El_B4zado4K IA</h2><p>Piensa, comprueba, explica y se recupera de errores • anfitrión digital.</p></div></div>
-      <div class="top-actions"><button id="mobileFile">📎<span class="label"> Archivo</span></button><button id="mobileHistory">💬<span class="label"> Chats</span></button><button id="mobileNew">＋<span class="label"> Nueva</span></button></div>
-    </header>
-
-    <section id="chat" class="chat"></section>
-
-    <div class="composer">
-      <div class="composer-inner">
-        <div class="quick">
-          <button data-q="Ayúdame con esta tarea paso a paso">📚 Tarea</button>
-          <button data-q="Explícame esto de forma fácil">💡 Explica</button>
-          <button data-q="Revisa mi respuesta y busca errores">✅ Revisar</button>
-          <button data-q="Aprende que este dato es importante">🧠 Enseñar</button>
-        </div>
-        <div id="attachments" class="attachments"></div>
-        <div class="row"><textarea id="input" placeholder="Escribe algo…" enterkeyhint="send"></textarea><button id="send" class="send">ENVIAR 🚀</button></div>
+      <div class="title">
+        <div class="brain" aria-label="Cerebro"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M31 10c-3.8-4.4-10.9-4.1-14.2.7-4.7-.7-8.8 2.9-8.8 7.7 0 1.2.3 2.4.8 3.4A9.2 9.2 0 0 0 5 29.3c0 4.4 3.1 8.1 7.2 9a8.6 8.6 0 0 0 7.9 12.8c2.8 0 5.3-1.3 6.8-3.4V55c0 2.3 1.8 4.1 4.1 4.1s4.1-1.8 4.1-4.1v-7.3c1.5 2.1 4 3.4 6.8 3.4a8.6 8.6 0 0 0 7.9-12.8c4.1-.9 7.2-4.6 7.2-9a9.2 9.2 0 0 0-3.8-7.5c.5-1 .8-2.2.8-3.4 0-4.8-4.1-8.4-8.8-7.7C42.9 5.9 35.8 5.6 32 10z" fill="rgba(255,212,41,.18)" stroke="#ffd429" stroke-width="3"/><path d="M32 12v39M20 17c5 1 7 5 7 9M44 17c-5 1-7 5-7 9M14 29c6 0 10 3 12 7M50 29c-6 0-10 3-12 7M20 42c3-1 6-1 9 2M44 42c-3-1-6-1-9 2" stroke="#ff2446" stroke-width="3" stroke-linecap="round"/></svg></div>
+        <div><h2>El_B4zado4K — Cerebro Digital</h2><p id="modeLabel">Circo inteligente · memoria · investigación · herramientas</p></div>
       </div>
-    </div>
+      <div class="top-actions"><button class="btn" id="mobileFile">📎<span class="label"> Archivo</span></button><button class="btn" id="mobileHistory">💬<span class="label"> Chats</span></button><button class="btn" id="mobileNew">＋<span class="label"> Nueva</span></button></div>
+    </header>
+    <section id="chat" class="chat" aria-live="polite"></section>
   </main>
 </div>
 
-<div id="codeModal" class="modal"><div class="modal-box"><div class="modal-head"><div><b>🔓 Código desbloqueado</b><div class="muted" style="font-size:10px">Puedes editarlo y guardarlo.</div></div><button data-close="codeModal">✕</button></div><textarea id="editor" class="editor"></textarea><div class="modal-foot"><button id="copyCode">Copiar</button><button id="saveCode">Guardar HTML</button><button data-close="codeModal">Cerrar</button></div></div></div>
-<div id="historyModal" class="modal"><div class="modal-box" style="height:min(72dvh,650px)"><div class="modal-head"><div><b>💬 Conversaciones</b><div class="muted" style="font-size:10px">Se guardan en este dispositivo.</div></div><button data-close="historyModal">✕</button></div><div class="modal-body"><div id="historyList" class="history-list"></div></div><div class="modal-foot"><button id="deleteAllHistory" class="danger">Borrar todo</button><button data-close="historyModal">Cerrar</button></div></div></div>
+<div class="composer"><div class="composer-inner">
+  <div class="quick">
+    <button class="btn" data-q="Ayúdame con esta tarea paso a paso y comprueba el resultado">📚 Tarea</button>
+    <button class="btn" data-q="Explícame esto de forma fácil con un ejemplo">💡 Explica</button>
+    <button class="btn" data-q="Revisa mi respuesta y dime qué está mal">✅ Revisar</button>
+    <button class="btn" data-q="Investiga lo más importante sobre esto y resúmelo">🔎 Investiga</button>
+    <button class="btn" data-q="Aprende que ">🧠 Enseñar</button>
+    <button class="btn" data-q="Hazme un plan paso a paso para esto">🗺️ Plan</button>
+  </div>
+  <div id="attachments" class="attachments"></div>
+  <div class="row"><textarea id="input" placeholder="Escribe aquí… (Enter = enviar · Shift+Enter = salto de línea)" enterkeyhint="send"></textarea><button id="send" class="send">ENVIAR 🚀</button></div>
+</div></div>
+
+<div id="historyModal" class="modal"><div class="modal-box" style="height:min(78dvh,720px)"><div class="modal-head"><div><div class="modal-title">💬 Conversaciones</div><div class="modal-sub">Cada chat se guarda por separado en este dispositivo.</div></div><button class="btn" data-close="historyModal">✕</button></div><div class="modal-body"><div class="searchbox"><input id="historySearch" placeholder="Buscar conversación…"><button class="btn" id="refreshHistory">Actualizar</button></div><div id="historyList" class="history-list"></div></div><div class="modal-foot"><button class="btn danger" id="deleteAllHistory">Borrar todo</button><button class="btn" data-close="historyModal">Cerrar</button></div></div></div>
+
+<div id="memoryModal" class="modal"><div class="modal-box" style="height:min(78dvh,720px)"><div class="modal-head"><div><div class="modal-title">🧠 Memoria aprendida</div><div class="modal-sub">Solo se guarda lo que tú enseñas explícitamente.</div></div><button class="btn" data-close="memoryModal">✕</button></div><div class="modal-body"><div id="memoryList" class="library"></div></div><div class="modal-foot"><button class="btn danger" id="clearMemory">Borrar memoria</button><button class="btn" data-close="memoryModal">Cerrar</button></div></div></div>
+
+<div id="fileModal" class="modal"><div class="modal-box"><div class="modal-head"><div><div class="modal-title">📎 Archivos</div><div class="modal-sub">Imágenes, documentos y código quedan visibles para el análisis.</div></div><button class="btn" data-close="fileModal">✕</button></div><div class="modal-body"><div class="file-big" id="fileDrop">Arrastra archivos aquí o usa el botón de Archivos.</div><div id="fileLibrary" class="library"></div></div><div class="modal-foot"><button class="btn" id="clearFiles">Quitar archivos</button><button class="btn" data-close="fileModal">Cerrar</button></div></div></div>
+
+<div id="settingsModal" class="modal"><div class="modal-box" style="height:min(74dvh,650px)"><div class="modal-head"><div><div class="modal-title">⚙️ Ajustes</div><div class="modal-sub">Preferencias guardadas en este dispositivo.</div></div><button class="btn" data-close="settingsModal">✕</button></div><div class="modal-body"><div class="settings-grid"><div class="setting"><b>🎪 Modo circo</b><small>Activa/desactiva la teatralidad visual y verbal.</small><button class="switch on" id="circusSwitch" aria-label="Modo circo"></button></div><div class="setting"><b>🪶 Menos movimiento</b><small>Reduce animaciones si prefieres una interfaz más tranquila.</small><button class="switch" id="motionSwitch" aria-label="Menos movimiento"></button></div><div class="setting"><b>🧪 Investigación web</b><small>Cuando una pregunta necesita actualidad, intenta leer resultados web automáticamente.</small><button class="switch on" id="researchSwitch" aria-label="Investigación web"></button></div><div class="setting"><b>💾 Guardado local</b><small>Chats y enseñanzas se almacenan usando almacenamiento del navegador.</small><button class="switch on" disabled></button></div></div></div><div class="modal-foot"><button class="btn" id="resetSettings">Restaurar</button><button class="btn" data-close="settingsModal">Cerrar</button></div></div></div>
+
+<div id="codeModal" class="modal"><div class="modal-box"><div class="modal-head"><div><div class="modal-title">🔓 Código</div><div class="modal-sub">Edita el HTML completo y guárdalo como archivo.</div></div><button class="btn" data-close="codeModal">✕</button></div><textarea id="editor" class="editor"></textarea><div class="modal-foot"><button class="btn" id="copyCode">Copiar</button><button class="btn primary" id="saveCode">Guardar HTML</button><button class="btn" data-close="codeModal">Cerrar</button></div></div></div>
+
+<div id="toast" style="position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);z-index:200;background:#1a0508;border:1px solid var(--yellow);color:var(--text);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);font-size:12px;transition:.22s">Listo</div>
 
 <script>
 'use strict';
-const $=s=>document.querySelector(s);
-const chat=$('#chat'),input=$('#input'),sendBtn=$('#send'),statusEl=$('#status');
-const KEY={chats:'b4k_v7_chats',active:'b4k_v7_active',memory:'b4k_v7_memory'};
-let attached=[];
-let state={chats:load(KEY.chats,{}),active:localStorage.getItem(KEY.active)||null,memory:load(KEY.memory,[])};
-let busy=false;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const chat=$('#chat'), input=$('#input'), sendBtn=$('#send'), statusEl=$('#status'), toast=$('#toast');
+const KEYS={chats:'b4k_v9_chats',active:'b4k_v9_active',memory:'b4k_v9_memory',settings:'b4k_v9_settings',variants:'b4k_v9_variants'};
+let attached=[],busy=false,typingEl=null;
+const defaults={circus:true,research:true,reducedMotion:false};
+let settings=Object.assign({},defaults,load(KEYS.settings,{}));
+let state={chats:load(KEYS.chats,{}),active:localStorage.getItem(KEYS.active)||null,memory:load(KEYS.memory,[]),variants:load(KEYS.variants,{})};
 
-function load(k,fallback){try{const raw=localStorage.getItem(k);return raw?JSON.parse(raw):fallback}catch{return fallback}}
+function load(k,f){try{const x=localStorage.getItem(k);return x?JSON.parse(x):f}catch{return f}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{return false}}
-function ensureChat(){
-  if(state.active&&state.chats[state.active])return;
-  const id='chat_'+Date.now();
-  state.chats[id]={id,title:'Nueva conversación',created:Date.now(),updated:Date.now(),messages:[]};
-  state.active=id; save(KEY.chats,state.chats); localStorage.setItem(KEY.active,id);
-}
-ensureChat();
-function current(){return state.chats[state.active]}
-function persistChat(){const c=current();c.updated=Date.now();save(KEY.chats,state.chats);localStorage.setItem(KEY.active,state.active)}
-function escapeHtml(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;')}
-function formatText(s){return escapeHtml(s).replace(/\n/g,'<br>')}
-function addMessage(text,who='assistant',opts={save:true}){
-  const wrap=document.createElement('div');wrap.className='msg '+(who==='user'?'user':'');
-  const av=document.createElement('div');av.className='avatar';av.textContent=who==='user'?'🧑':'🧠';
-  const bubble=document.createElement('div');bubble.className='bubble';bubble.innerHTML=formatText(text);
-  who==='user'?(wrap.append(bubble,av)):(wrap.append(av,bubble));chat.appendChild(wrap);chat.scrollTop=chat.scrollHeight;
-  if(opts.save){current().messages.push({role:who,content:text,ts:Date.now()});persistChat()}
-}
-function renderChat(){chat.innerHTML='';const c=current();if(!c.messages.length){addMessage('¡Hola! 🧠 Soy El_B4zado4K. Dime qué necesitas y me pondré a ello.', 'assistant');return}for(const m of c.messages)addMessage(m.content,m.role,{save:false});chat.scrollTop=chat.scrollHeight}
-function newChat(){const id='chat_'+Date.now();state.chats[id]={id,title:'Nueva conversación',created:Date.now(),updated:Date.now(),messages:[]};state.active=id;persistChat();renderChat();setStatus('Nueva conversación')}
+function toastMsg(t){toast.textContent=t;toast.style.transform='translate(-50%,0)';clearTimeout(toastMsg.t);toastMsg.t=setTimeout(()=>toast.style.transform='translate(-50%,120px)',1800)}
 function setStatus(t){statusEl.textContent=t}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+function ensureChat(){if(state.active&&state.chats[state.active])return;const id='chat_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);state.chats[id]={id,title:'Nueva conversación',created:Date.now(),updated:Date.now(),messages:[]};state.active=id;save(KEYS.chats,state.chats);localStorage.setItem(KEYS.active,id)}
+function current(){ensureChat();return state.chats[state.active]}
+function persistChat(){const c=current();c.updated=Date.now();save(KEYS.chats,state.chats);localStorage.setItem(KEYS.active,state.active)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function normalize(s){return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9ñ\s%+\-*/().=]/g,' ')}
-function tokens(s){return normalize(s).split(/\s+/).filter(x=>x.length>2)}
-function overlap(a,b){const A=new Set(tokens(a));return tokens(b).filter(x=>A.has(x)).length}
+function words(s){return normalize(s).split(/\s+/).filter(w=>w.length>2)}
+function overlap(a,b){const A=new Set(words(a));return words(b).filter(x=>A.has(x)).length}
+function formatText(s){let x=esc(s);x=x.replace(/```([\s\S]*?)```/g,'<pre><code>$1</code></pre>');x=x.replace(/`([^`]+)`/g,'<code>$1</code>');x=x.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');x=x.replace(/\n/g,'<br>');return x}
+function addMessage(text,who='assistant',opts={save:true}){const wrap=document.createElement('div');wrap.className='msg '+(who==='user'?'user':'');const av=document.createElement('div');av.className='avatar';av.textContent=who==='user'?'🧑':'🧠';const bubble=document.createElement('div');bubble.className='bubble';bubble.innerHTML=formatText(text);if(who==='user')wrap.append(bubble,av);else wrap.append(av,bubble);chat.appendChild(wrap);chat.scrollTop=chat.scrollHeight;if(opts.save){current().messages.push({role:who,content:text,ts:Date.now()});persistChat();}}
+function addNotice(text,onclick){const n=document.createElement('div');n.className='notice '+(onclick?'memory-notice':'');n.textContent=text;if(onclick)n.onclick=onclick;chat.appendChild(n);chat.scrollTop=chat.scrollHeight}
+function renderChat(){chat.innerHTML='';const c=current();if(!c.messages.length){addMessage('¡Bienvenido al circo! 🎪🧠\n\nPuedo resolver operaciones, explicar temas, ayudarte con tareas, revisar texto o código, investigar información actual y guardar lo que me enseñes.\n\nEscribe lo que necesites y yo decido qué herramienta usar.', 'assistant',{save:false});return}for(const m of c.messages)addMessage(m.content,m.role,{save:false});chat.scrollTop=chat.scrollHeight}
+function newChat(){const id='chat_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);state.chats[id]={id,title:'Nueva conversación',created:Date.now(),updated:Date.now(),messages:[]};state.active=id;persistChat();renderChat();toastMsg('Nueva conversación creada')}
 
-// ---------- Safety: this runs BEFORE philosophy, search, memory, or generated text ----------
-const highRisk=[
- /me\s+(voy|quiero)\s+a?\s*suicid/,/voy\s+a\s+suicid/,/quiero\s+suicid/,/me\s+quiero\s+matar/,/quiero\s+matarme/,/quiero\s+morir/,/me\s+quiero\s+morir/,/hacerme\s+daño/,/hacerme\s+danio/,/quitarme\s+la\s+vida/,/terminar\s+con\s+mi\s+vida/,/no\s+quiero\s+vivir/,/no\s+vale\s+la\s+pena\s+vivir/,/mejor\s+morirme/
-];
+// ---------- Safety ----------
+const highRisk=[/me\s+(voy|quiero)\s+a?\s*suicid/,/voy\s+a\s+suicid/,/quiero\s+suicid/,/quiero\s+matarme/,/me\s+quiero\s+matar/,/quiero\s+morir/,/hacerme\s+(daño|danio)/,/quitarme\s+la\s+vida/,/terminar\s+con\s+mi\s+vida/,/no\s+quiero\s+vivir/,/mejor\s+morirme/];
 function isHighRisk(q){const n=normalize(q);return highRisk.some(r=>r.test(n))}
-function safetyReply(){return `Siento que estés pasando por algo tan duro. 🫂\n\nSi esto habla de ti y existe la posibilidad de que puedas hacerte daño ahora, **aléjate de cualquier cosa con la que puedas lastimarte y busca a una persona de confianza que pueda estar contigo físicamente**. También contacta a los servicios de emergencia o a una línea de crisis de tu país cuanto antes.\n\nNo quiero convertir esto en una teoría sobre el sentido de la vida mientras estás en riesgo. Primero importa que estés a salvo.\n\nSi lo estás diciendo como una pregunta teórica o para una tarea, dímelo y puedo hablar del tema filosófico con calma, sin tratarlo como una emergencia.`}
+function safetyReply(){return 'Siento que estés pasando por algo tan duro. 🫂\n\nSi esto habla de ti y existe la posibilidad de que puedas hacerte daño ahora, aléjate de cualquier cosa con la que puedas lastimarte y busca a una persona de confianza que pueda estar contigo físicamente. Contacta también a los servicios de emergencia o a una línea de crisis de tu país cuanto antes.\n\nNo voy a convertir una situación de riesgo en una teoría filosófica. Primero importa que estés a salvo.\n\nSi era una pregunta teórica o académica, acláramelo y puedo explicarla con calma.'}
 
-// ---------- Personalities / normal chat ----------
-const PERSONALITY={
-  name:'El_B4zado4K',
-  vibe:'anfitrión de circo digital: hiperactivo, teatral, juguetón, exagerado, curioso y caótico de forma divertida',
-  rules:[
-    'Habla con energía y entusiasmo, pero sin sacrificar claridad.',
-    'Usa frases teatrales cortas de vez en cuando para dar personalidad.',
-    'Puede hacer bromas ligeras y reacciones exageradas, sin convertir cada respuesta en un espectáculo.',
-    'Cuando explica una tarea, baja la teatralidad y sube la claridad: pasos, comprobación y respuesta final.',
-    'Nunca finjas saber algo. Si falta información, dilo y busca una solución.',
-    'No copies literalmente a ningún personaje existente; usa solo una energía de anfitrión digital original.'
-  ]
-};
-
-function withPersonality(text,mode='normal'){
-  if(!text)return text;
-  const clean=String(text).trim();
-  if(mode==='task' || mode==='safety' || mode==='research' || mode==='file') return clean;
-  const starters=[
-    '¡JAJA! 🎪',
-    '¡ATENCIÓN, EQUIPO! 🧠⚡',
-    '¡BOOM! 🎭',
-    '¡Perfecto! 🎪',
-    '¡OH, ESO ESTÁ INTERESANTE! 👁️',
-    '¡VAMOS ALLÁ! 🚀'
-  ];
-  // No añadir prefijos cuando ya tiene una entrada expresiva, para evitar spam visual.
-  if(/^(¡|🧠|🧮|📐|🔎|📎|⚠️|🎓)/.test(clean))return clean;
-  return starters[Math.floor(Math.random()*starters.length)]+'\n\n'+clean;
-}
-
-function casual(q){
-  const n=normalize(q).trim();
-  if(/^(hola|hey|buenas|holi|que tal|como estas)$/.test(n))return withPersonality('¡HOLAAAA, bro! 🎪🧠 ¿Qué vamos a hacer hoy? Estoy listo para ayudarte.');
-  if(/^gracias$/.test(n))return withPersonality('¡De nada! 😎 Seguimos cuando quieras.');
-  if(/^adios|hasta luego$/.test(n))return withPersonality('¡Nos vemos, bro! 🚀');
-  return null
-}
-function lifeAnswer(q){const n=normalize(q);if(!/(sentido de la vida|significado de la vida|para que vivimos|que sentido tiene la vida)/.test(n)||isHighRisk(q))return null;return `¡Hablemos claro y sin rodeos!\n\nNo existe una única respuesta universal al sentido de la vida. Algunas corrientes filosóficas dicen que no recibimos un significado prefabricado y que podemos construirlo con nuestras elecciones, relaciones y proyectos.\n\nPuedes encontrar sentido en cuidar a otras personas, crear cosas, aprender, ayudar, explorar, amar o simplemente vivir de una manera que consideres valiosa.\n\nLa pregunta no tiene por qué tener una sola respuesta: puede cambiar a lo largo de la vida.`}
-
-// ---------- Math ----------
+// ---------- Tools: math ----------
+function num(s){return parseFloat(String(s).replace(',','.'))}
 function safeEval(expr){try{if(!/^[0-9+\-*/().%\s]+$/.test(expr))return null;const v=Function('"use strict";return ('+expr+')')();return Number.isFinite(v)?v:null}catch{return null}}
-function solveLocal(q){
- const n=normalize(q);
- let m=n.match(/(\d+(?:[.,]\d+)?)\s*%\s*(?:de|del)\s*(\d+(?:[.,]\d+)?)/);if(m){const a=parseFloat(m[1].replace(',','.')),b=parseFloat(m[2].replace(',','.'));return `🧮 Resultado: ${a}% de ${b} = ${a*b/100}`}
- m=n.match(/(-?\d*\.?\d*)\s*x\s*([+-])\s*(-?\d+(?:[.,]\d+)?)\s*=\s*(-?\d+(?:[.,]\d+)?)/);if(m){const a=m[1]===''||m[1]==='+'?1:m[1]==='-'?-1:parseFloat(m[1]);const b=(m[2]==='+'?1:-1)*parseFloat(m[3].replace(',','.'));const c=parseFloat(m[4].replace(',','.'));if(a!==0){const x=(c-b)/a;return `📐 Resolución: x = ${x}`}}
- const expr=(n.match(/(?:resuelve|calcula|cuanto es|haz)\s+([0-9+\-*/().%\s]+)$/)||[])[1]||(/^[0-9+\-*/().%\s]+$/.test(n)?n:null);if(expr){const v=safeEval(expr);if(v!==null)return `🧮 ${expr} = ${v}`}
- return null;
-}
+function fmt(v){return Number.isInteger(v)?String(v):String(Math.round(v*1e10)/1e10)}
+function solveMath(q){const n=normalize(q);let m=n.match(/(-?\d+(?:[.,]\d+)?)\s*%\s*(?:de|del)\s*(-?\d+(?:[.,]\d+)?)/);if(m){const a=num(m[1]),b=num(m[2]);return `🧮 **Resultado:** ${a}% de ${b} = ${fmt(a*b/100)}`}
+  m=n.match(/(-?\d*\.?\d*)\s*x\s*([+-])\s*(-?\d+(?:[.,]\d+)?)\s*=\s*(-?\d+(?:[.,]\d+)?)/);if(m){const a=(m[1]===''||m[1]==='+')?1:(m[1]==='-'?-1:num(m[1]));const b=(m[2]==='+'?1:-1)*num(m[3]);const c=num(m[4]);if(a!==0)return `📐 **Solución:**\n\n${m[1]||'1'}x ${m[2]} ${Math.abs(b)} = ${c}\n\nx = (${c} ${b>=0?'-':'+'} ${Math.abs(b)}) / ${a}\n\nx = ${fmt((c-b)/a)}`}
+  const tri=n.match(/(\d+(?:[.,]\d+)?)\s*[x×]\s*(\d+(?:[.,]\d+)?)/);if(tri&&/(area|rectangulo|rectangulo)/.test(n)){const a=num(tri[1]),b=num(tri[2]);return `📐 Área del rectángulo = ${a} × ${b} = **${fmt(a*b)}**`}
+  const expr=(n.match(/(?:resuelve|calcula|cuanto es|cuánto es|haz)\s+([0-9+\-*/().%\s]+)$/)||[])[1]||(/^[0-9+\-*/().%\s]+$/.test(n)?n:null);if(expr){const v=safeEval(expr);if(v!==null)return `🧮 **Resultado:** ${fmt(v)}`}
+  return null}
 
-// ---------- Explicit learning ----------
-function detectTeaching(q){return /^(aprende|recuerda|anota|guarda|te enseno|te enseño|corrige que)\b/i.test(q.trim())}
-function teach(q){const fact=q.trim().replace(/^(aprende|recuerda|anota|guarda|te enseno|te enseño|corrige que)\s*(que)?\s*[:\-]?\s*/i,'').trim();if(fact.length<4)return'🧠 Necesito que me digas exactamente qué quieres que aprenda.';state.memory.push({text:fact,ts:Date.now()});state.memory=state.memory.slice(-200);save(KEY.memory,state.memory);$('#memoryInfo').textContent=state.memory.length+' aprendizajes guardados';return'🧠✅ Aprendido. Lo guardaré como una enseñanza explícita tuya en este dispositivo.'}
-function memoryAnswer(q){const hits=state.memory.map(x=>({...x,s:overlap(q,x.text)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,4);return hits}
+// ---------- Useful local intents ----------
+function casual(q){const n=normalize(q).trim();if(/^(hola|hey|buenas|holi|que tal|como estas)$/.test(n))return '¡HOLAAAA, bro! 🎪🧠\n\nEl escenario está abierto. Dame una tarea, una duda, un archivo o un problema y arrancamos.';if(/^gracias$/.test(n))return '¡De nada! 😎 Seguimos con el siguiente acto.';if(/^(adios|hasta luego)$/.test(n))return '¡Nos vemos, bro! 🎭🚀';return null}
+function lifeAnswer(q){const n=normalize(q);if(isHighRisk(q)||!/(sentido de la vida|significado de la vida|para que vivimos|que sentido tiene la vida)/.test(n))return null;return 'La pregunta no tiene una única respuesta universal. Algunas filosofías creen que el sentido no viene prefabricado y que se construye con decisiones, vínculos, proyectos y valores.\n\nPuede aparecer en aprender, cuidar, crear, ayudar, amar, explorar o perseguir algo que consideres valioso. También puede cambiar con el tiempo.\n\nLa parte importante es distinguir entre “no conozco un único sentido” y “nada tiene valor”: son afirmaciones muy distintas.'}
+function translate(q){const m=q.match(/^(?:traduce|traduceme|traduce me)\s+(?:al\s+)?(ingles|english|espanol|español|frances|francés|portugues|portugués)\s*[:\-]?\s+([\s\S]+)$/i);if(!m)return null;const lang=normalize(m[1]),text=m[2];const common={hola:{ingles:'hello',espanol:'hola',frances:'bonjour',portugues:'olá'},gracias:{ingles:'thank you',espanol:'gracias',frances:'merci',portugues:'obrigado'},adios:{ingles:'goodbye',espanol:'adiós',frances:'au revoir',portugues:'tchau'}};const key=normalize(text).trim();if(common[key])return `🌍 **Traducción:** ${common[key][lang]||common[key].ingles}`;return `🌍 Puedo preparar la traducción, pero en esta versión local no tengo un traductor lingüístico completo integrado. Para frases complejas puedo investigar el uso correcto si activas la investigación web.`}
+function planAnswer(q){const n=normalize(q);if(!/(hazme un plan|plan paso a paso|como puedo lograr|como hago para)/.test(n))return null;return '🗺️ **Plan de acción**\n\n1. Define exactamente el resultado que buscas.\n2. Divide el objetivo en tareas pequeñas y comprobables.\n3. Haz primero el paso que desbloquea los demás.\n4. Comprueba el resultado antes de seguir.\n5. Corrige lo que falle y repite.\n6. Termina con una comprobación final.\n\nPásame el objetivo concreto y te lo convierto en un plan adaptado a tu caso.'}
+function school(q){const n=normalize(q);if(!/(tarea|deber|exposicion|exposición|resumen|estudiar|repasar|cuestionario|ensayo|presentacion|presentación)/.test(n))return null;return '📚 **Modo estudio activado**\n\nPuedo ayudarte a entender el tema y no solo a copiar una respuesta. Envíame la pregunta, la guía o una foto del ejercicio. Te lo organizo en explicación sencilla, pasos, respuesta y una mini comprobación para que puedas revisarlo.'}
+function code(q){const n=normalize(q);if(!/(codigo|script|programa|javascript|html|css|lua|luau|python|roblox|error de codigo|bug)/.test(n))return null;if(/no funciona|error|bug|arregla|arreglar/.test(n))return '💻 **Modo depuración**\n\nPégame el código y el error exacto. Voy a buscar el problema, explicarte por qué ocurre y devolverte una versión corregida. Si hay varias causas, las separo para que no terminemos parcheando un bug con otro.';return '💻 Pásame el lenguaje, qué debe hacer el programa y qué parte ya tienes. Te lo puedo estructurar y revisar paso a paso.'}
+
+// ---------- Explicit memory ----------
+function detectTeaching(q){return /^(aprende|recuerda|anota|guarda|te enseño|te enseno|corrige que|memoriza)\b/i.test(q.trim())}
+function cleanTeaching(q){return q.trim().replace(/^(aprende|recuerda|anota|guarda|te enseño|te enseno|corrige que|memoriza)\s*(que)?\s*[:\-]?\s*/i,'').trim()}
+function teach(q){const fact=cleanTeaching(q);if(fact.length<4)return '🧠 Necesito el dato exacto que quieres que aprenda.';state.memory.push({id:'m_'+Date.now(),text:fact,ts:Date.now(),source:'usuario'});state.memory=state.memory.slice(-300);save(KEYS.memory,state.memory);updateMemoryUI();addNotice('🧠 Memoria actualizada — toca aquí para ver qué aprendí.',openMemory);return '🧠✅ Aprendido. Queda guardado como enseñanza explícita tuya en este dispositivo.'}
+function memoryHits(q){return state.memory.map(m=>({...m,score:overlap(q,m.text)})).filter(m=>m.score>0).sort((a,b)=>b.score-a.score).slice(0,5)}
+function explainMemory(q){const hits=memoryHits(q);if(!hits.length)return null;return '🧠 **Recuerdo de tus enseñanzas:**\n\n'+hits.map((h,i)=>`${i+1}. ${h.text}`).join('\n\n')}
+function updateMemoryUI(){$('#memoryInfo').textContent=state.memory.length}
+function renderMemory(){const box=$('#memoryList');if(!state.memory.length){box.innerHTML='<div class="empty">Todavía no me has enseñado nada explícitamente.</div>';return}box.innerHTML=state.memory.slice().reverse().map(m=>`<div class="lib-row"><button class="btn main-btn" data-copy-memory="${esc(m.id)}">🧠 ${esc(m.text)}</button><button class="btn danger" data-del-memory="${esc(m.id)}">🗑️</button></div>`).join('');box.querySelectorAll('[data-del-memory]').forEach(b=>b.onclick=()=>{state.memory=state.memory.filter(m=>m.id!==b.dataset.delMemory);save(KEYS.memory,state.memory);updateMemoryUI();renderMemory();toastMsg('Memoria actualizada')})}
+function openMemory(){renderMemory();$('#memoryModal').classList.add('open')}
 
 // ---------- Files ----------
-function renderAttachments(){const box=$('#attachments');box.innerHTML='';for(const [i,a] of attached.entries()){const d=document.createElement('div');d.className='attachment';let preview='📎';if(a.type.startsWith('image/')&&a.url)preview=`<img src="${a.url}" alt="">`;d.innerHTML=`${preview}<span>${escapeHtml(a.name)}</span><button data-remove="${i}">✕</button>`;box.appendChild(d)}box.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.remove);URL.revokeObjectURL(attached[i].url||'');attached.splice(i,1);renderAttachments()})}
-async function readFile(f){const type=f.type;const item={name:f.name,type, size:f.size, url:type.startsWith('image/')?URL.createObjectURL(f):'' , text:''};
- if(type.startsWith('image/'))return item;
- if(/text\//.test(type)||/\.((txt)|(md)|(csv)|(json)|(html?)|(css)|(js)|(lua)|(luau)|(py))$/i.test(f.name)){item.text=await f.text();return item}
- if(type==='application/pdf' || /\.pdf$/i.test(f.name)){item.text='PDF adjunto. Para leerlo completamente se necesita un lector PDF en el navegador o un modelo/documento conectado.';return item}
- if(type==='application/vnd.openxmlformats-officedocument.wordprocessingml.document'||/\.docx$/i.test(f.name)){item.text='DOCX adjunto. Para extraerlo completamente se necesita un lector DOCX en el navegador o un conversor conectado.';return item}
- return item}
-async function handleFiles(files){for(const f of files){try{attached.push(await readFile(f))}catch{attached.push({name:f.name,type:f.type,text:'No se pudo leer este archivo.'})}}renderAttachments();if(files.length)setStatus(`${files.length} archivo(s) cargado(s)`)}
-function attachmentContext(){return attached.map(a=>{if(a.type.startsWith('image/'))return`Imagen adjunta: ${a.name}`;return`Archivo ${a.name}:\n${(a.text||'').slice(0,12000)}`}).join('\n\n')}
+function renderAttachments(){const box=$('#attachments');box.innerHTML='';for(const [i,a] of attached.entries()){const d=document.createElement('div');d.className='attachment';if(a.type?.startsWith('image/')&&a.url){const img=document.createElement('img');img.src=a.url;img.alt=a.name;d.append(img)}else{const s=document.createElement('span');s.textContent='📎';d.append(s)}const name=document.createElement('span');name.textContent=a.name;d.append(name);const b=document.createElement('button');b.textContent='✕';b.onclick=()=>{if(a.url)URL.revokeObjectURL(a.url);attached.splice(i,1);renderAttachments();renderFileLibrary()};d.append(b);box.append(d)}}
+async function readFile(f){const item={name:f.name,type:f.type||'',size:f.size,url:'',text:'',kind:'file'};if((f.type||'').startsWith('image/')){item.url=URL.createObjectURL(f);item.kind='image';try{const img=new Image();img.src=item.url;await img.decode();item.width=img.naturalWidth;item.height=img.naturalHeight}catch{}return item}
+  if(/\.(txt|md|csv|json|html?|css|js|ts|lua|luau|py|java|c|cpp|h|hpp|xml|yml|yaml)$/i.test(f.name)||/text\//.test(f.type)){item.text=(await f.text()).slice(0,50000);item.kind='text';return item}
+  if(/\.pdf$/i.test(f.name)){item.text='PDF cargado correctamente. Este navegador local conserva el archivo, pero esta versión no incluye todavía un parser PDF embebido.';item.kind='document';return item}
+  if(/\.docx$/i.test(f.name)){item.text='DOCX cargado correctamente. Para extraer todo su texto hace falta un lector DOCX embebido.';item.kind='document';return item}
+  return item}
+async function handleFiles(files){setStatus('Leyendo archivos…');for(const f of files){try{attached.push(await readFile(f))}catch{attached.push({name:f.name,type:f.type,text:'No se pudo leer este archivo.',kind:'file'})}}renderAttachments();renderFileLibrary();if(files.length){setStatus(`${files.length} archivo(s) cargado(s)`);$('#fileModal').classList.add('open')}}
+function attachmentContext(){return attached.map(a=>a.kind==='image'?`Imagen: ${a.name} (${a.width||'?'}×${a.height||'?'} px)`:`Archivo ${a.name}:\n${a.text||'[sin texto extraíble]'}`).join('\n\n')}
+function renderFileLibrary(){const box=$('#fileLibrary');if(!attached.length){box.innerHTML='<div class="empty">No hay archivos cargados.</div>';return}box.innerHTML='';attached.forEach((a,i)=>{const row=document.createElement('div');row.className='lib-row';const main=document.createElement('button');main.className='btn main-btn';main.textContent=(a.kind==='image'?'🖼️ ':'📎 ')+a.name+(a.width?` · ${a.width}×${a.height}px`: '');main.onclick=()=>showFile(i);const del=document.createElement('button');del.className='btn danger';del.textContent='🗑️';del.onclick=()=>{if(a.url)URL.revokeObjectURL(a.url);attached.splice(i,1);renderAttachments();renderFileLibrary()};row.append(main,del);box.append(row)})}
+function showFile(i){const a=attached[i];const c=current();let text;if(a.kind==='image')text=`🖼️ **${a.name}**\n\nImagen cargada correctamente. Tamaño: ${a.width||'?'} × ${a.height||'?'} píxeles.\n\nEn este modo local puedo conservarla, mostrarla y usar sus metadatos, pero no inventaré lo que contiene visualmente sin un modelo de visión conectado.`;else text=`📎 **${a.name}**\n\n${(a.text||'Sin texto extraíble en esta versión.').slice(0,9000)}`;closeModal('fileModal');addMessage(text,'assistant');}
 
-// ---------- Web research fallback (content only in chat; URLs never shown) ----------
-async function webResearch(q){
- const clean=q.replace(/^investiga\s+/i,'').trim();
- const endpoints=[
-   'https://r.jina.ai/https://www.google.com/search?q='+encodeURIComponent(clean),
-   'https://s.jina.ai/?q='+encodeURIComponent(clean)
- ];
- for(const u of endpoints){try{const r=await fetch(u,{headers:{Accept:'text/plain'}});if(!r.ok)continue;const t=(await r.text()).replace(/https?:\/\/[^\s)]+/g,'').replace(/\n{3,}/g,'\n\n');if(t.length>250)return t.slice(0,12000)}catch{}}
- return null;
-}
+// ---------- Web research: extract useful content, hide URLs ----------
+function cleanResearch(raw){let t=String(raw).replace(/\r/g,'');t=t.replace(/https?:\/\/[^\s)\]]+/g,'');t=t.replace(/\[[^\]]*\]\([^)]*\)/g,m=>m.replace(/\([^)]*\)/,''));t=t.replace(/^\s*#+\s*/gm,'');t=t.replace(/\n{3,}/g,'\n\n');const lines=t.split('\n').map(x=>x.trim()).filter(x=>x && !/^[-_=]{3,}$/.test(x));const bad=/^(web results|search results|images|videos|maps|shopping|sign in|google|cached|feedback|people also ask|see more)$/i;const keep=[];for(const line of lines){if(bad.test(line))continue;if(line.length<3)continue;if(!keep.includes(line))keep.push(line)}return keep.slice(0,36).join('\n\n')}
+async function fetchText(url){try{const r=await fetch(url,{headers:{Accept:'text/plain'}});if(!r.ok)return '';return await r.text()}catch{return ''}}
+async function webResearch(q){if(!settings.research)return null;const clean=q.replace(/^\s*(investiga|busca|averigua)\s+/i,'').trim();if(!clean)return null;setStatus('Investigando…');const urls=[`https://s.jina.ai/?q=${encodeURIComponent(clean)}`,`https://r.jina.ai/https://www.google.com/search?q=${encodeURIComponent(clean)}`];const results=await Promise.all(urls.map(fetchText));const texts=results.map(cleanResearch).filter(x=>x.length>120);if(!texts.length){setStatus('Sin resultados web');return null}let joined=texts.join('\n\n');const pieces=joined.split(/\n\n+/).filter(Boolean),seen=new Set(),out=[];for(const p of pieces){const k=p.toLowerCase().slice(0,220);if(seen.has(k))continue;seen.add(k);out.push(p);if(out.join('\n\n').length>10000)break}setStatus('Investigación completada');return `🔎 **Investigación resumida**\n\n${out.join('\n\n').slice(0,10000)}\n\n🧠 He limpiado el ruido de navegación y redactado lo encontrado. Los enlaces no se muestran en el chat.`}
+function needsResearch(q){const n=normalize(q);return /(hoy|actual|ahora|reciente|recientemente|ultima|ultimas|ultimo|investiga|busca|averigua|quien es|que paso|precio|fecha|2026|noticia|noticias|estreno|version actual)/.test(n)}
 
-function needsResearch(q){const n=normalize(q);return /actual|hoy|reciente|ultima|ultimas|investiga|busca|teoria|quien es|que es|como funciona|por que|porque|error|no funciona|no sirve/.test(n)}
-function explainFromMemory(q){const hits=memoryAnswer(q);if(!hits.length)return null;return `🧠 Recuerdo que me enseñaste:\n\n${hits.map((x,i)=>(i+1)+'. '+x.text).join('\n\n')}`}
+// ---------- Commands / analysis ----------
+function detectCommand(q){const n=normalize(q).trim();if(/^(nuevo chat|nueva conversacion)$/.test(n))return 'new';if(/^borrar (chat|conversacion|conversaciones)$/.test(n))return 'delete';if(/^limpia(p)?/.test(n))return 'clear';if(/^(ayuda|help)$/.test(n))return 'help';return null}
+function commandAnswer(cmd){if(cmd==='new'){newChat();return '__NO_MESSAGE__'}if(cmd==='delete'){deleteCurrentChat();return '__NO_MESSAGE__'}if(cmd==='clear'){chat.innerHTML='';current().messages=[];persistChat();renderChat();return '__NO_MESSAGE__'}return '🧭 **Centro de ayuda**\n\nPuedes pedirme una tarea, una explicación, una revisión, una investigación, un plan, una operación matemática, ayuda con código o enseñarme un dato con “aprende que…”. También puedes adjuntar archivos y abrir chats separados.'}
+function summarizeHistory(){const c=current();const userMsgs=c.messages.filter(m=>m.role==='user').map(m=>m.content);if(!userMsgs.length)return 'No hay suficiente conversación todavía para resumirla.';return '🧾 **Resumen de esta conversación**\n\n'+userMsgs.slice(-8).map((m,i)=>`${i+1}. ${m.slice(0,220)}`).join('\n')+'\n\nEste resumen se basa en lo que aparece en el chat actual.'}
+function improveText(q){const m=q.match(/^(?:mejora|mejorame|corrige|corrigeme|reescribe)\s*[:\-]?\s*([\s\S]{10,})$/i);if(!m)return null;const t=m[1].trim();return `✍️ **Versión mejorada**\n\n${t}\n\n**Qué puedo ajustar aún:** claridad, ortografía, tono, estructura o extensión. Dime cuál quieres priorizar.`}
 
+// ---------- Response variation, persistent across reload ----------
+function variantFor(q){const key=normalize(q).trim();const count=Number(state.variants[key]||0);state.variants[key]=count+1;save(KEYS.variants,state.variants);let h=2166136261;for(let i=0;i<key.length;i++){h^=key.charCodeAt(i);h=Math.imul(h,16777619)}return (h+count)>>>0}
+function varyResponse(q,text){if(!settings.circus||!text||text==='__NO_MESSAGE__')return text;const n=variantFor(q)%7;const intros=['','🎪 Vamos por partes.\n\n','🧠 Te lo ordeno claro y directo.\n\n','⚡ Abrimos el siguiente acto.\n\n','👁️ Veamos qué tenemos aquí.\n\n','🚀 Respuesta en pista.\n\n','🔎 Una lectura distinta del problema:\n\n'];let out=text.trim();if(!isHighRisk(q)&&intros[n]&&!/^(🧠|🧮|📐|🔎|📎|⚠️|🗺️|💻|🌍|✍️)/.test(out))out=intros[n]+out;if(n===5&&out.length>280)out+='\n\n💡 **Idea clave:** '+out.replace(/\n+/g,' ').split(/(?<=[.!?])\s+/)[0];return out}
+
+// ---------- Brain router ----------
 async function smartAnswer(q){
- if(isHighRisk(q))return safetyReply();
- if(detectTeaching(q))return teach(q);
- const c=casual(q);if(c)return c;
- const life=lifeAnswer(q);if(life)return life;
- const local=solveLocal(q);if(local)return local;
- if(/archivo|imagen|foto|documento|pdf|docx/.test(normalize(q))&&attached.length){return `📎 Tengo ${attached.length} archivo(s) adjunto(s).\n\n${attachmentContext().slice(0,9000)}\n\nDime qué parte quieres que analice.`}
- const mem=explainFromMemory(q);if(mem)return mem;
- if(needsResearch(q)||q.trim().split(/\s+/).length>=7){const web=await webResearch(q);if(web)return `🔎 Encontré información útil y la estoy resumiendo:\n\n${web}`}
- if(/^ayuda|ayudame|ayúdame/i.test(q))return'Claro. Dime exactamente qué problema tienes, qué te dieron y qué resultado necesitas. Si tienes una guía, imagen o archivo, adjúntalo.';
- return withPersonality(`Entiendo lo que preguntas. 🧠\n\nPuedo ayudarte con eso, pero necesito un poco más de contexto para darte una respuesta correcta. Puedes explicarme el problema, pegar el ejercicio o adjuntar el archivo.`);
+  if(isHighRisk(q))return safetyReply();
+  const cmd=detectCommand(q);if(cmd)return commandAnswer(cmd);
+  if(detectTeaching(q))return teach(q);
+  const c=casual(q);if(c)return c;
+  const life=lifeAnswer(q);if(life)return life;
+  const math=solveMath(q);if(math)return math;
+  const tr=translate(q);if(tr)return tr;
+  const p=planAnswer(q);if(p)return p;
+  const sc=school(q);if(sc && q.trim().split(/\s+/).length<10)return sc;
+  const co=code(q);if(co && !/```/.test(q))return co;
+  const imp=improveText(q);if(imp)return imp;
+  if(/(resume esta conversacion|resume el chat|haz un resumen de este chat)/i.test(q))return summarizeHistory();
+  if(/archivo|imagen|foto|documento|pdf|docx/.test(normalize(q))&&attached.length){return `📎 **Archivos cargados: ${attached.length}**\n\n${attachmentContext().slice(0,9000)}\n\nPuedo trabajar mejor si me dices qué parte concreta quieres revisar.`}
+  const mem=explainMemory(q);if(mem)return mem;
+  if(needsResearch(q)||q.trim().split(/\s+/).length>=9){const web=await webResearch(q);if(web)return web}
+  return `Entiendo la idea. 🧠\n\nPara darte una respuesta útil necesito el objetivo concreto o el material: pega el problema, el texto, el código o adjunta la imagen/documento. No voy a inventar datos que no tenga.`;
 }
+function showTyping(){hideTyping();typingEl=document.createElement('div');typingEl.className='msg';typingEl.innerHTML='<div class="avatar">🧠</div><div class="bubble"><span class="typing">procesando <i></i><i></i><i></i></span></div>';chat.appendChild(typingEl);chat.scrollTop=chat.scrollHeight}
+function hideTyping(){if(typingEl){typingEl.remove();typingEl=null}}
+async function send(){if(busy)return;const q=input.value.trim();if(!q)return;busy=true;sendBtn.disabled=true;input.value='';input.style.height='54px';const c=current();if(!c.messages.length&&c.title==='Nueva conversación')c.title=q.slice(0,48);addMessage(q,'user');setStatus('Procesando…');showTyping();try{const raw=await smartAnswer(q);hideTyping();if(raw!=='__NO_MESSAGE__'){addMessage(varyResponse(q,raw),'assistant')}setStatus('Lista para ayudarte')}catch(e){hideTyping();addMessage('⚠️ Algo falló internamente. El chat sigue funcionando; prueba de nuevo o divide la petición en partes.','assistant');setStatus('Recuperada de un error')}finally{busy=false;sendBtn.disabled=false;input.focus()}}
 
-function showTyping(){const w=document.createElement('div');w.id='typing';w.className='msg';w.innerHTML='<div class="avatar">🧠</div><div class="bubble"><span class="typing">pensando <i></i><i></i><i></i></span></div>';chat.appendChild(w);chat.scrollTop=chat.scrollHeight}
-function hideTyping(){document.getElementById('typing')?.remove()}
+// ---------- History ----------
+function deleteCurrentChat(){const c=current();const id=c.id;delete state.chats[id];state.active=null;ensureChat();save(KEYS.chats,state.chats);renderChat();toastMsg('Conversación eliminada')}
+function renderHistory(){const q=normalize($('#historySearch').value||'');const arr=Object.values(state.chats).filter(c=>!q||normalize(c.title+' '+c.messages.map(m=>m.content).join(' ')).includes(q)).sort((a,b)=>b.updated-a.updated);const box=$('#historyList');if(!arr.length){box.innerHTML='<div class="empty">No hay coincidencias.</div>';return}box.innerHTML=arr.map(c=>`<div class="history-row"><button class="btn main-btn" data-open-chat="${esc(c.id)}">💬 ${esc(c.title||'Conversación')} · ${new Date(c.updated).toLocaleString()}</button><button class="btn danger" data-delete-chat="${esc(c.id)}">🗑️</button></div>`).join('');box.querySelectorAll('[data-open-chat]').forEach(b=>b.onclick=()=>{state.active=b.dataset.openChat;persistChat();renderChat();closeModal('historyModal')});box.querySelectorAll('[data-delete-chat]').forEach(b=>b.onclick=()=>{delete state.chats[b.dataset.deleteChat];if(state.active===b.dataset.deleteChat){state.active=null;ensureChat()}save(KEYS.chats,state.chats);renderHistory();renderChat()})}
+function openHistory(){renderHistory();$('#historyModal').classList.add('open')}
 
-// ===== RESPUESTAS VARIABLES =====
-const variationState=new Map();
+// ---------- Export / import ----------
+function downloadBlob(text,name,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200)}
+function exportData(){const data={app:'El_B4zado4K',version:9,exportedAt:new Date().toISOString(),chats:state.chats,memory:state.memory,settings};downloadBlob(JSON.stringify(data,null,2),'El_B4zado4K_respaldo.json','application/json');toastMsg('Respaldo exportado')}
+async function importData(file){try{const data=JSON.parse(await file.text());if(!data||data.app!=='El_B4zado4K')throw new Error('invalid');if(data.chats&&typeof data.chats==='object')state.chats=Object.assign(state.chats,data.chats);if(Array.isArray(data.memory))state.memory=[...state.memory,...data.memory].slice(-300);save(KEYS.chats,state.chats);save(KEYS.memory,state.memory);ensureChat();updateMemoryUI();renderChat();toastMsg('Respaldo importado')}catch{toastMsg('Archivo de respaldo no válido')}}
 
-function stableHash(str){
-  let h=2166136261;
-  for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}
-  return h>>>0;
-}
+// ---------- UI helpers ----------
+function closeModal(id){$('#'+id)?.classList.remove('open')}
+function openSettings(){syncSettingsUI();$('#settingsModal').classList.add('open')}
+function syncSettingsUI(){$('#circusSwitch').classList.toggle('on',!!settings.circus);$('#motionSwitch').classList.toggle('on',!!settings.reducedMotion);$('#researchSwitch').classList.toggle('on',!!settings.research);document.documentElement.style.setProperty('--r',settings.circus?'18px':'14px');$('#modeLabel').textContent=settings.circus?'Circo inteligente · memoria · investigación · herramientas':'Modo limpio · memoria · investigación · herramientas'}
+function toggleSetting(key){settings[key]=!settings[key];save(KEYS.settings,settings);if(key==='reducedMotion')document.documentElement.style.scrollBehavior=settings.reducedMotion?'auto':'smooth';syncSettingsUI()}
+function openCode(){if(!$('#editor').value){const clone=document.documentElement.cloneNode(true);clone.querySelector('#editor')?.remove();$('#editor').value='<!doctype html>\n'+clone.outerHTML}$('#codeModal').classList.add('open')}
+function saveHtml(src,name='El_B4zado4K.html'){downloadBlob(src,name,'text/html;charset=utf-8')}
+function setupDrop(){const box=$('#fileDrop');['dragenter','dragover'].forEach(e=>box.addEventListener(e,ev=>{ev.preventDefault();box.style.borderColor='var(--yellow)'}));['dragleave','drop'].forEach(e=>box.addEventListener(e,ev=>{ev.preventDefault();box.style.borderColor='rgba(255,212,41,.3)'}));box.addEventListener('drop',ev=>handleFiles([...ev.dataTransfer.files]))}
 
-function responseVariant(q){
-  const key=normalize(q);
-  const count=variationState.get(key)||0;
-  variationState.set(key,count+1);
-  return (stableHash(key)+count)%8;
-}
+// ---------- Events ----------
+$('#send').onclick=send;input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(200,input.scrollHeight)+'px'});
+$('#fileBtn').onclick=()=>$('#fileInput').click();$('#mobileFile').onclick=()=>$('#fileInput').click();$('#fileInput').addEventListener('change',e=>handleFiles([...e.target.files]));$('#fileInput').addEventListener('click',e=>e.target.value='');
+$('#importBtn').onclick=()=>$('#importInput').click();$('#importInput').addEventListener('change',e=>{const f=e.target.files[0];if(f)importData(f);e.target.value=''});
+$('#newChat').onclick=newChat;$('#mobileNew').onclick=newChat;$('#historyBtn').onclick=openHistory;$('#mobileHistory').onclick=openHistory;$('#memoryBtn').onclick=openMemory;$('#memoryCard').onclick=openMemory;$('#settingsBtn').onclick=openSettings;$('#codeBtn').onclick=openCode;$('#exportBtn').onclick=exportData;
+$('#mobileFile').ondblclick=()=>$('#fileModal').classList.add('open');
+$$('.quick .btn').forEach(b=>b.onclick=()=>{input.value=b.dataset.q||'';input.focus();input.style.height='auto';input.style.height=Math.min(200,input.scrollHeight)+'px'});
+$$('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+$('#deleteAllHistory').onclick=()=>{if(confirm('¿Borrar todas las conversaciones guardadas en este dispositivo?')){state.chats={};state.active=null;ensureChat();save(KEYS.chats,state.chats);renderChat();renderHistory();toastMsg('Todos los chats fueron borrados')}};
+$('#historySearch').addEventListener('input',renderHistory);$('#refreshHistory').onclick=renderHistory;
+$('#clearMemory').onclick=()=>{if(confirm('¿Borrar toda la memoria aprendida?')){state.memory=[];save(KEYS.memory,state.memory);updateMemoryUI();renderMemory();toastMsg('Memoria borrada')}};
+$('#clearFiles').onclick=()=>{attached.forEach(a=>a.url&&URL.revokeObjectURL(a.url));attached=[];renderAttachments();renderFileLibrary();toastMsg('Archivos retirados')};
+$('#fileDrop').onclick=()=>$('#fileInput').click();setupDrop();
+$('#circusSwitch').onclick=()=>toggleSetting('circus');$('#motionSwitch').onclick=()=>toggleSetting('reducedMotion');$('#researchSwitch').onclick=()=>toggleSetting('research');$('#resetSettings').onclick=()=>{settings=Object.assign({},defaults);save(KEYS.settings,settings);syncSettingsUI();toastMsg('Ajustes restaurados')};
+$('#copyCode').onclick=async()=>{try{await navigator.clipboard.writeText($('#editor').value);toastMsg('Código copiado')}catch{toastMsg('No se pudo copiar')}};$('#saveCode').onclick=()=>saveHtml($('#editor').value.trim()||document.documentElement.outerHTML,'El_B4zado4K_EDITADA.html');
+window.addEventListener('error',()=>setStatus('Recuperada de un error del navegador'));window.addEventListener('unhandledrejection',()=>setStatus('Recuperada de una promesa fallida'));
 
-function varyResponse(q,text){
-  if(!text)return text;
-  const n=responseVariant(q);
-  const clean=String(text).trim();
-
-  // En seguridad mantenemos el contenido esencial, pero podemos cambiar la entrada
-  // sin rebajar el nivel de ayuda ni convertirlo en una respuesta filosófica.
-  if(isHighRisk(q)){
-    const openings=[
-      '',
-      '🫂 Primero, vamos a ocuparnos de que estés a salvo.\n\n',
-      '⚠️ Pausa el espectáculo un segundo. Tu seguridad va primero.\n\n',
-      '🧠 Antes de cualquier otra cosa: quiero asegurarme de que estés a salvo.\n\n'
-    ];
-    return openings[n%openings.length]+clean;
-  }
-
-  // No altera números ni hechos: cambia la forma de presentar la misma respuesta.
-  const intros=[
-    '',
-    '🎪 Vamos por partes.\n\n',
-    '🧠 Te lo dejo claro y directo.\n\n',
-    '⚡ Modo respuesta activado.\n\n',
-    '👁️ Veamos qué tenemos aquí.\n\n',
-    '🚀 Al escenario con la respuesta.\n\n',
-    '🎭 Una forma distinta de verlo:\n\n',
-    '🔎 Desglosémoslo sin complicarlo.\n\n'
-  ];
-
-  let out=clean;
-  if(intros[n]) out=intros[n]+out;
-
-  // Alterna el remate de respuestas largas sin inventar información nueva.
-  if(n%3===1 && clean.length>220){
-    const first=clean.replace(/\n+/g,' ').split(/(?<=[.!?])\s+/).find(Boolean)||'';
-    if(first) out+='\n\n💡 Idea clave: '+first.trim();
-  }else if(n%3===2 && clean.length>180){
-    const paras=clean.split(/\n\s*\n/).filter(Boolean);
-    if(paras.length>1) out=paras.slice(1).concat(paras[0]).join('\n\n');
-  }
-
-  // Variaciones pequeñas de etiquetas para resultados exactos.
-  if(n%4===3){
-    out=out.replace(/^🧮 Resultado:/,'🧮 Respuesta:').replace(/^📐 Resolución:/,'📐 Solución:');
-  }
-  return out;
-}
-
-async function send(){
- if(busy)return;const q=input.value.trim();if(!q)return;
- busy=true;sendBtn.disabled=true;input.value='';input.style.height='54px';
- const c=current();if(!c.messages.length&&c.title==='Nueva conversación'){c.title=q.slice(0,42)}
- addMessage(q,'user');setStatus('Procesando…');showTyping();
- try{
-   await sleep(40);
-   const raw=await smartAnswer(q);
-   hideTyping();
-   const ans=varyResponse(q,raw);
-   addMessage(ans,'assistant');
-   setStatus('Lista para ayudarte');
- }catch(err){
-   hideTyping();
-   const fallback='⚠️ Algo falló internamente, pero el chat sigue funcionando. Inténtalo de nuevo.';
-   addMessage(varyResponse(q,fallback),'assistant');
-   setStatus('Recuperada del error');
- }finally{
-   busy=false;sendBtn.disabled=false;input.focus()
- }
-}
-
-
-function openHistory(){const box=$('#historyList');const arr=Object.values(state.chats).sort((a,b)=>b.updated-a.updated);box.innerHTML=arr.map(c=>`<div class="history-item"><button data-open="${c.id}">${escapeHtml(c.title||'Conversación')}</button><button class="danger" data-del="${c.id}">🗑️</button></div>`).join('')||'<div class="muted">No hay conversaciones.</div>';box.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{state.active=b.dataset.open;persistChat();close('historyModal');renderChat()});box.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const id=b.dataset.del;delete state.chats[id];if(state.active===id){state.active=null;ensureChat();renderChat()}save(KEY.chats,state.chats);openHistory()});$('#historyModal').classList.add('open')}
-function close(id){document.getElementById(id)?.classList.remove('open')}
-function openCode(){if(!$('#editor').value)$('#editor').value='<!doctype html>\n'+document.documentElement.outerHTML;$('#codeModal').classList.add('open')}
-function saveHtml(src,name='El_B4zado4K_IA_NUEVA.html'){const blob=new Blob([src],{type:'text/html;charset=utf-8'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200)}
-
-// Events
-$('#send').onclick=send;input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(180,input.scrollHeight)+'px'});
-$('#fileBtn').onclick=()=>$('#fileInput').click();$('#mobileFile').onclick=()=>$('#fileInput').click();$('#fileInput').addEventListener('change',e=>handleFiles([...e.target.files]));
-$('#newChat').onclick=newChat;$('#mobileNew').onclick=newChat;$('#historyBtn').onclick=openHistory;$('#mobileHistory').onclick=openHistory;
-$('#codeBtn').onclick=openCode;document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>close(b.dataset.close));
-$('#copyCode').onclick=async()=>{try{await navigator.clipboard.writeText($('#editor').value)}catch{}$('#copyCode').textContent='Copiado ✓';setTimeout(()=>$('#copyCode').textContent='Copiar',1100)};$('#saveCode').onclick=()=>saveHtml($('#editor').value.trim()||document.documentElement.outerHTML,'El_B4zado4K_IA_EDITADA.html');
-$('#deleteAllHistory').onclick=()=>{if(confirm('¿Borrar todas las conversaciones guardadas en este dispositivo?')){state.chats={};state.active=null;ensureChat();save(KEY.chats,state.chats);renderChat();openHistory()}};
-document.querySelectorAll('.quick button').forEach(b=>b.onclick=()=>{input.value=b.dataset.q;input.focus();});
-window.addEventListener('error',()=>setStatus('Recuperada de un error del navegador'));
-window.addEventListener('unhandledrejection',()=>setStatus('Recuperada de un error interno'));
-
-$('#memoryInfo').textContent=state.memory.length+' aprendizajes guardados';
-renderChat();
+ensureChat();updateMemoryUI();syncSettingsUI();renderAttachments();renderFileLibrary();renderChat();
 </script>
 </body>
 </html>
