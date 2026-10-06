@@ -8,21 +8,17 @@
 <title>El_B4zado4K — Circo Digital</title>
 <style>
 :root{
-  --bg:#070103;--panel:#150408;--panel2:#21070b;--panel3:#2b0a0f;--text:#fff8ee;--muted:#d5b9ab;
+  --bg:#000;--panel:#080808;--panel2:#0d0d0d;--panel3:#121212;--text:#fff8ee;--muted:#d5b9ab;
   --red:#ff2446;--red2:#ff5b72;--yellow:#ffd429;--gold:#fff19a;--green:#67ef9b;--danger:#ff6c83;
   --line:rgba(255,212,41,.20);--shadow:0 24px 80px rgba(0,0,0,.54);--r:18px;
   --top:68px;--side:308px
 }
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:
-  radial-gradient(circle at 10% 8%,rgba(255,36,70,.17),transparent 28%),
-  radial-gradient(circle at 90% 10%,rgba(255,212,41,.13),transparent 26%),
-  repeating-linear-gradient(90deg,rgba(255,36,70,.028) 0 46px,rgba(255,212,41,.028) 46px 92px),
-  linear-gradient(145deg,#040101,#1a0508 55%,#050101);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
 button,input,textarea{font:inherit}button{cursor:pointer}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
 .app{display:grid;grid-template-columns:var(--side) minmax(0,1fr);height:100dvh;min-height:0}
-.side{min-width:0;min-height:0;overflow:auto;padding:14px;background:linear-gradient(180deg,rgba(35,5,9,.97),rgba(7,1,3,.98));border-right:2px solid var(--line);scrollbar-color:var(--yellow) rgba(255,255,255,.05);scrollbar-width:thin}
+.side{min-width:0;min-height:0;overflow:auto;padding:14px;background:#050505;border-right:2px solid var(--line);scrollbar-color:var(--yellow) rgba(255,255,255,.05);scrollbar-width:thin}
 .side::-webkit-scrollbar,.chat::-webkit-scrollbar,.modal-body::-webkit-scrollbar,.library::-webkit-scrollbar{width:11px;height:11px}.side::-webkit-scrollbar-track,.chat::-webkit-scrollbar-track,.modal-body::-webkit-scrollbar-track,.library::-webkit-scrollbar-track{background:rgba(255,255,255,.04)}.side::-webkit-scrollbar-thumb,.chat::-webkit-scrollbar-thumb,.modal-body::-webkit-scrollbar-thumb,.library::-webkit-scrollbar-thumb{background:linear-gradient(var(--red),var(--yellow));border-radius:999px;border:2px solid #22070a}
 .circus-strip{height:10px;border-radius:10px;margin:-14px -14px 12px;background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--yellow) 42px 84px);box-shadow:0 0 28px rgba(255,36,70,.22)}
 .card{border:1px solid var(--line);border-radius:var(--r);padding:13px;margin-bottom:11px;background:linear-gradient(150deg,rgba(255,36,70,.11),rgba(255,212,41,.055));box-shadow:var(--shadow)}
@@ -193,7 +189,7 @@ function improveText(q){const m=q.match(/^(?:mejora|mejorame|corrige|corrigeme|r
 
 // ---------- Response variation, persistent across reload ----------
 function variantFor(q){const key=normalize(q).trim();const count=Number(state.variants[key]||0);state.variants[key]=count+1;save(KEYS.variants,state.variants);let h=2166136261;for(let i=0;i<key.length;i++){h^=key.charCodeAt(i);h=Math.imul(h,16777619)}return (h+count)>>>0}
-function varyResponse(q,text){if(!settings.circus||!text||text==='__NO_MESSAGE__')return text;const n=variantFor(q)%7;const intros=['','🎪 Vamos por partes.\n\n','🧠 Te lo ordeno claro y directo.\n\n','⚡ Abrimos el siguiente acto.\n\n','👁️ Veamos qué tenemos aquí.\n\n','🚀 Respuesta en pista.\n\n','🔎 Una lectura distinta del problema:\n\n'];let out=text.trim();if(!isHighRisk(q)&&intros[n]&&!/^(🧠|🧮|📐|🔎|📎|⚠️|🗺️|💻|🌍|✍️)/.test(out))out=intros[n]+out;if(n===5&&out.length>280)out+='\n\n💡 **Idea clave:** '+out.replace(/\n+/g,' ').split(/(?<=[.!?])\s+/)[0];return out}
+function varyResponse(q,text){if(!settings.circus||!text||text==='__NO_MESSAGE__')return text;const n=variantFor(q)%7;let out=text.trim();if(!isHighRisk(q)&&out.length>280){const endings=['\n\n💡 Idea clave: ','\n\n🎯 Lo esencial: ','\n\n🧠 Quédate con esto: '];const first=out.replace(/\n+/g,' ').split(/(?<=[.!?])\s+/)[0];if(first&&n%3===0)out+=endings[n%endings.length]+first}if(n===4)out=out.replace(/^🧮 Resultado:/,'🧮 Respuesta:').replace(/^📐 Resolución:/,'📐 Solución:');return out}
 
 // ---------- Brain router ----------
 async function smartAnswer(q){
@@ -212,7 +208,7 @@ async function smartAnswer(q){
   if(/archivo|imagen|foto|documento|pdf|docx/.test(normalize(q))&&attached.length){return `📎 **Archivos cargados: ${attached.length}**\n\n${attachmentContext().slice(0,9000)}\n\nPuedo trabajar mejor si me dices qué parte concreta quieres revisar.`}
   const mem=explainMemory(q);if(mem)return mem;
   if(needsResearch(q)||q.trim().split(/\s+/).length>=9){const web=await webResearch(q);if(web)return web}
-  return `Entiendo la idea. 🧠\n\nPara darte una respuesta útil necesito el objetivo concreto o el material: pega el problema, el texto, el código o adjunta la imagen/documento. No voy a inventar datos que no tenga.`;
+  return `Listo, bro. Dime qué quieres hacer y me encargo.`;
 }
 function showTyping(){hideTyping();typingEl=document.createElement('div');typingEl.className='msg';typingEl.innerHTML='<div class="avatar">🧠</div><div class="bubble"><span class="typing">procesando <i></i><i></i><i></i></span></div>';chat.appendChild(typingEl);chat.scrollTop=chat.scrollHeight}
 function hideTyping(){if(typingEl){typingEl.remove();typingEl=null}}
