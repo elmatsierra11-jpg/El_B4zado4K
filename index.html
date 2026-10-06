@@ -106,11 +106,11 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
 'use strict';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const chat=$('#chat'), input=$('#input'), sendBtn=$('#send'), statusEl=$('#status'), toast=$('#toast');
-const KEYS={chats:'b4k_v9_chats',active:'b4k_v9_active',memory:'b4k_v9_memory',settings:'b4k_v9_settings',variants:'b4k_v9_variants'};
+const KEYS={chats:'b4k_v9_chats',active:'b4k_v9_active',memory:'b4k_v9_memory',settings:'b4k_v9_settings',variants:'b4k_v9_variants',research:'b4k_v10_research'};
 let attached=[],busy=false,typingEl=null;
 const defaults={circus:true,research:true,reducedMotion:false};
 let settings=Object.assign({},defaults,load(KEYS.settings,{}));
-let state={chats:load(KEYS.chats,{}),active:localStorage.getItem(KEYS.active)||null,memory:load(KEYS.memory,[]),variants:load(KEYS.variants,{})};
+let state={chats:load(KEYS.chats,{}),active:localStorage.getItem(KEYS.active)||null,memory:load(KEYS.memory,[]),variants:load(KEYS.variants,{}),research:load(KEYS.research,[])};
 
 function load(k,f){try{const x=localStorage.getItem(k);return x?JSON.parse(x):f}catch{return f}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{return false}}
@@ -146,9 +146,9 @@ function solveMath(q){const n=normalize(q);let m=n.match(/(-?\d+(?:[.,]\d+)?)\s*
   return null}
 
 // ---------- Useful local intents ----------
-function casual(q){const n=normalize(q).trim();if(/^(hola|hey|buenas|holi|que tal|como estas)$/.test(n))return '¡HOLAAAA, bro! 🎪🧠\n\nEl escenario está abierto. Dame una tarea, una duda, un archivo o un problema y arrancamos.';if(/^gracias$/.test(n))return '¡De nada! 😎 Seguimos con el siguiente acto.';if(/^(adios|hasta luego)$/.test(n))return '¡Nos vemos, bro! 🎭🚀';return null}
+function casual(q){const n=normalize(q).trim();if(/^(hola|hey|buenas|holi|que tal|como estas)$/.test(n))return 'Hola, bro. 🧠\n\nEstoy listo. Dime directamente qué necesitas y empiezo.';if(/^gracias$/.test(n))return '¡De nada! 😎 Seguimos con el siguiente acto.';if(/^(adios|hasta luego)$/.test(n))return '¡Nos vemos, bro! 🎭🚀';return null}
 function lifeAnswer(q){const n=normalize(q);if(isHighRisk(q)||!/(sentido de la vida|significado de la vida|para que vivimos|que sentido tiene la vida)/.test(n))return null;return 'La pregunta no tiene una única respuesta universal. Algunas filosofías creen que el sentido no viene prefabricado y que se construye con decisiones, vínculos, proyectos y valores.\n\nPuede aparecer en aprender, cuidar, crear, ayudar, amar, explorar o perseguir algo que consideres valioso. También puede cambiar con el tiempo.\n\nLa parte importante es distinguir entre “no conozco un único sentido” y “nada tiene valor”: son afirmaciones muy distintas.'}
-function translate(q){const m=q.match(/^(?:traduce|traduceme|traduce me)\s+(?:al\s+)?(ingles|english|espanol|español|frances|francés|portugues|portugués)\s*[:\-]?\s+([\s\S]+)$/i);if(!m)return null;const lang=normalize(m[1]),text=m[2];const common={hola:{ingles:'hello',espanol:'hola',frances:'bonjour',portugues:'olá'},gracias:{ingles:'thank you',espanol:'gracias',frances:'merci',portugues:'obrigado'},adios:{ingles:'goodbye',espanol:'adiós',frances:'au revoir',portugues:'tchau'}};const key=normalize(text).trim();if(common[key])return `🌍 **Traducción:** ${common[key][lang]||common[key].ingles}`;return `🌍 Puedo preparar la traducción, pero en esta versión local no tengo un traductor lingüístico completo integrado. Para frases complejas puedo investigar el uso correcto si activas la investigación web.`}
+function translate(q){const m=q.match(/^(?:traduce|traduceme|traduce me)\s+(?:al\s+)?(ingles|english|espanol|español|frances|francés|portugues|portugués)\s*[:\-]?\s+([\s\S]+)$/i);if(!m)return null;const lang=normalize(m[1]),text=m[2];const common={hola:{ingles:'hello',espanol:'hola',frances:'bonjour',portugues:'olá'},gracias:{ingles:'thank you',espanol:'gracias',frances:'merci',portugues:'obrigado'},adios:{ingles:'goodbye',espanol:'adiós',frances:'au revoir',portugues:'tchau'}};const key=normalize(text).trim();if(common[key])return `🌍 **Traducción:** ${common[key][lang]||common[key].ingles}`;return null;}
 function planAnswer(q){const n=normalize(q);if(!/(hazme un plan|plan paso a paso|como puedo lograr|como hago para)/.test(n))return null;return '🗺️ **Plan de acción**\n\n1. Define exactamente el resultado que buscas.\n2. Divide el objetivo en tareas pequeñas y comprobables.\n3. Haz primero el paso que desbloquea los demás.\n4. Comprueba el resultado antes de seguir.\n5. Corrige lo que falle y repite.\n6. Termina con una comprobación final.\n\nPásame el objetivo concreto y te lo convierto en un plan adaptado a tu caso.'}
 function school(q){const n=normalize(q);if(!/(tarea|deber|exposicion|exposición|resumen|estudiar|repasar|cuestionario|ensayo|presentacion|presentación)/.test(n))return null;return '📚 **Modo estudio activado**\n\nPuedo ayudarte a entender el tema y no solo a copiar una respuesta. Envíame la pregunta, la guía o una foto del ejercicio. Te lo organizo en explicación sencilla, pasos, respuesta y una mini comprobación para que puedas revisarlo.'}
 function code(q){const n=normalize(q);if(!/(codigo|script|programa|javascript|html|css|lua|luau|python|roblox|error de codigo|bug)/.test(n))return null;if(/no funciona|error|bug|arregla|arreglar/.test(n))return '💻 **Modo depuración**\n\nPégame el código y el error exacto. Voy a buscar el problema, explicarte por qué ocurre y devolverte una versión corregida. Si hay varias causas, las separo para que no terminemos parcheando un bug con otro.';return '💻 Pásame el lenguaje, qué debe hacer el programa y qué parte ya tienes. Te lo puedo estructurar y revisar paso a paso.'}
@@ -166,9 +166,9 @@ function openMemory(){renderMemory();$('#memoryModal').classList.add('open')}
 // ---------- Files ----------
 function renderAttachments(){const box=$('#attachments');box.innerHTML='';for(const [i,a] of attached.entries()){const d=document.createElement('div');d.className='attachment';if(a.type?.startsWith('image/')&&a.url){const img=document.createElement('img');img.src=a.url;img.alt=a.name;d.append(img)}else{const s=document.createElement('span');s.textContent='📎';d.append(s)}const name=document.createElement('span');name.textContent=a.name;d.append(name);const b=document.createElement('button');b.textContent='✕';b.onclick=()=>{if(a.url)URL.revokeObjectURL(a.url);attached.splice(i,1);renderAttachments();renderFileLibrary()};d.append(b);box.append(d)}}
 async function readFile(f){const item={name:f.name,type:f.type||'',size:f.size,url:'',text:'',kind:'file'};if((f.type||'').startsWith('image/')){item.url=URL.createObjectURL(f);item.kind='image';try{const img=new Image();img.src=item.url;await img.decode();item.width=img.naturalWidth;item.height=img.naturalHeight}catch{}return item}
-  if(/\.(txt|md|csv|json|html?|css|js|ts|lua|luau|py|java|c|cpp|h|hpp|xml|yml|yaml)$/i.test(f.name)||/text\//.test(f.type)){item.text=(await f.text()).slice(0,50000);item.kind='text';return item}
-  if(/\.pdf$/i.test(f.name)){item.text='PDF cargado correctamente. Este navegador local conserva el archivo, pero esta versión no incluye todavía un parser PDF embebido.';item.kind='document';return item}
-  if(/\.docx$/i.test(f.name)){item.text='DOCX cargado correctamente. Para extraer todo su texto hace falta un lector DOCX embebido.';item.kind='document';return item}
+  if(/\.(txt|md|csv|json|html?|css|js|ts|lua|luau|py|java|c|cpp|h|hpp|xml|yml|yaml)$/i.test(f.name)||/text\//.test(f.type)){item.text=(await f.text()).slice(0,100000);item.kind='text';return item}
+  if(/\.pdf$/i.test(f.name)){item.text='PDF cargado. Se conserva el archivo; para extracción completa de texto en esta edición se necesita un parser PDF disponible en el navegador. Puedes usar la investigación/localización del documento mientras tanto.';item.kind='document';return item}
+  if(/\.docx$/i.test(f.name)){item.text='DOCX cargado. Se conserva el archivo; la extracción completa de párrafos/tablas requiere un lector DOCX embebido. No inventaré contenido que no pueda leer.';item.kind='document';return item}
   return item}
 async function handleFiles(files){setStatus('Leyendo archivos…');for(const f of files){try{attached.push(await readFile(f))}catch{attached.push({name:f.name,type:f.type,text:'No se pudo leer este archivo.',kind:'file'})}}renderAttachments();renderFileLibrary();if(files.length){setStatus(`${files.length} archivo(s) cargado(s)`);$('#fileModal').classList.add('open')}}
 function attachmentContext(){return attached.map(a=>a.kind==='image'?`Imagen: ${a.name} (${a.width||'?'}×${a.height||'?'} px)`:`Archivo ${a.name}:\n${a.text||'[sin texto extraíble]'}`).join('\n\n')}
@@ -176,10 +176,10 @@ function renderFileLibrary(){const box=$('#fileLibrary');if(!attached.length){bo
 function showFile(i){const a=attached[i];const c=current();let text;if(a.kind==='image')text=`🖼️ **${a.name}**\n\nImagen cargada correctamente. Tamaño: ${a.width||'?'} × ${a.height||'?'} píxeles.\n\nEn este modo local puedo conservarla, mostrarla y usar sus metadatos, pero no inventaré lo que contiene visualmente sin un modelo de visión conectado.`;else text=`📎 **${a.name}**\n\n${(a.text||'Sin texto extraíble en esta versión.').slice(0,9000)}`;closeModal('fileModal');addMessage(text,'assistant');}
 
 // ---------- Web research: extract useful content, hide URLs ----------
-function cleanResearch(raw){let t=String(raw).replace(/\r/g,'');t=t.replace(/https?:\/\/[^\s)\]]+/g,'');t=t.replace(/\[[^\]]*\]\([^)]*\)/g,m=>m.replace(/\([^)]*\)/,''));t=t.replace(/^\s*#+\s*/gm,'');t=t.replace(/\n{3,}/g,'\n\n');const lines=t.split('\n').map(x=>x.trim()).filter(x=>x && !/^[-_=]{3,}$/.test(x));const bad=/^(web results|search results|images|videos|maps|shopping|sign in|google|cached|feedback|people also ask|see more)$/i;const keep=[];for(const line of lines){if(bad.test(line))continue;if(line.length<3)continue;if(!keep.includes(line))keep.push(line)}return keep.slice(0,36).join('\n\n')}
-async function fetchText(url){try{const r=await fetch(url,{headers:{Accept:'text/plain'}});if(!r.ok)return '';return await r.text()}catch{return ''}}
-async function webResearch(q){if(!settings.research)return null;const clean=q.replace(/^\s*(investiga|busca|averigua)\s+/i,'').trim();if(!clean)return null;setStatus('Investigando…');const urls=[`https://s.jina.ai/?q=${encodeURIComponent(clean)}`,`https://r.jina.ai/https://www.google.com/search?q=${encodeURIComponent(clean)}`];const results=await Promise.all(urls.map(fetchText));const texts=results.map(cleanResearch).filter(x=>x.length>120);if(!texts.length){setStatus('Sin resultados web');return null}let joined=texts.join('\n\n');const pieces=joined.split(/\n\n+/).filter(Boolean),seen=new Set(),out=[];for(const p of pieces){const k=p.toLowerCase().slice(0,220);if(seen.has(k))continue;seen.add(k);out.push(p);if(out.join('\n\n').length>10000)break}setStatus('Investigación completada');return `🔎 **Investigación resumida**\n\n${out.join('\n\n').slice(0,10000)}\n\n🧠 He limpiado el ruido de navegación y redactado lo encontrado. Los enlaces no se muestran en el chat.`}
-function needsResearch(q){const n=normalize(q);return /(hoy|actual|ahora|reciente|recientemente|ultima|ultimas|ultimo|investiga|busca|averigua|quien es|que paso|precio|fecha|2026|noticia|noticias|estreno|version actual)/.test(n)}
+function cleanResearch(raw){let t=String(raw).replace(/\r/g,'');t=t.replace(/https?:\/\/[^\s)\]]+/g,'');t=t.replace(/\[[^\]]*\]\([^)]*\)/g,m=>m.replace(/\([^)]*\)/,''));t=t.replace(/^\s*#+\s*/gm,'');t=t.replace(/\n{3,}/g,'\n\n');const lines=t.split('\n').map(x=>x.trim()).filter(x=>x && !/^[-_=]{3,}$/.test(x));const bad=/^(web results|search results|images|videos|maps|shopping|sign in|google|cached|feedback|people also ask|see more|all|news)$/i;const keep=[];for(const line of lines){if(bad.test(line))continue;if(line.length<20)continue;if(/^\(?\d+\)?[.)]\s*$/.test(line))continue;if(!keep.includes(line))keep.push(line)}return keep.slice(0,60).join('\n\n')}
+async function fetchText(url){try{const r=await fetch(url,{headers:{Accept:'text/plain'},cache:'no-store'});if(!r.ok)return '';return await r.text()}catch{return ''}}
+async function webResearch(q){if(!settings.research)return null;const clean=q.replace(/^\s*(investiga|busca|averigua)\s+/i,'').trim();if(!clean)return null;setStatus('Investigando…');const urls=[`https://s.jina.ai/?q=${encodeURIComponent(clean)}`,`https://r.jina.ai/https://www.google.com/search?q=${encodeURIComponent(clean)}`];const results=await Promise.all(urls.map(fetchText));const texts=results.map(cleanResearch).filter(x=>x.length>120);if(!texts.length){setStatus('Sin resultados web');return null}const synthesis=synthesizeResearch(clean,texts);const fallback=texts.join('\n\n').slice(0,9000);setStatus('Investigación completada');const body=(synthesis||fallback).slice(0,10000);const record={id:'r_'+Date.now(),query:clean,answer:body,ts:Date.now()};state.research=(state.research||[]).slice(-49);state.research.push(record);save(KEYS.research,state.research);return `🔎 **Investigación**\n\n${body}\n\n🧠 Separé el ruido de navegación y prioricé los fragmentos que más se relacionan con tu pregunta. Los enlaces no se muestran en el chat.`}
+function needsResearch(q){const n=normalize(q);return /(hoy|actual|ahora|reciente|recientemente|ultima|ultimas|ultimo|investiga|busca|averigua|quien es|que paso|precio|fecha|2026|noticia|noticias|estreno|version actual|en este momento|esta semana|este mes|disponible|cuanto cuesta)/.test(n)}
 
 // ---------- Commands / analysis ----------
 function detectCommand(q){const n=normalize(q).trim();if(/^(nuevo chat|nueva conversacion)$/.test(n))return 'new';if(/^borrar (chat|conversacion|conversaciones)$/.test(n))return 'delete';if(/^limpia(p)?/.test(n))return 'clear';if(/^(ayuda|help)$/.test(n))return 'help';return null}
@@ -187,28 +187,139 @@ function commandAnswer(cmd){if(cmd==='new'){newChat();return '__NO_MESSAGE__'}if
 function summarizeHistory(){const c=current();const userMsgs=c.messages.filter(m=>m.role==='user').map(m=>m.content);if(!userMsgs.length)return 'No hay suficiente conversación todavía para resumirla.';return '🧾 **Resumen de esta conversación**\n\n'+userMsgs.slice(-8).map((m,i)=>`${i+1}. ${m.slice(0,220)}`).join('\n')+'\n\nEste resumen se basa en lo que aparece en el chat actual.'}
 function improveText(q){const m=q.match(/^(?:mejora|mejorame|corrige|corrigeme|reescribe)\s*[:\-]?\s*([\s\S]{10,})$/i);if(!m)return null;const t=m[1].trim();return `✍️ **Versión mejorada**\n\n${t}\n\n**Qué puedo ajustar aún:** claridad, ortografía, tono, estructura o extensión. Dime cuál quieres priorizar.`}
 
+
+// ---------- B4K Neural Core: context, intent, reasoning, local knowledge ----------
+const CORE_KNOWLEDGE={
+  'articulo 103 constitucion colombia':'El artículo 103 de la Constitución Política de Colombia reconoce mecanismos de participación ciudadana como el voto, el plebiscito, el referendo, la consulta popular, el cabildo abierto, la iniciativa legislativa y la revocatoria del mandato.',
+  'mecanismos participacion colombia':'Los principales mecanismos son voto, plebiscito, referendo, consulta popular, cabildo abierto, iniciativa legislativa y revocatoria del mandato.',
+  'fotosintesis':'La fotosíntesis es el proceso mediante el cual las plantas, algas y algunas bacterias convierten energía luminosa en energía química. Usan principalmente agua y dióxido de carbono para producir materia orgánica y liberar oxígeno.',
+  'newton segunda ley':'La segunda ley de Newton relaciona fuerza, masa y aceleración: F = m·a. Una fuerza neta mayor produce mayor aceleración para una misma masa.',
+  'energia cinetica':'La energía cinética es la energía asociada al movimiento. Se calcula con Ec = 1/2·m·v².',
+  'energia potencial gravitatoria':'La energía potencial gravitatoria cerca de la superficie terrestre se aproxima con Ep = m·g·h.',
+  'densidad':'La densidad relaciona la masa de un cuerpo con el volumen que ocupa: ρ = m/V.',
+  'porcentaje':'Un porcentaje es una proporción expresada sobre 100. Para hallar p% de una cantidad C se calcula C·p/100.',
+  'regla de tres':'La regla de tres permite encontrar un valor desconocido cuando dos magnitudes guardan una proporción. En una proporción a/b = c/x, x = (b·c)/a.',
+  'mitosis':'La mitosis es una división celular que produce dos células hijas con la misma información cromosómica que la célula original, en condiciones normales.',
+  'meiosis':'La meiosis es una división celular especializada que reduce a la mitad el número de cromosomas y participa en la formación de gametos.',
+  'internet':'Internet es una red mundial de redes que permite que dispositivos intercambien datos mediante protocolos como IP y TCP, entre muchos otros.',
+  'http':'HTTP es un protocolo de comunicación usado para transferir recursos entre clientes y servidores en la web. HTTPS añade cifrado mediante TLS.',
+  'javascript':'JavaScript es un lenguaje de programación usado ampliamente para agregar lógica e interacción a páginas web y también en servidores y otras plataformas.',
+  'html':'HTML define la estructura y el significado del contenido de una página web mediante elementos y atributos.',
+  'css':'CSS controla la presentación visual de documentos web: diseño, tamaños, espaciado, tipografía, colores y comportamiento responsive.',
+  'roblox studio':'Roblox Studio es el entorno de creación de experiencias de Roblox. Usa Luau para programar comportamientos y sistemas del juego.',
+  'luau':'Luau es el lenguaje derivado de Lua utilizado por Roblox para scripting dentro de Roblox Studio.',
+  'inteligencia artificial':'La inteligencia artificial reúne métodos que permiten a sistemas computacionales reconocer patrones, generar contenido, predecir resultados, tomar decisiones o resolver tareas que normalmente requieren capacidades cognitivas.',
+  'algoritmo':'Un algoritmo es un conjunto ordenado de pasos y reglas para transformar una entrada en una salida o resolver un problema.',
+  'democracia':'La democracia es una forma de organización política en la que la ciudadanía participa directa o indirectamente en las decisiones públicas y en la elección de autoridades, según el sistema de cada país.'
+};
+function lastMessages(limit=8){const c=current();return c.messages.slice(-limit)}
+function recentUserText(){return [...lastMessages(12)].reverse().find(m=>m.role==='user')?.content||''}
+function recentAssistantText(){return [...lastMessages(12)].reverse().find(m=>m.role==='assistant')?.content||''}
+function hasReferenceWords(q){return /^(y\s+)?(eso|esa|ese|esto|esta|este|lo anterior|lo mismo|lo de arriba|aquello|y ahora|y entonces|pero por que|pero porque|como asi)\b/i.test(q.trim())||/\b(ese|esa|esto|esta|anterior|mencionaste|dijiste)\b/i.test(normalize(q))}
+function resolveContextQuestion(q){if(!hasReferenceWords(q))return q;const prev=recentUserText();return prev?`${prev}\n
+Seguimiento del usuario: ${q}`:q}
+function detectIntent(q){
+  const n=normalize(q), intents=[];
+  const add=(name,re,score)=>{if(re.test(n))intents.push({name,score})};
+  add('math',/(calcula|cuanto es|resuelve|operacion|porcentaje|por ciento|regla de tres|ecuacion|fraccion|decimal|multiplica|divide|suma|resta|area|perimetro|volumen)\b/,5);
+  add('research',/(investiga|busca|averigua|actual|hoy|ahora|reciente|noticia|precio|version actual|quien es|donde queda|cuando es|202[0-9])/,5);
+  add('school',/(tarea|deber|actividad|guia|taller|exposicion|examen|quiz|estudiar|repasar|colegio|clase|profesor)/,4);
+  add('code',/(codigo|script|programa|javascript|typescript|python|lua|luau|html|css|roblox|error|bug|funcion|api)/,4);
+  add('rewrite',/(mejora|corrige|corrigeme|reescribe|redacta|reformula|hazlo mejor|ortografia|gramatica|resume|resumeme|simplifica)/,4);
+  add('translate',/(traduce|traduccion|traduceme|ingles|english|frances|frances|portugues)/,4);
+  add('plan',/(plan|paso a paso|como hago|como puedo|guia|instrucciones|organiza|prepara)/,3);
+  add('explain',/(que es|que significa|explica|explicame|por que|porque|como funciona|para que sirve|diferencia entre)/,3);
+  add('creative',/(inventa|crea|escribe|historia|nombre|idea|guion|poema|dialogo|diseña|diseño)/,3);
+  add('compare',/(compara|comparacion|mejor que|diferencia|versus|vs\b)/,3);
+  return intents.sort((a,b)=>b.score-a.score)[0]?.name||'general';
+}
+function coreLookup(q){const n=normalize(q);let best=null,bestScore=0;for(const [k,v] of Object.entries(CORE_KNOWLEDGE)){const sc=overlap(n,k);if(n.includes(k))return {key:k,text:v,score:20};if(sc>bestScore){best={key:k,text:v,score:sc};bestScore=sc}}return bestScore>=2?best:null}
+function buildConversationContext(q){const msgs=lastMessages(10);if(!msgs.length)return '';return msgs.map(m=>`${m.role==='user'?'Usuario':'El_B4zado4K'}: ${String(m.content).slice(0,900)}`).join('\n')}
+function contextHint(q){const hits=memoryHits(q);if(!hits.length)return '';return hits.slice(0,3).map(x=>x.text).join(' | ')}
+function scoreLocalAnswer(q,text){if(!text)return 0;const n=normalize(q),t=normalize(text);let score=0;if(t.length>60)score+=1;if(overlap(n,t)>=1)score+=1;if(/\b(el|la|es|son|porque|para|significa)\b/.test(t))score+=1;if(/dime|explica|como|que\b/.test(n)&&t.length>180)score+=1;return score}
+function splitSentences(t){return String(t).replace(/\s+/g,' ').split(/(?<=[.!?])\s+/).filter(x=>x.length>25)}
+function synthesizeResearch(q,texts){
+  const queryWords=new Set(words(q));
+  const all=[];for(const t of texts){for(const s of splitSentences(t)){const hits=words(s).filter(w=>queryWords.has(w)).length;all.push({s,hits,source:t.slice(0,60)})}}
+  all.sort((a,b)=>b.hits-a.hits||b.s.length-a.s.length);
+  const out=[],seen=new Set();for(const item of all){const key=normalize(item.s).slice(0,180);if(seen.has(key))continue;seen.add(key);out.push(item.s);if(out.length>=10)break}
+  return out.join('\n\n');
+}
+function followupAnswer(q){const n=normalize(q);if(!hasReferenceWords(q))return null;const ctx=recentUserText();if(!ctx)return null;if(/^(y|entonces|y ahora|que hago|como sigo)\b/.test(n))return `Tomando como base lo último que me pediste: **${ctx.slice(0,220)}**\n\nAhora puedo continuar desde ahí sin hacerte repetir todo. Dime el siguiente paso o escribe directamente lo que quieras cambiar.`;return null}
+function genericFallback(q){const intent=detectIntent(q);const ctx=buildConversationContext(q);if(intent==='general'&&ctx)return `Voy a usar el contexto de esta conversación para no hacerte repetir información.\n\nLo último relacionado fue:\n${recentUserText().slice(0,500)}\n\nEscribe la acción concreta que quieres que haga sobre eso.`;return 'Entendido. Escribe la tarea o pregunta completa y voy a elegir el método más adecuado: cálculo, explicación, análisis, código, planificación, memoria o investigación web.'}
+
+// ---------- Better local tools ----------
+function solveAdvancedMath(q){
+  const n=normalize(q);
+  let m=n.match(/(?:regla de tres|proporcion)\s*[:\-]?\s*(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)\s*=\s*(\d+(?:\.\d+)?)\s*\/\s*x/);
+  if(m){const a=+m[1],b=+m[2],c=+m[3];if(b!==0)return `📐 **Regla de tres**\n\n${a}/${b} = ${c}/x\n\nx = (${b} × ${c}) ÷ ${a}\n\nx = **${fmt((b*c)/a)}**`}
+  m=n.match(/(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)/);if(m&&/(fraccion|divide|division|dividir)/.test(n)){const a=+m[1],b=+m[2];if(b!==0)return `🧮 **División:** ${a} ÷ ${b} = **${fmt(a/b)}**`}
+  m=n.match(/(\d+(?:\.\d+)?)\s*(?:km|kilometros?)\s+(?:a|en)\s+(?:m|metros?)/);if(m)return `📏 **Conversión:** ${m[1]} km = **${fmt(+m[1]*1000)} m**`;
+  m=n.match(/(\d+(?:\.\d+)?)\s*(?:m|metros?)\s+(?:a|en)\s+(?:cm|centimetros?)/);if(m)return `📏 **Conversión:** ${m[1]} m = **${fmt(+m[1]*100)} cm**`;
+  m=n.match(/(?:area|área)\s*(?:de\s*)?(?:un\s*)?(?:cuadrado|cuadrada)\s*(?:de\s*)?(\d+(?:\.\d+)?)/);if(m){const a=+m[1];return `📐 Área del cuadrado = lado × lado = ${a} × ${a} = **${fmt(a*a)}**`}
+  return null;
+}
+function textOperation(q){
+  const m=q.match(/^(?:cuenta|cuentame|cuenta cuantas|cuantas palabras tiene|cuenta las palabras)\s*[:\-]?\s*([\s\S]+)$/i);if(m){const txt=m[1].trim();return `📝 El texto tiene **${words(txt).length} palabras útiles** y **${txt.length} caracteres**.`}
+  const r=q.match(/^(?:resume|resumeme)\s*[:\-]?\s*([\s\S]{30,})$/i);if(r){const s=splitSentences(r[1]);return `🧾 **Resumen**\n\n${s.slice(0,Math.max(1,Math.ceil(s.length/3))).join(' ')}`}
+  return null;
+}
+function codeDiagnostics(q){
+  if(!/```/.test(q))return null;const block=q.match(/```(?:[a-z0-9_-]+)?\s*([\s\S]*?)```/i)?.[1]||'';if(!block.trim())return null;
+  const issues=[];
+  const count=(a,b)=> (block.match(new RegExp(a,'g'))||[]).length-(block.match(new RegExp(b,'g'))||[]).length;
+  if(count('\\{','\\}')!==0)issues.push('Hay un desbalance entre `{` y `}`.');
+  if(count('\\(','\\)')!==0)issues.push('Hay un desbalance entre `(` y `)`.');
+  if(count('\\[','\\]')!==0)issues.push('Hay un desbalance entre `[` y `]`.');
+  if(/document\.getElementById|querySelector/.test(block)&&/\.addEventListener\(/.test(block)&&/null/.test(block))issues.push('Comprueba que los elementos del DOM existan antes de registrar eventos.');
+  if(/Roblox|game\.GetService|Instance\.new|:Connect\(/i.test(block)&&/WaitForChild/.test(block)===false)issues.push('En Roblox, muchos objetos pueden tardar en aparecer; `WaitForChild()` suele evitar carreras al iniciar.');
+  return `🔬 **Análisis estático del código**\n\nLenguaje detectado aproximadamente por el contenido.\n\n${issues.length?issues.map((x,i)=>`${i+1}. ${x}`).join('\n'): 'No encontré un error estructural obvio con las comprobaciones locales básicas.'}\n\nPuedo seguir revisando la lógica, rendimiento y casos límite a partir del mismo código.`;
+}
+function localBrain(q){
+  const ctxQ=resolveContextQuestion(q), intent=detectIntent(ctxQ);
+  const core=coreLookup(ctxQ); if(core && /^(explain|school|general|research)$/.test(intent)) return `🧠 **${core.key.replace(/\b\w/g,c=>c.toUpperCase())}**\n\n${core.text}`;
+  const adv=solveAdvancedMath(ctxQ);if(adv)return adv;
+  const txt=textOperation(ctxQ);if(txt)return txt;
+  const diag=codeDiagnostics(ctxQ);if(diag)return diag;
+  const follow=followupAnswer(ctxQ);if(follow)return follow;
+  return null;
+}
+
 // ---------- Response variation, persistent across reload ----------
 function variantFor(q){const key=normalize(q).trim();const count=Number(state.variants[key]||0);state.variants[key]=count+1;save(KEYS.variants,state.variants);let h=2166136261;for(let i=0;i<key.length;i++){h^=key.charCodeAt(i);h=Math.imul(h,16777619)}return (h+count)>>>0}
 function varyResponse(q,text){if(!settings.circus||!text||text==='__NO_MESSAGE__')return text;const n=variantFor(q)%7;let out=text.trim();if(!isHighRisk(q)&&out.length>280){const endings=['\n\n💡 Idea clave: ','\n\n🎯 Lo esencial: ','\n\n🧠 Quédate con esto: '];const first=out.replace(/\n+/g,' ').split(/(?<=[.!?])\s+/)[0];if(first&&n%3===0)out+=endings[n%endings.length]+first}if(n===4)out=out.replace(/^🧮 Resultado:/,'🧮 Respuesta:').replace(/^📐 Resolución:/,'📐 Solución:');return out}
 
 // ---------- Brain router ----------
 async function smartAnswer(q){
-  if(isHighRisk(q))return safetyReply();
-  const cmd=detectCommand(q);if(cmd)return commandAnswer(cmd);
-  if(detectTeaching(q))return teach(q);
-  const c=casual(q);if(c)return c;
-  const life=lifeAnswer(q);if(life)return life;
-  const math=solveMath(q);if(math)return math;
-  const tr=translate(q);if(tr)return tr;
-  const p=planAnswer(q);if(p)return p;
-  const sc=school(q);if(sc && q.trim().split(/\s+/).length<10)return sc;
-  const co=code(q);if(co && !/```/.test(q))return co;
-  const imp=improveText(q);if(imp)return imp;
-  if(/(resume esta conversacion|resume el chat|haz un resumen de este chat)/i.test(q))return summarizeHistory();
-  if(/archivo|imagen|foto|documento|pdf|docx/.test(normalize(q))&&attached.length){return `📎 **Archivos cargados: ${attached.length}**\n\n${attachmentContext().slice(0,9000)}\n\nPuedo trabajar mejor si me dices qué parte concreta quieres revisar.`}
-  const mem=explainMemory(q);if(mem)return mem;
-  if(needsResearch(q)||q.trim().split(/\s+/).length>=9){const web=await webResearch(q);if(web)return web}
-  return `Listo, bro. Dime qué quieres hacer y me encargo.`;
+  const original=q.trim();
+  if(isHighRisk(original))return safetyReply();
+  const contextual=resolveContextQuestion(original);
+  const cmd=detectCommand(original);if(cmd)return commandAnswer(cmd);
+  if(detectTeaching(original))return teach(original);
+  const c=casual(original);if(c)return c;
+  if(/^(responde otra vez|otra respuesta|dilo diferente|explicalo diferente|otra forma)$/i.test(original)){
+    const prev=recentAssistantText();return prev?`Voy por un enfoque distinto:\n\n${prev}`:'Todavía no tengo una respuesta anterior que reformular.';
+  }
+  const life=lifeAnswer(contextual);if(life)return life;
+  const math=solveMath(contextual);if(math)return math;
+  const adv=solveAdvancedMath(contextual);if(adv)return adv;
+  const tr=translate(contextual);if(tr)return tr;
+  const p=planAnswer(contextual);if(p)return p;
+  const sc=school(contextual);if(sc && contextual.trim().split(/\s+/).length<24)return sc;
+  const co=code(contextual);if(co && !/```/.test(contextual))return co;
+  const diag=codeDiagnostics(contextual);if(diag)return diag;
+  const imp=improveText(contextual);if(imp)return imp;
+  const txt=textOperation(contextual);if(txt)return txt;
+  if(/(resume esta conversacion|resume el chat|haz un resumen de este chat)/i.test(original))return summarizeHistory();
+  if(/archivo|imagen|foto|documento|pdf|docx/.test(normalize(original))&&attached.length){return `📎 **Archivos cargados: ${attached.length}**\n\n${attachmentContext().slice(0,9000)}\n\nPuedo cruzar su contenido con tu pregunta y responder sobre lo que sí pueda leer.`}
+  const local=localBrain(contextual);if(local)return local;
+  const mem=explainMemory(original);if(mem && /que recuerdas|que sabes de mi|memoria|recuerdas/i.test(normalize(original)))return mem;
+  const intent=detectIntent(contextual);
+  const shouldResearch=settings.research && (needsResearch(original)||intent==='research'||/[?¿]/.test(original)||/^dime\s+(que|quien|cuando|donde|como|por que)/i.test(original)||original.split(/\s+/).length>=5);
+  if(shouldResearch){const web=await webResearch(contextual);if(web)return web}
+  const memHint=contextHint(original);
+  if(memHint)return `Tengo una enseñanza tuya que puede ser útil aquí:\n\n${memHint}\n\nLa tomo como contexto para esta conversación.`;
+  return genericFallback(original);
 }
 function showTyping(){hideTyping();typingEl=document.createElement('div');typingEl.className='msg';typingEl.innerHTML='<div class="avatar">🧠</div><div class="bubble"><span class="typing">procesando <i></i><i></i><i></i></span></div>';chat.appendChild(typingEl);chat.scrollTop=chat.scrollHeight}
 function hideTyping(){if(typingEl){typingEl.remove();typingEl=null}}
