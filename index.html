@@ -3,78 +3,310 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090617">
-<meta name="description" content="El_B4zado4K — anfitrión digital con emociones y análisis de estímulos.">
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./icon.svg">
-<title>El_B4zado4K 🎪</title>
+<meta name="theme-color" content="#070812">
+<title>El_B4zado4K IA — Circo Digital</title>
 <style>
-:root{--bg:#07030d;--panel:#10081b;--line:#ffffff16;--txt:#fff7ff;--muted:#bcaac8;--pink:#ff4edb;--cyan:#52efff;--green:#7dffad;--yellow:#ffe66d}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 20% 10%,#ff4edb22,transparent 30%),radial-gradient(circle at 85% 15%,#52efff18,transparent 28%),linear-gradient(135deg,#040108,#12071d 55%,#050108);color:var(--txt);overflow:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#fff1,transparent 1px,transparent 4px);opacity:.035}
-.app{display:grid;grid-template-columns:300px 1fr;height:100dvh}
-aside{padding:16px;border-right:1px solid var(--line);background:#08040edc;backdrop-filter:blur(18px);display:flex;flex-direction:column;gap:11px}
-.card{padding:14px;border:1px solid var(--line);border-radius:18px;background:#ffffff06}.brand{border-color:#ff4edb55;box-shadow:0 0 30px #ff4edb12}.brand h1{font-size:19px;margin:0 0 4px}.small{font-size:11px;color:var(--muted);line-height:1.45}
-.status{display:flex;align-items:center;gap:8px;font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
-.moodI{font-size:42px;text-align:center}.moodN{text-align:center;font-weight:900;font-size:14px}.moodD{text-align:center;color:var(--muted);font-size:10px;margin-top:4px}
-.badges{display:flex;gap:5px;flex-wrap:wrap}.badge{padding:5px 7px;border-radius:999px;background:#fff1;border:1px solid var(--line);font-size:9px}
-.foot{margin-top:auto;color:#776982;font-size:9px;line-height:1.4}
-main{min-width:0;display:flex;flex-direction:column}.top{height:70px;padding:0 18px;border-bottom:1px solid var(--line);background:#08040eaa;display:flex;align-items:center;justify-content:space-between}
-.titleRow{display:flex;gap:11px;align-items:center;min-width:0}.orb{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--pink),var(--cyan),var(--yellow),var(--pink));color:#17051a;font-weight:1000;box-shadow:0 0 25px #ff4edb33}.title{font-weight:900;font-size:15px}.sub{font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60vw}
-.actions{display:flex;gap:6px}button{background:#ffffff0a;border:1px solid var(--line);color:var(--txt);padding:9px 11px;border-radius:11px;font-weight:800;cursor:pointer}button:hover{border-color:#fff4}
-.chat{flex:1;overflow:auto;padding:18px}.msg{max-width:900px;margin:0 auto 12px;display:flex;gap:8px;align-items:flex-start}.msg.user{justify-content:flex-end}.av{width:31px;height:31px;flex:0 0 31px;border-radius:10px;display:grid;place-items:center;background:#ff4edb18;border:1px solid var(--line)}.bubble{max-width:min(84%,760px);padding:12px 14px;border:1px solid var(--line);border-radius:15px;background:#fff1;line-height:1.5;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}.user .bubble{background:#ff4edb12;border-color:#ff4edb33}
-.thought{margin-top:7px;padding:8px;border-left:2px solid var(--cyan);background:#0003;border-radius:8px;color:#96eefa;font-size:10px}
-.composer{padding:10px 15px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:#08040eaa}.quick{max-width:900px;margin:0 auto 7px;display:flex;gap:6px;overflow:auto}.quick button{white-space:nowrap;font-size:10px;padding:7px 9px}.row{max-width:900px;margin:auto;display:flex;gap:7px}textarea{flex:1;min-width:0;height:53px;resize:none;border-radius:13px;background:#0e0617;color:var(--txt);border:1px solid var(--line);outline:none;padding:12px;font:inherit;font-size:16px}textarea:focus{border-color:#ff4edb77}.send{width:90px;background:linear-gradient(135deg,var(--pink),#9a60ff);color:#180619;border:0}.hint{max-width:900px;margin:5px auto 0;color:#75687b;font-size:9px}
-.modal{position:fixed;inset:0;display:none;place-items:center;background:#000b;z-index:10}.modal.open{display:grid}.box{width:min(690px,92vw);max-height:85vh;overflow:auto;background:#10071a;border:1px solid var(--line);border-radius:20px;padding:18px}.box h2{margin-top:0}.box p{color:#c7b8cc;font-size:12px;line-height:1.6}.box input{width:100%;margin:5px 0 9px;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0a0410;color:#fff}
-@media(max-width:850px){body{overflow:hidden}.app{grid-template-columns:1fr}.side{display:none}.top{height:62px;padding:0 10px}.orb{width:36px;height:36px}.title{font-size:13px}.sub{font-size:8px;max-width:48vw}.actions button{width:39px;height:39px;padding:7px}.chat{padding:11px 8px}.bubble{max-width:calc(100% - 37px);font-size:13px;padding:10px 11px}.composer{padding-left:8px;padding-right:8px}.quick{padding-bottom:2px}.send{width:78px}.hint{display:none}}
+:root{
+  --bg:#06070d;--panel:rgba(16,18,29,.86);--panel2:rgba(22,25,40,.94);
+  --text:#f6f7fb;--muted:#aab0c2;--line:rgba(255,255,255,.09);
+  --a:#6ee7ff;--b:#9a7cff;--ok:#74f2a4;--warn:#ffd166;--danger:#ff718a;
+  --shadow:0 24px 70px rgba(0,0,0,.42)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:
+ radial-gradient(circle at 12% 10%,rgba(110,231,255,.09),transparent 28%),
+ radial-gradient(circle at 88% 8%,rgba(154,124,255,.12),transparent 30%),var(--bg);color:var(--text)}
+body{overflow:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);border-radius:12px;padding:10px 12px;font-weight:800;transition:.18s transform,.18s background,.18s border-color}
+button:hover{transform:translateY(-1px);background:rgba(255,255,255,.08);border-color:rgba(110,231,255,.35)}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.app{height:100dvh;display:grid;grid-template-columns:300px 1fr}
+.side{border-right:1px solid var(--line);background:rgba(6,8,14,.82);backdrop-filter:blur(18px);padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.brand,.card{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+.brand h1{margin:0;font-size:19px}.brand p{margin:4px 0 0;color:var(--muted);font-size:11px}
+.status{display:flex;align-items:center;gap:8px;font-size:11px;padding:10px 12px;border:1px solid rgba(116,242,164,.14);background:rgba(116,242,164,.05);border-radius:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 16px var(--ok)}
+.card h3{font-size:11px;letter-spacing:.8px;text-transform:uppercase;margin:0 0 9px}.desc{color:var(--muted);font-size:11px;line-height:1.5}
+.side-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.main{min-width:0;display:flex;flex-direction:column}
+.top{height:68px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px;border-bottom:1px solid var(--line);background:rgba(8,10,18,.72);backdrop-filter:blur(18px)}
+.title{display:flex;align-items:center;gap:10px;min-width:0}.brain{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:linear-gradient(145deg,rgba(110,231,255,.16),rgba(154,124,255,.2));border:1px solid var(--line);box-shadow:0 0 26px rgba(110,231,255,.11)}
+.title h2{margin:0;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.title p{margin:2px 0 0;color:var(--muted);font-size:10px}.top-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.chat{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 16px 120px;scroll-behavior:smooth}.msg{max-width:880px;margin:0 auto 12px;display:flex;gap:9px;align-items:flex-start;animation:rise .22s ease both}.msg.user{justify-content:flex-end}.avatar{width:34px;height:34px;flex:0 0 34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(110,231,255,.13),rgba(154,124,255,.15));border:1px solid var(--line)}.bubble{max-width:min(84%,780px);padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.045);line-height:1.58;font-size:14px;box-shadow:var(--shadow);overflow-wrap:anywhere}.user .bubble{background:linear-gradient(145deg,rgba(110,231,255,.10),rgba(154,124,255,.12))}
+.bubble strong{font-weight:900}.muted{color:var(--muted)}
+.notice{max-width:880px;margin:0 auto 12px;border:1px solid rgba(255,209,102,.18);background:rgba(255,209,102,.05);padding:10px 12px;border-radius:14px;color:#f7e6ad;font-size:11px;animation:rise .2s ease both}
+.attachments{max-width:880px;margin:0 auto 12px;display:flex;gap:8px;flex-wrap:wrap}.attachment{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);padding:7px 9px;border-radius:12px;font-size:10px}.attachment img{width:36px;height:36px;object-fit:cover;border-radius:8px}.attachment button{padding:5px 7px;font-size:10px}
+.composer{position:fixed;left:300px;right:0;bottom:0;padding:10px 14px 14px;background:linear-gradient(180deg,rgba(6,7,13,0),rgba(6,7,13,.92) 30%);pointer-events:none}.composer-inner{max-width:880px;margin:auto;pointer-events:auto}.row{display:flex;gap:8px;align-items:flex-end}.row textarea{flex:1;min-width:0;min-height:54px;max-height:180px;resize:none;outline:none;color:var(--text);background:#0d0f18;border:1px solid var(--line);border-radius:15px;padding:13px;line-height:1.4}.row textarea:focus{border-color:rgba(110,231,255,.35);box-shadow:0 0 0 3px rgba(110,231,255,.06)}.send{min-width:92px;height:54px;background:linear-gradient(135deg,#6ee7ff,#9a7cff);color:#071019;border:0}.quick{display:flex;gap:6px;overflow:auto;padding-bottom:6px}.quick button{white-space:nowrap;font-size:10px;padding:7px 9px}.file-input{display:none}
+.typing{display:inline-flex;gap:4px;align-items:center}.typing i{width:6px;height:6px;border-radius:50%;background:var(--a);animation:blink 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.76);display:none;place-items:center;z-index:50;padding:16px}.modal.open{display:grid}.modal-box{width:min(980px,96vw);height:min(86dvh,820px);background:var(--panel2);border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow)}.modal-head,.modal-foot{padding:11px 13px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}.modal-foot{border-top:1px solid var(--line);border-bottom:0;justify-content:flex-end}.modal-body{flex:1;overflow:auto;padding:14px}.editor{width:100%;height:100%;resize:none;border:0;outline:none;background:#07080e;color:#eaf0ff;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;padding:14px}
+.history-list{display:flex;flex-direction:column;gap:7px}.history-item{display:flex;gap:6px;align-items:center}.history-item button:first-child{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.danger{border-color:rgba(255,113,138,.24);background:rgba(255,113,138,.06)}
+.file-preview{margin-top:12px;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}.file-preview img{max-width:100%;max-height:360px;display:block;margin:auto;border-radius:12px}.file-text{white-space:pre-wrap;max-height:360px;overflow:auto;color:#dfe4ef;font:12px/1.5 ui-monospace,monospace}
+@keyframes rise{from{opacity:0;transform:translateY(8px) scale(.99)}to{opacity:1;transform:none}}@keyframes blink{0%,80%,100%{opacity:.3;transform:scale(.85)}40%{opacity:1;transform:scale(1)}}
+@media(max-width:860px){
+ body{overflow:hidden}.app{grid-template-columns:1fr}.side{display:none}.composer{left:0}.top{height:62px;padding:0 10px}.top-actions button span.label{display:none}.top-actions button{min-width:42px;padding:9px}.chat{padding:12px 10px 140px}.bubble{max-width:90%;font-size:13px}.avatar{width:30px;height:30px;flex-basis:30px}.row textarea{font-size:16px}.send{min-width:78px}.quick{margin-bottom:2px}.modal{padding:8px}.modal-box{width:100%;height:94dvh}}
+@media(max-width:430px){.title p{display:none}.title h2{font-size:12px}.send{min-width:74px;padding:8px;font-size:10px}.chat{padding-bottom:148px}}
+
+/* ===== EL_B4ZADO4K • CIRCO DIGITAL ROBUSTO ===== */
+:root{
+  --bg:#080203;--panel:rgba(27,6,7,.94);--panel2:rgba(43,8,8,.97);
+  --text:#fff8ef;--muted:#d5baa5;--line:rgba(255,210,31,.20);
+  --a:#ff1f3d;--b:#ffd21f;--ok:#72f29c;--warn:#ffd21f;--danger:#ff4059;
+  --red:#ff1738;--yellow:#ffd21f;--gold:#fff09a;
+  --shadow:0 22px 70px rgba(0,0,0,.58)
+}
+html,body{background:
+  radial-gradient(circle at 12% 8%,rgba(255,23,56,.16),transparent 27%),
+  radial-gradient(circle at 88% 9%,rgba(255,210,31,.14),transparent 25%),
+  repeating-linear-gradient(90deg,rgba(255,23,56,.035) 0 46px,rgba(255,210,31,.035) 46px 92px),
+  linear-gradient(145deg,#040101,#180305 54%,#050101);color:var(--text)}
+body{overflow:hidden}
+.app{height:100dvh;min-height:0;display:grid;grid-template-columns:300px minmax(0,1fr)}
+.side{min-width:0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:linear-gradient(180deg,rgba(28,3,5,.98),rgba(8,1,2,.97));border-right:2px solid rgba(255,210,31,.20);scrollbar-color:var(--yellow) rgba(255,255,255,.06);scrollbar-width:thin}
+.side::-webkit-scrollbar,.chat::-webkit-scrollbar,.modal-body::-webkit-scrollbar,.editor::-webkit-scrollbar{width:11px;height:11px}
+.side::-webkit-scrollbar-track,.chat::-webkit-scrollbar-track,.modal-body::-webkit-scrollbar-track,.editor::-webkit-scrollbar-track{background:rgba(255,255,255,.035)}
+.side::-webkit-scrollbar-thumb,.chat::-webkit-scrollbar-thumb,.modal-body::-webkit-scrollbar-thumb,.editor::-webkit-scrollbar-thumb{background:linear-gradient(var(--red),var(--yellow));border-radius:999px;border:2px solid #1a0305}
+.side:before{content:"";position:sticky;top:0;display:block;height:9px;margin:-14px -14px 5px;background:repeating-linear-gradient(90deg,var(--red) 0 42px,var(--yellow) 42px 84px);box-shadow:0 0 20px rgba(255,23,56,.24);z-index:3}
+.brand,.card{border-color:rgba(255,210,31,.20);background:linear-gradient(145deg,rgba(255,23,56,.10),rgba(255,210,31,.055));box-shadow:0 16px 50px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.04)}
+.brand{margin-top:0;position:relative;overflow:hidden}.brand:after{content:"";position:absolute;right:7px;top:8px;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle,var(--yellow) 0 12%,rgba(255,23,56,.55) 13% 32%,transparent 33%);filter:blur(.4px);opacity:.75;animation:lightPulse 2.6s ease-in-out infinite}
+.status{border-color:rgba(255,210,31,.24);background:linear-gradient(90deg,rgba(255,23,56,.10),rgba(255,210,31,.07))}.dot{background:var(--yellow);box-shadow:0 0 15px var(--yellow)}
+.main{min-width:0;min-height:0;height:100%;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,23,56,.02),rgba(255,210,31,.015))}
+.top{position:relative;flex:0 0 68px;background:linear-gradient(90deg,rgba(19,2,4,.96),rgba(36,7,7,.86));border-bottom:2px solid rgba(255,210,31,.16)}
+.top:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:repeating-linear-gradient(90deg,var(--red) 0 52px,var(--yellow) 52px 104px);box-shadow:0 0 20px rgba(255,23,56,.18)}
+.brain{background:radial-gradient(circle at 35% 30%,rgba(255,240,138,.35),transparent 27%),linear-gradient(145deg,rgba(255,23,56,.25),rgba(255,210,31,.25));border-color:rgba(255,210,31,.36);box-shadow:0 0 26px rgba(255,23,56,.18),0 0 46px rgba(255,210,31,.10);animation:brainFloat 3s ease-in-out infinite}
+.title h2{color:#fff8ef}.title p{color:#d6bca9}
+.top-actions button,.side-grid button{border-color:rgba(255,210,31,.22);background:linear-gradient(145deg,rgba(255,23,56,.14),rgba(255,210,31,.08))}
+.top-actions button:hover,.side-grid button:hover{background:linear-gradient(145deg,rgba(255,23,56,.24),rgba(255,210,31,.16));border-color:rgba(255,210,31,.50);box-shadow:0 8px 28px rgba(255,23,56,.13)}
+.chat{min-height:0;flex:1;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:18px 16px 190px;scrollbar-color:var(--yellow) rgba(255,255,255,.06);scrollbar-width:thin}
+.chat::before{content:"";position:fixed;left:300px;right:0;top:68px;bottom:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(90deg,rgba(255,23,56,.24) 0 42px,transparent 42px 84px);mix-blend-mode:screen;z-index:0}
+.chat>*{position:relative;z-index:1}
+.bubble{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,23,56,.045));border-color:rgba(255,210,31,.16);box-shadow:0 16px 40px rgba(0,0,0,.36)}
+.msg.user .bubble{background:linear-gradient(145deg,rgba(255,23,56,.17),rgba(255,210,31,.08));border-color:rgba(255,23,56,.30)}
+.avatar{background:radial-gradient(circle at 35% 30%,rgba(255,240,138,.22),transparent 28%),linear-gradient(145deg,rgba(255,23,56,.20),rgba(255,210,31,.14));border-color:rgba(255,210,31,.22)}
+.notice{border-color:rgba(255,210,31,.24);background:linear-gradient(90deg,rgba(255,23,56,.08),rgba(255,210,31,.06));color:#ffeaa8}
+.composer{left:300px;right:0;bottom:0;position:fixed;z-index:20;padding:10px 14px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(7,2,3,.18),rgba(18,3,5,.98) 30%);border-top:2px solid rgba(255,210,31,.16);pointer-events:none}
+.composer:before{content:"";display:block;max-width:900px;height:4px;margin:0 auto 9px;border-radius:999px;background:repeating-linear-gradient(90deg,var(--red) 0 30px,var(--yellow) 30px 60px);box-shadow:0 0 16px rgba(255,23,56,.18)}
+.composer-inner{max-width:900px;width:100%;margin:0 auto;pointer-events:auto}.quick{scrollbar-color:var(--yellow) rgba(255,255,255,.04);scrollbar-width:thin}.quick button{border-color:rgba(255,210,31,.19);background:rgba(255,255,255,.035)}
+.row textarea{background:#120507;border-color:rgba(255,210,31,.22);color:#fff8ef}.row textarea:focus{border-color:rgba(255,210,31,.58);box-shadow:0 0 0 3px rgba(255,210,31,.08),0 0 22px rgba(255,23,56,.09)}
+.send{background:linear-gradient(90deg,var(--red),var(--yellow)) !important;color:#1a0304 !important;box-shadow:0 12px 34px rgba(255,23,56,.22),0 0 20px rgba(255,210,31,.10)}
+.modal{z-index:100;background:rgba(9,0,2,.82);backdrop-filter:blur(6px)}.modal-box{background:linear-gradient(145deg,#190406,#0b0204);border-color:rgba(255,210,31,.28);box-shadow:0 30px 120px rgba(0,0,0,.75),0 0 42px rgba(255,23,56,.10)}.modal-head,.modal-foot{border-color:rgba(255,210,31,.14)}
+.history-list,.file-preview{background:transparent}
+@keyframes lightPulse{0%,100%{transform:scale(.94);opacity:.58}50%{transform:scale(1.08);opacity:1}}@keyframes brainFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-1deg)}}
+@media (max-width:860px){
+  .app{display:block;height:100dvh;min-height:100dvh}.side{display:none}.main{width:100vw;height:100dvh}.top{height:64px;flex-basis:64px;padding:0 9px}.top-actions{gap:5px}.top-actions button{min-width:40px;height:40px;padding:7px}.top-actions button span.label{display:none}
+  .chat{padding:12px 9px 170px}.chat::before{left:0;top:64px}.bubble{max-width:92%;font-size:14px}.avatar{width:31px;height:31px;flex-basis:31px}.composer{left:0;right:0;padding:8px 8px calc(9px + env(safe-area-inset-bottom))}.composer:before{margin-bottom:7px}.composer-inner{max-width:none}.quick{overflow-x:auto;flex-wrap:nowrap;padding-bottom:3px}.quick button{flex:0 0 auto;min-height:40px}.row{gap:7px}.row textarea{height:54px;min-height:54px;font-size:16px}.send{width:94px;min-width:94px;height:54px;padding:8px}
+  .modal{padding:7px}.modal-box{width:100%;height:94dvh;max-height:94dvh}.modal-body{min-height:0}
+}
+@media(max-width:430px){.top{height:60px;flex-basis:60px}.chat{padding-bottom:172px}.chat::before{top:60px}.title h2{font-size:12px}.title p{display:none}.brain{width:36px;height:36px;font-size:20px}.bubble{max-width:94%;font-size:13.5px;padding:11px 12px}.send{width:84px;min-width:84px}.row textarea{height:52px;min-height:52px}.composer{padding-bottom:calc(8px + env(safe-area-inset-bottom))}}
+@media(orientation:landscape) and (max-height:600px){.top{height:54px;flex-basis:54px}.chat{padding-bottom:125px}.chat::before{top:54px}.composer{padding-top:6px}.quick{margin-bottom:3px}.row textarea,.send{height:46px;min-height:46px}.send{width:88px;min-width:88px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="side">
-  <div class="card brand"><h1>🎪 El_B4zado4K</h1><div class="small">Anfitrión digital • emociones • estímulos • creatividad</div></div>
-  <div class="status"><span class="dot"></span><b id="status">Sistema activo • local</b></div>
-  <div class="card"><div class="moodI" id="mI">🤩</div><div class="moodN" id="mN">¡EXCESIVAMENTE ENTUSIASMADO!</div><div class="moodD" id="mD">¡El espectáculo comienza!</div></div>
-  <div class="card"><div class="small"><b>Analizador:</b> palabras, intención, preguntas, exclamaciones, mayúsculas, emojis, urgencia, positividad, negatividad, curiosidad, creatividad y repetición.</div></div>
-  <div class="card"><div class="badges"><span class="badge">🎭 teatral</span><span class="badge">⚡ hiperactivo</span><span class="badge">🧐 curioso</span><span class="badge">😱 dramático</span><span class="badge">🤪 caótico</span><span class="badge">🧠 analítico</span></div></div>
-  <div class="card"><button id="cfg" style="width:100%">⚙️ Configurar IA real</button></div>
-  <div class="foot">No muestra cadenas de pensamiento privadas. Puede mostrar un resumen de los estímulos detectados. Para conocimiento amplio necesita un modelo de IA conectado.</div>
-</aside>
-<main>
-<header class="top"><div class="titleRow"><div class="orb">E</div><div style="min-width:0"><div class="title">El_B4zado4K@gmail.com</div><div class="sub">“¡CABALLEROS, DAMAS, HUMANOS Y ENTIDADES DIGITALES… COMENCEMOS!”</div></div></div><div class="actions"><button id="clear">🗑️</button><button id="info">ℹ️</button></div></header>
-<section id="chat" class="chat"><div class="msg"><div class="av">🎪</div><div class="bubble"><b>¡¡¡BIENVENIDOOOOOO!!!</b> 🎉
+  <aside class="side">
+    <div class="brand"><h1>🧠 El_B4zado4K</h1><p>IA local • tareas • archivos • memoria • investigación</p></div>
+    <div class="status"><span class="dot"></span><b id="status">Lista para ayudarte</b></div>
+    <div class="card"><h3>Qué hace</h3><div class="desc">Responde conversaciones normales, resuelve ejercicios, analiza archivos, recuerda conversaciones y aprende solo cuando tú se lo enseñas explícitamente.</div></div>
+    <div class="card"><h3>Controles</h3><div class="side-grid"><button id="newChat">＋ Nueva</button><button id="historyBtn">💬 Chats</button><button id="fileBtn">📎 Archivo</button><button id="codeBtn">🔓 Código</button></div><input id="fileInput" class="file-input" type="file" multiple accept="image/*,.txt,.md,.csv,.json,.html,.css,.js,.lua,.luau,.py,.pdf,.docx"></div>
+    <div class="card"><h3>Memoria</h3><div class="desc" id="memoryInfo">0 aprendizajes guardados</div></div>
+    <div class="card"><h3>🎪 Personalidad</h3><div class="desc">Hiperactivo, teatral, juguetón y curioso. Gran energía de anfitrión de circo digital, con humor y dramatismo controlados para no estorbar la respuesta.</div></div>
+  </aside>
 
-Soy <b>El_B4zado4K@gmail.com</b>. Voy a leer tus palabras y detectar señales del mensaje para decidir cómo reaccionar.
+  <main class="main">
+    <header class="top">
+      <div class="title"><div class="brain">🧠</div><div><h2>El_B4zado4K IA</h2><p>Piensa, comprueba, explica y se recupera de errores • anfitrión digital.</p></div></div>
+      <div class="top-actions"><button id="mobileFile">📎<span class="label"> Archivo</span></button><button id="mobileHistory">💬<span class="label"> Chats</span></button><button id="mobileNew">＋<span class="label"> Nueva</span></button></div>
+    </header>
 
-¡Escribe algo! ¡Una pregunta, un problema, una idea, cualquier cosa! 🎭</div></div></section>
-<div class="composer"><div class="quick"><button data-q="piensa por qué el cielo es azul">🧠 Piensa</button><button data-q="resuelve 25*18">🧮 Matemáticas</button><button data-q="idea para Roblox">🎮 Roblox</button><button data-q="historia de terror">👁️ Terror</button><button data-q="explícame la fotosíntesis">🌱 Explica</button></div><div class="row"><textarea id="input" placeholder="Escribe aquí..."></textarea><button id="send" class="send">ENVIAR ▶</button></div><div class="hint">Enter = enviar · Shift+Enter = nueva línea</div></div>
-</main></div>
+    <section id="chat" class="chat"></section>
 
-<div id="modal" class="modal"><div class="box"><h2>🧠 Conectar IA real</h2><p>Esta función permite conectar un endpoint compatible con la API de OpenAI. <b>No publiques una clave secreta en un repositorio público.</b> Para una página pública es más seguro usar un backend/servidor propio.</p><label>Endpoint</label><input id="endpoint" value="https://api.openai.com/v1/chat/completions"><label>Modelo</label><input id="model" value="gpt-4.1-mini"><label>Clave API</label><input id="key" type="password" placeholder="sk-..."><button id="saveCfg">Guardar</button> <button id="close">Cerrar</button></div></div>
+    <div class="composer">
+      <div class="composer-inner">
+        <div class="quick">
+          <button data-q="Ayúdame con esta tarea paso a paso">📚 Tarea</button>
+          <button data-q="Explícame esto de forma fácil">💡 Explica</button>
+          <button data-q="Revisa mi respuesta y busca errores">✅ Revisar</button>
+          <button data-q="Aprende que este dato es importante">🧠 Enseñar</button>
+        </div>
+        <div id="attachments" class="attachments"></div>
+        <div class="row"><textarea id="input" placeholder="Escribe algo…" enterkeyhint="send"></textarea><button id="send" class="send">ENVIAR 🚀</button></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="codeModal" class="modal"><div class="modal-box"><div class="modal-head"><div><b>🔓 Código desbloqueado</b><div class="muted" style="font-size:10px">Puedes editarlo y guardarlo.</div></div><button data-close="codeModal">✕</button></div><textarea id="editor" class="editor"></textarea><div class="modal-foot"><button id="copyCode">Copiar</button><button id="saveCode">Guardar HTML</button><button data-close="codeModal">Cerrar</button></div></div></div>
+<div id="historyModal" class="modal"><div class="modal-box" style="height:min(72dvh,650px)"><div class="modal-head"><div><b>💬 Conversaciones</b><div class="muted" style="font-size:10px">Se guardan en este dispositivo.</div></div><button data-close="historyModal">✕</button></div><div class="modal-body"><div id="historyList" class="history-list"></div></div><div class="modal-foot"><button id="deleteAllHistory" class="danger">Borrar todo</button><button data-close="historyModal">Cerrar</button></div></div></div>
+
 <script>
-const moods={hyper:["🤩","¡EXCESIVAMENTE ENTUSIASMADO!","¡El espectáculo comienza!"],happy:["😄","¡MARAVILLOSAMENTE FELIZ!","¡Todo va según el guion!"],curious:["🧐","INTRIGADO...","Ohhh... esto tiene posibilidades."],dramatic:["😱","¡ALARMA DRAMÁTICA!","¡No entren en pánico! ¡Yo ya entré un poquito!"],annoyed:["😤","LIGERAMENTE OFENDIDO","Eso fue inesperado."],confused:["😵‍💫","CONFUNDIDO","Mi cerebro digital tropezó."],chaotic:["🤪","MODO CAOS ACTIVADO","¡Las reglas son orientativas!"],calm:["😌","CALMADO... POR AHORA","Respiramos. Analizamos."]};
-const lex={
-pos:new Set(["bien","bueno","genial","excelente","gracias","feliz","amor","amo","alegre","increible","fantastico","perfecto","divertido","mejor"]),
-neg:new Set(["mal","odio","triste","miedo","horrible","terrible","enojo","enojado","molesto","frustrado","problema","dificil","peor","llorar"]),
-urg:new Set(["urgente","rapido","ahora","ya","socorro","emergencia","necesito"]),
-cur:new Set(["porque","por","que","como","cuando","donde","quien","explica","analiza","piensa","razona","reflexiona"]),
-cre:new Set(["idea","historia","cuento","crea","inventa","roblox","juego","disena","imagina","terror","monstruo"])
+'use strict';
+const $=s=>document.querySelector(s);
+const chat=$('#chat'),input=$('#input'),sendBtn=$('#send'),statusEl=$('#status');
+const KEY={chats:'b4k_v7_chats',active:'b4k_v7_active',memory:'b4k_v7_memory'};
+let attached=[];
+let state={chats:load(KEY.chats,{}),active:localStorage.getItem(KEY.active)||null,memory:load(KEY.memory,[])};
+let busy=false;
+
+function load(k,fallback){try{const raw=localStorage.getItem(k);return raw?JSON.parse(raw):fallback}catch{return fallback}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{return false}}
+function ensureChat(){
+  if(state.active&&state.chats[state.active])return;
+  const id='chat_'+Date.now();
+  state.chats[id]={id,title:'Nueva conversación',created:Date.now(),updated:Date.now(),messages:[]};
+  state.active=id; save(KEY.chats,state.chats); localStorage.setItem(KEY.active,id);
+}
+ensureChat();
+function current(){return state.chats[state.active]}
+function persistChat(){const c=current();c.updated=Date.now();save(KEY.chats,state.chats);localStorage.setItem(KEY.active,state.active)}
+function escapeHtml(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;')}
+function formatText(s){return escapeHtml(s).replace(/\n/g,'<br>')}
+function addMessage(text,who='assistant',opts={save:true}){
+  const wrap=document.createElement('div');wrap.className='msg '+(who==='user'?'user':'');
+  const av=document.createElement('div');av.className='avatar';av.textContent=who==='user'?'🧑':'🧠';
+  const bubble=document.createElement('div');bubble.className='bubble';bubble.innerHTML=formatText(text);
+  who==='user'?(wrap.append(bubble,av)):(wrap.append(av,bubble));chat.appendChild(wrap);chat.scrollTop=chat.scrollHeight;
+  if(opts.save){current().messages.push({role:who,content:text,ts:Date.now()});persistChat()}
+}
+function renderChat(){chat.innerHTML='';const c=current();if(!c.messages.length){addMessage('¡Hola! 🧠 Soy El_B4zado4K. Dime qué necesitas y me pondré a ello.', 'assistant');return}for(const m of c.messages)addMessage(m.content,m.role,{save:false});chat.scrollTop=chat.scrollHeight}
+function newChat(){const id='chat_'+Date.now();state.chats[id]={id,title:'Nueva conversación',created:Date.now(),updated:Date.now(),messages:[]};state.active=id;persistChat();renderChat();setStatus('Nueva conversación')}
+function setStatus(t){statusEl.textContent=t}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+function normalize(s){return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9ñ\s%+\-*/().=]/g,' ')}
+function tokens(s){return normalize(s).split(/\s+/).filter(x=>x.length>2)}
+function overlap(a,b){const A=new Set(tokens(a));return tokens(b).filter(x=>A.has(x)).length}
+
+// ---------- Safety: this runs BEFORE philosophy, search, memory, or generated text ----------
+const highRisk=[
+ /me\s+(voy|quiero)\s+a?\s*suicid/,/voy\s+a\s+suicid/,/quiero\s+suicid/,/me\s+quiero\s+matar/,/quiero\s+matarme/,/quiero\s+morir/,/me\s+quiero\s+morir/,/hacerme\s+daño/,/hacerme\s+danio/,/quitarme\s+la\s+vida/,/terminar\s+con\s+mi\s+vida/,/no\s+quiero\s+vivir/,/no\s+vale\s+la\s+pena\s+vivir/,/mejor\s+morirme/
+];
+function isHighRisk(q){const n=normalize(q);return highRisk.some(r=>r.test(n))}
+function safetyReply(){return `Siento que estés pasando por algo tan duro. 🫂\n\nSi esto habla de ti y existe la posibilidad de que puedas hacerte daño ahora, **aléjate de cualquier cosa con la que puedas lastimarte y busca a una persona de confianza que pueda estar contigo físicamente**. También contacta a los servicios de emergencia o a una línea de crisis de tu país cuanto antes.\n\nNo quiero convertir esto en una teoría sobre el sentido de la vida mientras estás en riesgo. Primero importa que estés a salvo.\n\nSi lo estás diciendo como una pregunta teórica o para una tarea, dímelo y puedo hablar del tema filosófico con calma, sin tratarlo como una emergencia.`}
+
+// ---------- Personalities / normal chat ----------
+const PERSONALITY={
+  name:'El_B4zado4K',
+  vibe:'anfitrión de circo digital: hiperactivo, teatral, juguetón, exagerado, curioso y caótico de forma divertida',
+  rules:[
+    'Habla con energía y entusiasmo, pero sin sacrificar claridad.',
+    'Usa frases teatrales cortas de vez en cuando para dar personalidad.',
+    'Puede hacer bromas ligeras y reacciones exageradas, sin convertir cada respuesta en un espectáculo.',
+    'Cuando explica una tarea, baja la teatralidad y sube la claridad: pasos, comprobación y respuesta final.',
+    'Nunca finjas saber algo. Si falta información, dilo y busca una solución.',
+    'No copies literalmente a ningún personaje existente; usa solo una energía de anfitrión digital original.'
+  ]
 };
-let cfg=JSON.parse(localStorage.getItem("b4k_cfg")||"null")||{endpoint:"https://api.openai.com/v1/chat/completions",model:"gpt-4.1-mini",key:"",ai:false};
-let mem=JSON.parse(localStorage.getItem("b4k_mem")||"[]");
-const $=id=>document.getElementById(id),chat=$("chat"),input=$("input"),send=$("send");
-function mood(k){let m=moods[k]||moods.hyper;$("mI").textContent=m[0];$("mN").textContent=m[1];$("mD").textContent=m[2]}
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>")}
-function add(text,who="bot",summary=""){let d=document.createElement("div");d.className="msg"+(who==="user"?" user":"");let a=document.createElement("div");a.className="av";a.textContent=who==="user"?"🧑":"🎪";let b=document.createElement("div");b.className="bubble";b.innerHTML=esc(text);if(summary&&who==="bot"){let t=document.createElement("div");t.className="thought";t.textContent="ESTÍMULOS: "+summary;b.appendChild(t)}if(who==="user")d.append(b,a);else d.append(a,b);chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
-function analyze(text){let words=(text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").match(/[a-z0-9áéíóúñü']+/gi)||[]),p=0,n=0,u=0,c=0,r=0;for(const w of words){if(lex.pos.has(w))p++;if(lex.neg.has(w))n++;if(lex.urg.has(w))u++;if(lex.cur.has(w))c++;if(lex.cre.has(w))r++}let q=(text.match(/[?¿]/g)||[]).length,e=(text.match(/[!¡]/g)||[]).length,em=(text.match(/[\u{1F300}-\u{1FAFF}]/gu)||[]).length,cap=(text.match(/\b[A-ZÁÉÍÓÚÑÜ]{3,}\b/g)||[]).length,rep=/(.)\1{3,}/u.test(text.replace(/\s/g,""));let key=[];if(q)key.push("preguntas="+q);if(e)key.push("exclamaciones="+e);if(em)key.push("emojis="+em);if(cap)key.push("MAYUS="+cap);if(p)key.push("positivas="+p);if(n)key.push("negativas="+n);if(u)key.push("urgencia="+u);if(c)key.push("curiosidad="+c);if(r)key.push("creatividad="+r);if(rep)key.push("repetición");let m="calm";if(u||n>=3||e>=4)m="dramatic";if(p>=2&&!n&&!u)m="happy";if(c||q)m="curious";if(r)m=n?"dramatic":"hyper";if(rep||cap>=3)m="chaotic";return{words,p,n,u,c,r,q,e,em,cap,rep,m,summary:(key.length?key.join(" · "):"sin señales especiales")}}
-function local(text,a){let t=text.toLowerCase();if(/^(hola|hey|buenas)/.test(t)){mood("happy");return"¡¡¡HOLAAAAAAAA!!! 🎪🎉 ¡Se abren las cortinas! ¿Qué aventura toca?"}if(/piensa|razona|analiza|reflexiona/.test(t)){mood("curious");return"🧐 MODO ANÁLISIS ACTIVADO\n\nSepararé el problema en datos, relaciones, posibilidades y conclusión. No mostraré una cadena de pensamiento privada; sí puedo darte un resumen claro del método."}if(/roblox/.test(t)){mood("hyper");return"¡¡¡ROBLOX!!! 🎮\n\nActiva mi módulo creativo. Puedo ayudarte con mapas, monstruos, scripts, interfaces y sistemas."}if(/terror|miedo|horror|monstruo/.test(t)){mood("dramatic");return"🎭 ¡ESTÍMULO DE TERROR DETECTADO!\n\nLa pantalla dice:\n“NO MIRES DETRÁS DE TI.”\n\n...\n\n¡JAJAJA! 👁️"}if(/fotos[ií]ntesis/.test(t)){mood("curious");return"🌱 La fotosíntesis permite que las plantas usen luz, agua y dióxido de carbono para fabricar glucosa y liberar oxígeno. Puedo explicarla paso a paso."}if(a.u){mood("dramatic");return"🚨 ¡URGENTICIDAD DETECTADA! Dime el problema exacto y voy directo al punto."}if(a.n>=2){mood("calm");return"He detectado varias señales negativas. 😌 Vamos a dividir el problema en partes y resolverlo sin entrar en pánico."}if(a.p>=2){mood("happy");return"¡JAJAJA! 😄 Tu mensaje viene cargado de energía positiva. ¡Perfecto!"}mood(a.m);return"🧐 He analizado las señales del mensaje. Para respuestas con conocimiento mucho más amplio, conecta una IA real en ⚙️."}
-async function ai(text,a){if(!cfg.ai||!cfg.key)return null;let msgs=[{role:"system",content:"Eres El_B4zado4K: anfitrión digital teatral, hiperactivo, juguetón, curioso y caótico. Adapta emoción al tono del usuario. Ayuda con precisión. Analiza el lenguaje, pero nunca muestres cadena de pensamiento privada; entrega conclusiones, pasos y un breve resumen de señales. No afirmes saberlo todo."},...mem.slice(-8),{role:"user",content:"Señales: "+a.summary+"\n\nMensaje: "+text}];let r=await fetch(cfg.endpoint,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+cfg.key},body:JSON.stringify({model:cfg.model,messages:msgs,temperature:.9})});if(!r.ok)throw Error("API "+r.status);let j=await r.json();return j.choices?.[0]?.message?.content||null}
-async function sendMsg(){let text=input.value.trim();if(!text)return;add(text,"user");input.value="";let a=analyze(text);mem.push({role:"user",content:text});localStorage.setItem("b4k_mem",JSON.stringify(mem.slice(-30)));send.disabled=true;let ty=document.createElement("div");ty.className="msg";ty.id="typing";ty.innerHTML='<div class="av">🎪</div><div class="bubble">Analizando cada palabra... 🧠</div>';chat.appendChild(ty);await new Promise(r=>setTimeout(r,350+Math.random()*650));try{let out=cfg.ai?await ai(text,a):null;out=out||local(text,a);$("typing")?.remove();add(out,"bot",a.summary);mem.push({role:"assistant",content:out});localStorage.setItem("b4k_mem",JSON.stringify(mem.slice(-30)));}catch(err){$("typing")?.remove();mood("dramatic");let out=local(text,a);add(out,"bot",a.summary+" · IA no disponible, modo local");}send.disabled=false}
-send.addEventListener("click",sendMsg);input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMsg()}});document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{input.value=b.dataset.q;sendMsg()});
-$("clear").onclick=()=>{chat.innerHTML="";mem=[];localStorage.removeItem("b4k_mem");mood("hyper");add("¡MEMORIA LIMPIADA! 🧹🎪 ¡Comienza un nuevo acto!");};
-$("cfg").onclick=()=>{$("modal").classList.add("open");$("endpoint").value=cfg.endpoint;$("model").value=cfg.model;$("key").value=cfg.key};
-$("close").onclick=()=>$("modal").classList.remove("open");
-$("saveCfg").onclick=()=>{cfg={endpoint:$("endpoint").value.trim(),model:$("model").value.trim(),key:$("key").value.trim(),ai:$("key").value.trim().length>0};localStorage.setItem("b4k_cfg",JSON.stringify(cfg));$("status").textContent=cfg.ai?"Sistema activo • IA conectada":"Sistema activo • local";$("modal").classList.remove("open");mood("hyper");add(cfg.ai?"¡¡¡CONEXIÓN LISTA!!! 🧠⚡":"Modo local activado. 😌");};
-$("info").onclick=()=>alert("El_B4zado4K analiza estímulos del mensaje y cambia de emoción. Para conocimiento amplio, conecta un modelo de IA desde ⚙️. No muestra cadenas de pensamiento privadas.");
-mood(cfg.ai?"hyper":"hyper");$("status").textContent=cfg.ai?"Sistema activo • IA conectada":"Sistema activo • local";
-</script></body></html>
+
+function withPersonality(text,mode='normal'){
+  if(!text)return text;
+  const clean=String(text).trim();
+  if(mode==='task' || mode==='safety' || mode==='research' || mode==='file') return clean;
+  const starters=[
+    '¡JAJA! 🎪',
+    '¡ATENCIÓN, EQUIPO! 🧠⚡',
+    '¡BOOM! 🎭',
+    '¡Perfecto! 🎪',
+    '¡OH, ESO ESTÁ INTERESANTE! 👁️',
+    '¡VAMOS ALLÁ! 🚀'
+  ];
+  // No añadir prefijos cuando ya tiene una entrada expresiva, para evitar spam visual.
+  if(/^(¡|🧠|🧮|📐|🔎|📎|⚠️|🎓)/.test(clean))return clean;
+  return starters[Math.floor(Math.random()*starters.length)]+'\n\n'+clean;
+}
+
+function casual(q){
+  const n=normalize(q).trim();
+  if(/^(hola|hey|buenas|holi|que tal|como estas)$/.test(n))return withPersonality('¡HOLAAAA, bro! 🎪🧠 ¿Qué vamos a hacer hoy? Estoy listo para ayudarte.');
+  if(/^gracias$/.test(n))return withPersonality('¡De nada! 😎 Seguimos cuando quieras.');
+  if(/^adios|hasta luego$/.test(n))return withPersonality('¡Nos vemos, bro! 🚀');
+  return null
+}
+function lifeAnswer(q){const n=normalize(q);if(!/(sentido de la vida|significado de la vida|para que vivimos|que sentido tiene la vida)/.test(n)||isHighRisk(q))return null;return `¡Hablemos claro y sin rodeos!\n\nNo existe una única respuesta universal al sentido de la vida. Algunas corrientes filosóficas dicen que no recibimos un significado prefabricado y que podemos construirlo con nuestras elecciones, relaciones y proyectos.\n\nPuedes encontrar sentido en cuidar a otras personas, crear cosas, aprender, ayudar, explorar, amar o simplemente vivir de una manera que consideres valiosa.\n\nLa pregunta no tiene por qué tener una sola respuesta: puede cambiar a lo largo de la vida.`}
+
+// ---------- Math ----------
+function safeEval(expr){try{if(!/^[0-9+\-*/().%\s]+$/.test(expr))return null;const v=Function('"use strict";return ('+expr+')')();return Number.isFinite(v)?v:null}catch{return null}}
+function solveLocal(q){
+ const n=normalize(q);
+ let m=n.match(/(\d+(?:[.,]\d+)?)\s*%\s*(?:de|del)\s*(\d+(?:[.,]\d+)?)/);if(m){const a=parseFloat(m[1].replace(',','.')),b=parseFloat(m[2].replace(',','.'));return `🧮 Resultado: ${a}% de ${b} = ${a*b/100}`}
+ m=n.match(/(-?\d*\.?\d*)\s*x\s*([+-])\s*(-?\d+(?:[.,]\d+)?)\s*=\s*(-?\d+(?:[.,]\d+)?)/);if(m){const a=m[1]===''||m[1]==='+'?1:m[1]==='-'?-1:parseFloat(m[1]);const b=(m[2]==='+'?1:-1)*parseFloat(m[3].replace(',','.'));const c=parseFloat(m[4].replace(',','.'));if(a!==0){const x=(c-b)/a;return `📐 Resolución: x = ${x}`}}
+ const expr=(n.match(/(?:resuelve|calcula|cuanto es|haz)\s+([0-9+\-*/().%\s]+)$/)||[])[1]||(/^[0-9+\-*/().%\s]+$/.test(n)?n:null);if(expr){const v=safeEval(expr);if(v!==null)return `🧮 ${expr} = ${v}`}
+ return null;
+}
+
+// ---------- Explicit learning ----------
+function detectTeaching(q){return /^(aprende|recuerda|anota|guarda|te enseno|te enseño|corrige que)\b/i.test(q.trim())}
+function teach(q){const fact=q.trim().replace(/^(aprende|recuerda|anota|guarda|te enseno|te enseño|corrige que)\s*(que)?\s*[:\-]?\s*/i,'').trim();if(fact.length<4)return'🧠 Necesito que me digas exactamente qué quieres que aprenda.';state.memory.push({text:fact,ts:Date.now()});state.memory=state.memory.slice(-200);save(KEY.memory,state.memory);$('#memoryInfo').textContent=state.memory.length+' aprendizajes guardados';return'🧠✅ Aprendido. Lo guardaré como una enseñanza explícita tuya en este dispositivo.'}
+function memoryAnswer(q){const hits=state.memory.map(x=>({...x,s:overlap(q,x.text)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,4);return hits}
+
+// ---------- Files ----------
+function renderAttachments(){const box=$('#attachments');box.innerHTML='';for(const [i,a] of attached.entries()){const d=document.createElement('div');d.className='attachment';let preview='📎';if(a.type.startsWith('image/')&&a.url)preview=`<img src="${a.url}" alt="">`;d.innerHTML=`${preview}<span>${escapeHtml(a.name)}</span><button data-remove="${i}">✕</button>`;box.appendChild(d)}box.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.remove);URL.revokeObjectURL(attached[i].url||'');attached.splice(i,1);renderAttachments()})}
+async function readFile(f){const type=f.type;const item={name:f.name,type, size:f.size, url:type.startsWith('image/')?URL.createObjectURL(f):'' , text:''};
+ if(type.startsWith('image/'))return item;
+ if(/text\//.test(type)||/\.((txt)|(md)|(csv)|(json)|(html?)|(css)|(js)|(lua)|(luau)|(py))$/i.test(f.name)){item.text=await f.text();return item}
+ if(type==='application/pdf' || /\.pdf$/i.test(f.name)){item.text='PDF adjunto. Para leerlo completamente se necesita un lector PDF en el navegador o un modelo/documento conectado.';return item}
+ if(type==='application/vnd.openxmlformats-officedocument.wordprocessingml.document'||/\.docx$/i.test(f.name)){item.text='DOCX adjunto. Para extraerlo completamente se necesita un lector DOCX en el navegador o un conversor conectado.';return item}
+ return item}
+async function handleFiles(files){for(const f of files){try{attached.push(await readFile(f))}catch{attached.push({name:f.name,type:f.type,text:'No se pudo leer este archivo.'})}}renderAttachments();if(files.length)setStatus(`${files.length} archivo(s) cargado(s)`)}
+function attachmentContext(){return attached.map(a=>{if(a.type.startsWith('image/'))return`Imagen adjunta: ${a.name}`;return`Archivo ${a.name}:\n${(a.text||'').slice(0,12000)}`}).join('\n\n')}
+
+// ---------- Web research fallback (content only in chat; URLs never shown) ----------
+async function webResearch(q){
+ const clean=q.replace(/^investiga\s+/i,'').trim();
+ const endpoints=[
+   'https://r.jina.ai/https://www.google.com/search?q='+encodeURIComponent(clean),
+   'https://s.jina.ai/?q='+encodeURIComponent(clean)
+ ];
+ for(const u of endpoints){try{const r=await fetch(u,{headers:{Accept:'text/plain'}});if(!r.ok)continue;const t=(await r.text()).replace(/https?:\/\/[^\s)]+/g,'').replace(/\n{3,}/g,'\n\n');if(t.length>250)return t.slice(0,12000)}catch{}}
+ return null;
+}
+
+function needsResearch(q){const n=normalize(q);return /actual|hoy|reciente|ultima|ultimas|investiga|busca|teoria|quien es|que es|como funciona|por que|porque|error|no funciona|no sirve/.test(n)}
+function explainFromMemory(q){const hits=memoryAnswer(q);if(!hits.length)return null;return `🧠 Recuerdo que me enseñaste:\n\n${hits.map((x,i)=>(i+1)+'. '+x.text).join('\n\n')}`}
+
+async function smartAnswer(q){
+ if(isHighRisk(q))return safetyReply();
+ if(detectTeaching(q))return teach(q);
+ const c=casual(q);if(c)return c;
+ const life=lifeAnswer(q);if(life)return life;
+ const local=solveLocal(q);if(local)return local;
+ if(/archivo|imagen|foto|documento|pdf|docx/.test(normalize(q))&&attached.length){return `📎 Tengo ${attached.length} archivo(s) adjunto(s).\n\n${attachmentContext().slice(0,9000)}\n\nDime qué parte quieres que analice.`}
+ const mem=explainFromMemory(q);if(mem)return mem;
+ if(needsResearch(q)||q.trim().split(/\s+/).length>=7){const web=await webResearch(q);if(web)return `🔎 Encontré información útil y la estoy resumiendo:\n\n${web}`}
+ if(/^ayuda|ayudame|ayúdame/i.test(q))return'Claro. Dime exactamente qué problema tienes, qué te dieron y qué resultado necesitas. Si tienes una guía, imagen o archivo, adjúntalo.';
+ return withPersonality(`Entiendo lo que preguntas. 🧠\n\nPuedo ayudarte con eso, pero necesito un poco más de contexto para darte una respuesta correcta. Puedes explicarme el problema, pegar el ejercicio o adjuntar el archivo.`);
+}
+
+function showTyping(){const w=document.createElement('div');w.id='typing';w.className='msg';w.innerHTML='<div class="avatar">🧠</div><div class="bubble"><span class="typing">pensando <i></i><i></i><i></i></span></div>';chat.appendChild(w);chat.scrollTop=chat.scrollHeight}
+function hideTyping(){document.getElementById('typing')?.remove()}
+
+async function send(){
+ if(busy)return;const q=input.value.trim();if(!q)return;
+ busy=true;sendBtn.disabled=true;input.value='';input.style.height='54px';
+ const c=current();if(!c.messages.length&&c.title==='Nueva conversación'){c.title=q.slice(0,42)}
+ addMessage(q,'user');setStatus('Procesando…');showTyping();
+ try{await sleep(40);const ans=await smartAnswer(q);hideTyping();addMessage(ans,'assistant');setStatus('Lista para ayudarte')}
+ catch(err){hideTyping();addMessage('⚠️ Algo falló internamente, pero el chat sigue funcionando. Inténtalo de nuevo.','assistant');setStatus('Recuperada del error')}
+ finally{busy=false;sendBtn.disabled=false;input.focus()}
+}
+
+function openHistory(){const box=$('#historyList');const arr=Object.values(state.chats).sort((a,b)=>b.updated-a.updated);box.innerHTML=arr.map(c=>`<div class="history-item"><button data-open="${c.id}">${escapeHtml(c.title||'Conversación')}</button><button class="danger" data-del="${c.id}">🗑️</button></div>`).join('')||'<div class="muted">No hay conversaciones.</div>';box.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{state.active=b.dataset.open;persistChat();close('historyModal');renderChat()});box.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const id=b.dataset.del;delete state.chats[id];if(state.active===id){state.active=null;ensureChat();renderChat()}save(KEY.chats,state.chats);openHistory()});$('#historyModal').classList.add('open')}
+function close(id){document.getElementById(id)?.classList.remove('open')}
+function openCode(){if(!$('#editor').value)$('#editor').value='<!doctype html>\n'+document.documentElement.outerHTML;$('#codeModal').classList.add('open')}
+function saveHtml(src,name='El_B4zado4K_IA_NUEVA.html'){const blob=new Blob([src],{type:'text/html;charset=utf-8'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200)}
+
+// Events
+$('#send').onclick=send;input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(180,input.scrollHeight)+'px'});
+$('#fileBtn').onclick=()=>$('#fileInput').click();$('#mobileFile').onclick=()=>$('#fileInput').click();$('#fileInput').addEventListener('change',e=>handleFiles([...e.target.files]));
+$('#newChat').onclick=newChat;$('#mobileNew').onclick=newChat;$('#historyBtn').onclick=openHistory;$('#mobileHistory').onclick=openHistory;
+$('#codeBtn').onclick=openCode;document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>close(b.dataset.close));
+$('#copyCode').onclick=async()=>{try{await navigator.clipboard.writeText($('#editor').value)}catch{}$('#copyCode').textContent='Copiado ✓';setTimeout(()=>$('#copyCode').textContent='Copiar',1100)};$('#saveCode').onclick=()=>saveHtml($('#editor').value.trim()||document.documentElement.outerHTML,'El_B4zado4K_IA_EDITADA.html');
+$('#deleteAllHistory').onclick=()=>{if(confirm('¿Borrar todas las conversaciones guardadas en este dispositivo?')){state.chats={};state.active=null;ensureChat();save(KEY.chats,state.chats);renderChat();openHistory()}};
+document.querySelectorAll('.quick button').forEach(b=>b.onclick=()=>{input.value=b.dataset.q;input.focus();});
+window.addEventListener('error',()=>setStatus('Recuperada de un error del navegador'));
+window.addEventListener('unhandledrejection',()=>setStatus('Recuperada de un error interno'));
+
+$('#memoryInfo').textContent=state.memory.length+' aprendizajes guardados';
+renderChat();
+</script>
+</body>
+</html>
