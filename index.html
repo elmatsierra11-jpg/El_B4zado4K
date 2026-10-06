@@ -366,15 +366,6 @@ async function send(){
 }
 
 
- if(busy)return;const q=input.value.trim();if(!q)return;
- busy=true;sendBtn.disabled=true;input.value='';input.style.height='54px';
- const c=current();if(!c.messages.length&&c.title==='Nueva conversación'){c.title=q.slice(0,42)}
- addMessage(q,'user');setStatus('Procesando…');showTyping();
- try{await sleep(40);const ans=await smartAnswer(q);hideTyping();addMessage(ans,'assistant');setStatus('Lista para ayudarte')}
- catch(err){hideTyping();addMessage('⚠️ Algo falló internamente, pero el chat sigue funcionando. Inténtalo de nuevo.','assistant');setStatus('Recuperada del error')}
- finally{busy=false;sendBtn.disabled=false;input.focus()}
-}
-
 function openHistory(){const box=$('#historyList');const arr=Object.values(state.chats).sort((a,b)=>b.updated-a.updated);box.innerHTML=arr.map(c=>`<div class="history-item"><button data-open="${c.id}">${escapeHtml(c.title||'Conversación')}</button><button class="danger" data-del="${c.id}">🗑️</button></div>`).join('')||'<div class="muted">No hay conversaciones.</div>';box.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{state.active=b.dataset.open;persistChat();close('historyModal');renderChat()});box.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const id=b.dataset.del;delete state.chats[id];if(state.active===id){state.active=null;ensureChat();renderChat()}save(KEY.chats,state.chats);openHistory()});$('#historyModal').classList.add('open')}
 function close(id){document.getElementById(id)?.classList.remove('open')}
 function openCode(){if(!$('#editor').value)$('#editor').value='<!doctype html>\n'+document.documentElement.outerHTML;$('#codeModal').classList.add('open')}
