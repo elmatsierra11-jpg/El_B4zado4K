@@ -279,7 +279,93 @@ async function smartAnswer(q){
 function showTyping(){const w=document.createElement('div');w.id='typing';w.className='msg';w.innerHTML='<div class="avatar">🧠</div><div class="bubble"><span class="typing">pensando <i></i><i></i><i></i></span></div>';chat.appendChild(w);chat.scrollTop=chat.scrollHeight}
 function hideTyping(){document.getElementById('typing')?.remove()}
 
+// ===== RESPUESTAS VARIABLES =====
+const variationState=new Map();
+
+function stableHash(str){
+  let h=2166136261;
+  for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}
+  return h>>>0;
+}
+
+function responseVariant(q){
+  const key=normalize(q);
+  const count=variationState.get(key)||0;
+  variationState.set(key,count+1);
+  return (stableHash(key)+count)%8;
+}
+
+function varyResponse(q,text){
+  if(!text)return text;
+  const n=responseVariant(q);
+  const clean=String(text).trim();
+
+  // En seguridad mantenemos el contenido esencial, pero podemos cambiar la entrada
+  // sin rebajar el nivel de ayuda ni convertirlo en una respuesta filosófica.
+  if(isHighRisk(q)){
+    const openings=[
+      '',
+      '🫂 Primero, vamos a ocuparnos de que estés a salvo.\n\n',
+      '⚠️ Pausa el espectáculo un segundo. Tu seguridad va primero.\n\n',
+      '🧠 Antes de cualquier otra cosa: quiero asegurarme de que estés a salvo.\n\n'
+    ];
+    return openings[n%openings.length]+clean;
+  }
+
+  // No altera números ni hechos: cambia la forma de presentar la misma respuesta.
+  const intros=[
+    '',
+    '🎪 Vamos por partes.\n\n',
+    '🧠 Te lo dejo claro y directo.\n\n',
+    '⚡ Modo respuesta activado.\n\n',
+    '👁️ Veamos qué tenemos aquí.\n\n',
+    '🚀 Al escenario con la respuesta.\n\n',
+    '🎭 Una forma distinta de verlo:\n\n',
+    '🔎 Desglosémoslo sin complicarlo.\n\n'
+  ];
+
+  let out=clean;
+  if(intros[n]) out=intros[n]+out;
+
+  // Alterna el remate de respuestas largas sin inventar información nueva.
+  if(n%3===1 && clean.length>220){
+    const first=clean.replace(/\n+/g,' ').split(/(?<=[.!?])\s+/).find(Boolean)||'';
+    if(first) out+='\n\n💡 Idea clave: '+first.trim();
+  }else if(n%3===2 && clean.length>180){
+    const paras=clean.split(/\n\s*\n/).filter(Boolean);
+    if(paras.length>1) out=paras.slice(1).concat(paras[0]).join('\n\n');
+  }
+
+  // Variaciones pequeñas de etiquetas para resultados exactos.
+  if(n%4===3){
+    out=out.replace(/^🧮 Resultado:/,'🧮 Respuesta:').replace(/^📐 Resolución:/,'📐 Solución:');
+  }
+  return out;
+}
+
 async function send(){
+ if(busy)return;const q=input.value.trim();if(!q)return;
+ busy=true;sendBtn.disabled=true;input.value='';input.style.height='54px';
+ const c=current();if(!c.messages.length&&c.title==='Nueva conversación'){c.title=q.slice(0,42)}
+ addMessage(q,'user');setStatus('Procesando…');showTyping();
+ try{
+   await sleep(40);
+   const raw=await smartAnswer(q);
+   hideTyping();
+   const ans=varyResponse(q,raw);
+   addMessage(ans,'assistant');
+   setStatus('Lista para ayudarte');
+ }catch(err){
+   hideTyping();
+   const fallback='⚠️ Algo falló internamente, pero el chat sigue funcionando. Inténtalo de nuevo.';
+   addMessage(varyResponse(q,fallback),'assistant');
+   setStatus('Recuperada del error');
+ }finally{
+   busy=false;sendBtn.disabled=false;input.focus()
+ }
+}
+
+
  if(busy)return;const q=input.value.trim();if(!q)return;
  busy=true;sendBtn.disabled=true;input.value='';input.style.height='54px';
  const c=current();if(!c.messages.length&&c.title==='Nueva conversación'){c.title=q.slice(0,42)}
